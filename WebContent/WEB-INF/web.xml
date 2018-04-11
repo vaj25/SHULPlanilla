@@ -6,7 +6,7 @@
   
 	<display-name>SHULPlanilla</display-name>
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/view/welcome.jsp</welcome-file>
+		<welcome-file>/welcome.html</welcome-file>
 	</welcome-file-list>
   
 	<servlet>
@@ -18,10 +18,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>shulplanilla</servlet-name>
-        <url-pattern>/welcome.jsp</url-pattern>
         <url-pattern>/welcome.html</url-pattern>
         <url-pattern>*.html</url-pattern>
-        
     </servlet-mapping>
   
 </web-app>
