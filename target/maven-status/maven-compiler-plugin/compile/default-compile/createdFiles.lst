@@ -1,1 +1,7 @@
+com/shuldevelop/model/Rol.class
+com/shuldevelop/controller/LoginController.class
+com/shuldevelop/DAO/Impl/UsuarioDAOImpl.class
+com/shuldevelop/service/UsuarioDetailsServiceImpl.class
 com/shuldevelop/controller/WelcomeController.class
+com/shuldevelop/model/Usuario.class
+com/shuldevelop/DAO/UsuarioDAO.class

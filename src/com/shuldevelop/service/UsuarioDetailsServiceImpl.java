@@ -8,13 +8,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.shuldevelop.DAO.UsuarioDAO;
 import com.shuldevelop.model.Usuario;
-import com.shulplanilla.DAO.UsuarioDAO;
 
 @Service("userDetailsService")
 public class UsuarioDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
+	@Autowired(required=true)
 	private UsuarioDAO userDao;
 	
 	@Transactional(readOnly = true)

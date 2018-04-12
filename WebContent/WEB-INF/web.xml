@@ -5,6 +5,17 @@
 	version="3.0">
   
 	<display-name>SHULPlanilla</display-name>
+	
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/shulplanilla-security.xml     
+        </param-value>
+    </context-param>
+	
 	<welcome-file-list>
 		<welcome-file>/welcome.html</welcome-file>
 	</welcome-file-list>
@@ -14,20 +25,18 @@
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
+        <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>/WEB-INF/shulplanilla-servlet.xml</param-value>
+    	</init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>shulplanilla</servlet-name>
         <url-pattern>/welcome.html</url-pattern>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
     
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-			/WEB-INF/spring/shulplantilla-security.xml                          
-        </param-value>
-    </context-param>
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
