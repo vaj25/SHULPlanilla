@@ -74,7 +74,7 @@ nav ul li ul {
 .container {
     flex: 1 0 auto;
     padding: 1.5em;
-    margin-left: 11em;
+    margin-left: 15em;
     margin-bottom: -3em;
     padding-bottom: 5em;
 }
@@ -90,7 +90,7 @@ footer {
     background: #262422;
     color: #FCFCFC;
     flex-shrink: 0;
-    min-height: 6em;
+    min-height: 4em;
     padding-left: 12em;
     padding-top: 1.5em;
     z-index: 10;

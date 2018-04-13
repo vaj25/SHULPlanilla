@@ -29,7 +29,7 @@ public class TipoDocIdentidadController {
 		this.tipoDocIdentidadValidator = new TipoDocIdentidadValidator();
 	}
 
-	@RequestMapping(value = "/tipo-doc-identidad", method = RequestMethod.GET)
+	@RequestMapping(value = "/tipo-doc-identidad/index", method = RequestMethod.GET)
 	public ModelAndView tipoDocIdentidad() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -42,7 +42,7 @@ public class TipoDocIdentidadController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/add-tipo-doc-identidad", method = RequestMethod.GET)
+	@RequestMapping(value = "/tipo-doc-identidad/add", method = RequestMethod.GET)
 	public ModelAndView addTipoDocIdentidad() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -53,7 +53,7 @@ public class TipoDocIdentidadController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/add-tipo-doc-identidad", method = RequestMethod.POST)
+	@RequestMapping(value = "/tipo-doc-identidad/add", method = RequestMethod.POST)
 	public ModelAndView addTipoDocIdentidad(
 			@ModelAttribute("TipoDocIdentidad") TipoDocIdentidad u,
 			BindingResult result,
@@ -73,10 +73,10 @@ public class TipoDocIdentidadController {
 		
 		tipoDocIdentidadService.add(u);
 		
-		return new ModelAndView("redirect:/tipo-doc-identidad.html");
+		return new ModelAndView("redirect:/tipo-doc-identidad/index.html");
 	}
 	
-	@RequestMapping(value = "/edit-tipo-doc-identidad", method = RequestMethod.GET)
+	@RequestMapping(value = "/tipo-doc-identidad/edit", method = RequestMethod.GET)
 	public ModelAndView editTipoDocIdentidad(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -90,7 +90,7 @@ public class TipoDocIdentidadController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/edit-tipo-doc-identidad", method = RequestMethod.POST)
+	@RequestMapping(value = "/tipo-doc-identidad/edit", method = RequestMethod.POST)
 	public ModelAndView editTipoDocIdentidad(
 			@ModelAttribute("TipoDocIdentidad") TipoDocIdentidad u,
 			BindingResult result,
@@ -114,17 +114,17 @@ public class TipoDocIdentidadController {
 		
 		tipoDocIdentidadService.edit(u);
 		
-		return new ModelAndView("redirect:/tipo-doc-identidad.html");
+		return new ModelAndView("redirect:/tipo-doc-identidad/index.html");
 	}
 	
-	@RequestMapping(value = "/delete-tipo-doc-identidad", method = RequestMethod.GET)
+	@RequestMapping(value = "/tipo-doc-identidad/delete", method = RequestMethod.GET)
 	public ModelAndView deleteTipoDocIdentidad(HttpServletRequest request) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		tipoDocIdentidadService.delete(id);
 		
-		return new ModelAndView("redirect:/tipo-doc-identidad.html");
+		return new ModelAndView("redirect:/tipo-doc-identidad/index.html");
 	}
 	
 }
