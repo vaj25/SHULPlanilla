@@ -34,8 +34,8 @@
 								<c:out value="${tipoDocIdentidad.getTipo()}"></c:out>
 							</td>
 							<td>
-								<a href="<c:url value="edit-tipo-doc-identidad.html" />">Editar</a>
-								<a href="<c:url value="delete-tipo-doc-identidad.html" />">Eliminar</a>
+								<a href="<c:url value="edit-tipo-doc-identidad.html?id=${tipoDocIdentidad.getId()}" />">Editar</a>
+								<a href="<c:url value="delete-tipo-doc-identidad.html?id=${tipoDocIdentidad.getId()}" />">Eliminar</a>
 							</td>
 						</tr>					
 					</c:forEach>
