@@ -4,4 +4,7 @@ com/shuldevelop/DAO/Impl/UsuarioDAOImpl.class
 com/shuldevelop/service/UsuarioDetailsServiceImpl.class
 com/shuldevelop/controller/WelcomeController.class
 com/shuldevelop/model/Usuario.class
+com/shuldevelop/service/UsuarioService.class
+com/shuldevelop/service/UsuarioServiceImp.class
+com/shuldevelop/DAO/AbstractDao.class
 com/shuldevelop/DAO/UsuarioDAO.class

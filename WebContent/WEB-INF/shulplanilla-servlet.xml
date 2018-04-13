@@ -39,6 +39,8 @@
         </property>
     </bean>
     
+    <bean id="userDetailsService" class="com.shuldevelop.service.UsuarioDetailsServiceImpl"></bean>
+    
     <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
         <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>

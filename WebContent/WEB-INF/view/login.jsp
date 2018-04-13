@@ -9,7 +9,7 @@
 <title>Login</title>
 </head>
 <body>
-	<form action='<spring:url value="/loginAction"/>' method="post">
+	<form action="${pageContext.request.contextPath}/loginAction.html" method="post">
 		<label>Username: </label>
 		<input type="text" name="username">
 		<br/>

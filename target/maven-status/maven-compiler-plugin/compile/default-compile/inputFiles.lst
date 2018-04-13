@@ -1,7 +1,10 @@
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/model/Rol.java
+/home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/DAO/AbstractDao.java
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/controller/WelcomeController.java
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/model/Usuario.java
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/service/UsuarioDetailsServiceImpl.java
+/home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/service/UsuarioServiceImp.java
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/controller/LoginController.java
+/home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/service/UsuarioService.java
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/DAO/UsuarioDAO.java
 /home/acastaneda/eclipse-workspace/SHULPlanilla/src/com/shuldevelop/DAO/Impl/UsuarioDAOImpl.java

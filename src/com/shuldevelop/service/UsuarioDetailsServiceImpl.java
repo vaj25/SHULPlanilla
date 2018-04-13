@@ -8,20 +8,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shuldevelop.DAO.UsuarioDAO;
 import com.shuldevelop.model.Usuario;
 
 @Service("userDetailsService")
 public class UsuarioDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired(required=true)
-	private UsuarioDAO userDao;
+	private UsuarioService userService;
 	
 	@Transactional(readOnly = true)
-	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		Usuario user = userDao.findUserByUsername(username);
+		
+		Usuario user = userService.findUserByUsername(username);
 		UserBuilder builder = null;
 		
 		if (user != null) {

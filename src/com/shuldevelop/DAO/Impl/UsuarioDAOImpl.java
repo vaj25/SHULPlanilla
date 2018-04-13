@@ -1,27 +1,27 @@
 package com.shuldevelop.DAO.Impl;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.shuldevelop.DAO.AbstractDao;
 import com.shuldevelop.DAO.UsuarioDAO;
 import com.shuldevelop.model.Usuario;
 
-@Service(value="UsuarioDAO")
-public class UsuarioDAOImpl implements UsuarioDAO {
-
-	@Autowired(required=true)
-	private SessionFactory sessionFactory;
+@Service("UsuarioDAO")
+public class UsuarioDAOImpl extends AbstractDao<Integer, Usuario> implements UsuarioDAO {
 	
 	@Override
 	@Transactional
 	public Usuario findUserByUsername(String username) {
 		
-		return (Usuario) sessionFactory.getCurrentSession().createQuery(
+		Session session = getSession();
+		
+		return (Usuario) session.createQuery(
 				"from Usuario where username = :username and estado=true")
 				.setParameter("username", username)
 				.uniqueResult();
+		
 	}
 
 }
