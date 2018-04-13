@@ -1,0 +1,116 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require semantic.min
+ *= require_self
+ */
+
+ html {
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+    flex-direction: column;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+    height: 100%;
+    min-width: 100%;
+}
+
+nav {
+    background: #262422;
+    color: #FCFCFC;
+    height: 100%;
+    left: 0;
+    padding: 0.5em;
+    position: fixed;
+    top: 0;
+    width: 11em;
+}
+
+nav .name {
+    border-bottom: 1px solid #cdc9c9;
+    margin-left: -0.4em;
+    margin-right: -0.4em;
+    padding: 0.7em 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+nav li {
+    margin: 0.5em;
+}
+
+nav ul li a, nav ul li span {
+    color: #FCFCFC;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+nav ul li ul {
+    display: none;
+}
+
+.container {
+    flex: 1 0 auto;
+    padding: 1.5em;
+    margin-left: 11em;
+    margin-bottom: -3em;
+    padding-bottom: 5em;
+}
+
+.error {
+    padding: 0.5em;
+    background: #C23E4B;
+    border: solid #262422 1px;
+    border-radius: 0.25em;
+}
+
+footer {
+    background: #262422;
+    color: #FCFCFC;
+    flex-shrink: 0;
+    min-height: 6em;
+    padding-left: 12em;
+    padding-top: 1.5em;
+    z-index: 10;
+}
+
+@media screen and (min-width: 1400px) {
+    body {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    nav {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    nav {
+        display: none;
+    }
+}
+

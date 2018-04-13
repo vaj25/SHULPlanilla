@@ -16,7 +16,7 @@ public class TipoDocIdentidad {
 	@Column(name = "id_tipo_doc_identidad")
 	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_SEQUENCENAME")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
-	private Integer id;
+	private int id;
 	
 	@Column
 	private String tipo;
@@ -40,7 +40,9 @@ public class TipoDocIdentidad {
 	public int getId() {
 		return id;
 	}
-	
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }
