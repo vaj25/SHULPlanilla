@@ -1,4 +1,4 @@
-package com.shuldevelop.DAO.Impl;
+package com.shuldevelop.DAO.impl;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
