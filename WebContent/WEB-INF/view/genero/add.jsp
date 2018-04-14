@@ -8,27 +8,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Genero</title>
+	<meta charset="UTF-8">
+	<title>Genero</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
-	<div>
-		<div>
-			<a href="<c:url value="/genero.html" />">Atras</a>
-		</div>
-		<div>
-			<form:form method="post" modelAttribute="Genero">
+	<c:import url="../layouts/menu.jsp"></c:import>
+	<div class="container">
+		<div class="ui raised very padded text container segment">
+			<div class="ui large breadcrumb">
+				<a class="section" href="<c:url value="/genero.html" />">Atras</a>
+			</div>
+			<br><br>
+			<div>
+				<form:form method="post" modelAttribute="Genero" cssClass="ui form">
 				
-				<form:errors path="*" element="div" cssClass="alert" />
-				
-				<form:label path="genero">Genero: </form:label>
-				<form:input path="genero" />
-				<form:errors path="genero" />
-				
-				<br/>
-				
-				<button type="submit">Guardar</button>
-			</form:form>
+					<h4 class="ui dividing header">Nuevo Genero</h4>
+					
+					<form:errors path="*" element="div" cssClass="alert" />
+					
+					<div class="field">
+						<form:label path="genero">Genero: </form:label>
+						<form:input path="genero" />
+						<form:errors path="genero" />
+					</div>
+					
+					<button class="ui primary button" type="submit">Guardar</button>
+					<button class="ui button" type="reset" >Limpiar</button>
+				</form:form>
+			</div>
 		</div>
 	</div>
 </body>
