@@ -13,7 +13,7 @@ import com.shuldevelop.model.Usuario;
 @Service
 public class UsuarioDetailsServiceImpl implements UserDetailsService {	
 	
-	@Autowired
+	@Autowired(required=true)
 	private UsuarioService userService;
 	
 	@Transactional(readOnly = true)
