@@ -30,6 +30,6 @@
    
   	<beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
   	
-  	<beans:bean id="userDetailsService" class="com.shuldevelop.service.UsuarioDetailsServiceImpl" />
+  	<!-- beans:bean id="userDetailsService" class="com.shuldevelop.service" /-->
      
 </beans:beans>
