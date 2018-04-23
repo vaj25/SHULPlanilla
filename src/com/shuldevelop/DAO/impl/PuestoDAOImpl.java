@@ -50,7 +50,8 @@ public class PuestoDAOImpl implements PuestoDAO {
 	
 	public List<Puesto> getAllPuesto() {
 		
-        Query query = session.getCurrentSession().createQuery("from PUESTO");
+        Query<Puesto> query = session.getCurrentSession().
+        		createQuery("from PUESTO", Puesto.class);
         List<Puesto> puestoList = query.list();
 
         return puestoList;
