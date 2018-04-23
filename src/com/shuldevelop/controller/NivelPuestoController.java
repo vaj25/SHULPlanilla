@@ -66,7 +66,7 @@ public class NivelPuestoController {
 			ModelAndView mav = new ModelAndView();
 			
 			mav.setViewName("nivel_puesto/add");
-			mav.addObject("TipoPuesto", new NivelPuesto());
+			mav.addObject("TipoPuesto", u);
 			
 			return mav;
 		}
@@ -102,12 +102,9 @@ public class NivelPuestoController {
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
-			int id = Integer.parseInt(request.getParameter("id"));
-			
-			NivelPuesto tipoPuesto = tipoPuestoService.getTipoPuesto(id);
-			
+						
 			mav.setViewName("nivel_puesto/edit");
-			mav.addObject("TipoPuesto", tipoPuesto);
+			mav.addObject("TipoPuesto", u);
 			
 			return mav;
 		}
