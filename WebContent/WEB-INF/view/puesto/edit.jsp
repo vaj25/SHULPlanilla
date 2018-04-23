@@ -36,7 +36,7 @@
 						<form:label path="nivelPuesto.id">Nivel de Puesto: </form:label>
 						<form:select path="nivelPuesto.id">
                 			<form:option value="0" label="Seleccione un nivel de puesto"/>
-                			<form:options items="${tipoPuestoList}" itemLabel="numeroNivel" itemValue="id" />
+                			<form:options items="${tipoPuestoList}" itemValue="id" />
             			</form:select>
 						<form:errors path="nivelPuesto" />
 					</div>
