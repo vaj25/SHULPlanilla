@@ -34,7 +34,18 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
     
-    <!--  filter>
+    <!--listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/shulplanilla-security.xml     
+        </param-value>
+    </context-param>
+    
+    <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>

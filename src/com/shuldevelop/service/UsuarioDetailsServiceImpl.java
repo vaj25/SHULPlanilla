@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shuldevelop.model.Usuario;
 
-@Service("userDetailsService")
-public class UsuarioDetailsServiceImpl implements UserDetailsService {
-
+@Service
+public class UsuarioDetailsServiceImpl implements UserDetailsService {	
+	
 	@Autowired(required=true)
 	private UsuarioService userService;
 	
