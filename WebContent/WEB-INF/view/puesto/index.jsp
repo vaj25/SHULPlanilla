@@ -38,19 +38,19 @@
 									<c:out value="${puesto.getId()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${puesto.getNivelPuesto().getNumeroNivel()}"></c:out>
+									<c:out value="${puesto.getNivelPuesto().toString()}"></c:out>
 								</td>
 								<td>
 									<c:out value="${puesto.getNombre()}"></c:out>
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
-										<a href="<c:url value="/tipo-doc-identidad/edit.html?id=${tipoDocIdentidad.getId()}" />">
+										<a href="<c:url value="/puesto/edit.html?id=${puesto.getId()}" />">
 											<i class="large edit icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
-										<a href="<c:url value="/tipo-doc-identidad/delete.html?id=${tipoDocIdentidad.getId()}" />">
+										<a href="<c:url value="/puesto/delete.html?id=${puesto.getId()}" />">
 											<i class="large erase icon"></i>
 										</a>
 									</div>

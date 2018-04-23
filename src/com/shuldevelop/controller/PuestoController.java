@@ -1,7 +1,8 @@
 package com.shuldevelop.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,7 @@ public class PuestoController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-//		List<Puesto> listPuesto = puestoService.getAllPuesto();
-		List<Puesto> listPuesto = new ArrayList<Puesto>();
-		
-		listPuesto.add(puestoService.getPuesto(1));
+		List<Puesto> listPuesto = puestoService.getAllPuesto();
 		
 		mav.setViewName("puesto/index");
 		mav.addObject("puestoList", listPuesto);
@@ -82,12 +80,69 @@ public class PuestoController {
 			return mav;
 		}
 		
-		u.getNivelPuesto().setSalario(nivelPuestoService.getTipoPuesto(u.getNivelPuesto().getId()).getSalario());
-		u.getNivelPuesto().setNumeroNivel(nivelPuestoService.getTipoPuesto(u.getNivelPuesto().getId()).getNumeroNivel());
+		u.getNivelPuesto().setSalario(nivelPuestoService.getTipoPuesto(
+				u.getNivelPuesto().getId()).getSalario());
+		u.getNivelPuesto().setNumeroNivel(nivelPuestoService.getTipoPuesto(
+				u.getNivelPuesto().getId()).getNumeroNivel());
 		
 		puestoService.add(u);
 		
 		return new ModelAndView("redirect:/puesto/index.html");
 	}
+	
+	@RequestMapping(value = "/puesto/edit", method = RequestMethod.GET)
+	public ModelAndView editPuesto(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		Puesto puesto = puestoService.getPuesto(id);
+		
+		List<NivelPuesto> listTipoPuesto = nivelPuestoService.getAllTipoPuesto();
+		
+		mav.setViewName("puesto/edit");
+		mav.addObject("Puesto", puesto);
+		mav.addObject("tipoPuestoList", listTipoPuesto);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/puesto/edit", method = RequestMethod.POST)
+	public ModelAndView editPuesto(
+			@ModelAttribute("Puesto") Puesto u,
+			BindingResult result,
+			SessionStatus status,
+			HttpServletRequest request
+ 			) {
+		
+//		this.tipoPuestoValidator.validate(u, result);
+		
+		if (result.hasErrors()) {
+			ModelAndView mav = new ModelAndView();
+			
+			List<NivelPuesto> listTipoPuesto = nivelPuestoService.getAllTipoPuesto();
+			
+			mav.setViewName("nivel_puesto/edit");
+			mav.addObject("Puesto", u);
+			mav.addObject("tipoPuestoList", listTipoPuesto);
+			
+			return mav;
+		}
+		
+		puestoService.edit(u);
+		
+		return new ModelAndView("redirect:/puesto/index.html");
+	}
+	
+	@RequestMapping(value = "/puesto/delete", method = RequestMethod.GET)
+	public ModelAndView deletePuesto(HttpServletRequest request) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		puestoService.delete(id);
+		
+		return new ModelAndView("redirect:/puesto/index.html");
+	}
+	
 	
 }

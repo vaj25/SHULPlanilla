@@ -73,5 +73,10 @@ public class NivelPuesto {
 	public void setPuesto(List<Puesto> puesto) {
 		this.puesto = puesto;
 	}
+
+	@Override
+	public String toString() {
+		return numeroNivel + " - $" + String.format("%.2f", salario);
+	}
 	
 }
