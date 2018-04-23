@@ -66,7 +66,7 @@ public class TipoDocIdentidadController {
 			ModelAndView mav = new ModelAndView();
 			
 			mav.setViewName("tipo_doc_identidad/add");
-			mav.addObject("TipoDocIdentidad", new TipoDocIdentidad());
+			mav.addObject("TipoDocIdentidad", u);
 			
 			return mav;
 		}
@@ -102,12 +102,9 @@ public class TipoDocIdentidadController {
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
-			int id = Integer.parseInt(request.getParameter("id"));
-			
-			TipoDocIdentidad tipoDocIdentidad = tipoDocIdentidadService.getTipoDocIdentidad(id);
 			
 			mav.setViewName("tipo_doc_identidad/edit");
-			mav.addObject("TipoDocIdentidad", tipoDocIdentidad);
+			mav.addObject("TipoDocIdentidad", u);
 			
 			return mav;
 		}
