@@ -29,7 +29,7 @@ public class GeneroController {
 		this.generoValidator = new  GeneroValidator();
 	}
 	
-	@RequestMapping(value = "/genero-all", method = RequestMethod.GET)
+	@RequestMapping(value = "/genero/index", method = RequestMethod.GET)
 	public ModelAndView tipoDocIdentidad() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -42,7 +42,7 @@ public class GeneroController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/add-genero", method = RequestMethod.GET)
+	@RequestMapping(value = "/genero/add", method = RequestMethod.GET)
 	public ModelAndView addGenero() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -53,7 +53,7 @@ public class GeneroController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/add-genero", method = RequestMethod.POST)
+	@RequestMapping(value = "/genero/add", method = RequestMethod.POST)
 	public ModelAndView addGenero(
 			@ModelAttribute("Genero") Genero u,
 			BindingResult result,
@@ -73,10 +73,10 @@ public class GeneroController {
 		
 		generoService.add(u);
 		
-		return new ModelAndView("redirect:/genero-all.html");
+		return new ModelAndView("redirect:/genero/index.html");
 	}
 	
-	@RequestMapping(value = "/edit-genero", method = RequestMethod.GET)
+	@RequestMapping(value = "/genero/edit", method = RequestMethod.GET)
 	public ModelAndView editGenero(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -90,7 +90,7 @@ public class GeneroController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/edit-genero", method = RequestMethod.POST)
+	@RequestMapping(value = "/genero/edit", method = RequestMethod.POST)
 	public ModelAndView editGenero(
 			@ModelAttribute("Genero") Genero u,
 			BindingResult result,
@@ -114,18 +114,18 @@ public class GeneroController {
 		
 		generoService.edit(u);
 		
-		return new ModelAndView("redirect:/genero-all.html");
+		return new ModelAndView("redirect:/genero/index.html");
 	}
 	
 	
-	@RequestMapping(value = "/delete-genero", method = RequestMethod.GET)
+	@RequestMapping(value = "/genero/delete", method = RequestMethod.GET)
 	public ModelAndView deleteGenero(HttpServletRequest request) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		generoService.delete(id);
 		
-		return new ModelAndView("redirect:/genero-all.html");
+		return new ModelAndView("redirect:/genero/index.html");
 	}
 	
 	
