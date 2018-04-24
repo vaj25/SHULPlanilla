@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.NivelPuesto;
 import com.shuldevelop.model.Puesto;
+import com.shuldevelop.model.validator.PuestoValidator;
 import com.shuldevelop.service.NivelPuestoService;
 import com.shuldevelop.service.PuestoService;
 
@@ -26,8 +27,11 @@ public class PuestoController {
 	
 	@Autowired
 	private NivelPuestoService nivelPuestoService;
+	
+	private PuestoValidator puestoValidator;
 
 	public PuestoController() {
+		puestoValidator = new PuestoValidator();
 	}
 	
 	@RequestMapping(value = "/puesto/index", method = RequestMethod.GET)
@@ -65,7 +69,7 @@ public class PuestoController {
 			SessionStatus status
  			) {
 		
-//		this.tipoPuestoValidator.validate(u, result);
+		this.puestoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
@@ -115,7 +119,7 @@ public class PuestoController {
 			HttpServletRequest request
  			) {
 		
-//		this.tipoPuestoValidator.validate(u, result);
+		this.puestoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
