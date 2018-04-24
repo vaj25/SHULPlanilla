@@ -12,7 +12,7 @@ import com.shuldevelop.model.EstadoCivil;
 import com.shuldevelop.service.EstadoCivilService;
 
 @Service
-public class EstadoCivilImpl implements EstadoCivilService {
+public class EstadoCivilServiceImpl implements EstadoCivilService {
 	
 	@Autowired
 	public EstadoCivilDAO estadoCivilDao;

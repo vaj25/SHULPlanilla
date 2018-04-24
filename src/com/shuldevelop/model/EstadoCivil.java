@@ -18,23 +18,24 @@ public class EstadoCivil {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
 	private int id;
 	
-	@Column
-	private String estado_civil;
+	
+	@Column(name = "estado_civil")
+	private String estadoCivil;
 	
 	public EstadoCivil() {
 	}
 
 	public EstadoCivil(String estadoCivil) {
 		super();
-		this.estado_civil = estadoCivil;
+		this.estadoCivil = estadoCivil;
 	}
 
 	public String getEstadoCivil() {
-		return estado_civil;
+		return estadoCivil;
 	}
 
 	public void setTipo(String estadoCivil) {
-		this.estado_civil = estadoCivil;
+		this.estadoCivil = estadoCivil;
 	}
 
 	public int getId() {
