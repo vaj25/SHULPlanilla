@@ -44,16 +44,10 @@ public class EstadoCivilServiceImpl implements EstadoCivilService {
 		return estadoCivilDao.getEstadoCivil(idEstadoCivil);
 	}
 
-	@Transactional
-	public List<EstadoCivil> getAllEstadoCIvil() {
-		
-		return estadoCivilDao.getAllEstadoCivil();
-	}
 
-	@Override
+	@Transactional
 	public List<EstadoCivil> getAllEstadoCivil() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		return estadoCivilDao.getAllEstadoCivil();
+	}	
 
 }

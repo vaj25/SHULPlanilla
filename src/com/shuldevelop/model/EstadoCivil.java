@@ -34,7 +34,7 @@ public class EstadoCivil {
 		return estadoCivil;
 	}
 
-	public void setTipo(String estadoCivil) {
+	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
 
