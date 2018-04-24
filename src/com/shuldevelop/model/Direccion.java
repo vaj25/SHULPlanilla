@@ -35,13 +35,13 @@ public class Direccion {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_municipio")
-	private Municipio minicipio;
+	private Municipio municipio;
 	
 	public Direccion() {
 	}
 
 	public Direccion(int id, String numCasa, String numCalle, String colonia, String avenida, String poligono,
-			String pasaje, Municipio minicipio) {
+			String pasaje, Municipio municipio) {
 		this.id = id;
 		this.numCasa = numCasa;
 		this.numCalle = numCalle;
@@ -49,7 +49,7 @@ public class Direccion {
 		this.avenida = avenida;
 		this.poligono = poligono;
 		this.pasaje = pasaje;
-		this.minicipio = minicipio;
+		this.municipio = municipio;
 	}
 
 	public int getId() {
@@ -108,12 +108,12 @@ public class Direccion {
 		this.pasaje = pasaje;
 	}
 
-	public Municipio getMinicipio() {
-		return minicipio;
+	public Municipio getMunicipio() {
+		return municipio;
 	}
 
-	public void setMinicipio(Municipio minicipio) {
-		this.minicipio = minicipio;
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 		
 }
