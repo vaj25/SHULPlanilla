@@ -14,8 +14,14 @@ public class EstadoCivil {
 
 	@Id
 	@Column(name = "id_estado_civil")
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_ESTADO_CIVIL")
+	/*@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_ESTADO_CIVIL")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	*/
+	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ESTADO_CIVIL")
+	@SequenceGenerator(name = "SEQ_ESTADO_CIVIL", sequenceName = "SEQ_ESTADO_CIVIL", allocationSize = 1, initialValue = 1)
+	
+	
 	private int id;
 	
 	
