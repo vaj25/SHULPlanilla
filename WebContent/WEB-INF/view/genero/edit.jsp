@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/genero.html" />">Atras</a>
+				<a class="section" href="<c:url value="/genero/index.html" />">Atras</a>
 			</div>
 			<br><br>
 			<div>
