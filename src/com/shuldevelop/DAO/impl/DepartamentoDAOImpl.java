@@ -37,7 +37,8 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 	public List<Departamento> findDepartamentoByZona(int idZona) {
 		
 		Query<Departamento> query = session.getCurrentSession().
-				createQuery("from DEPARTAMENTO where id_est_territorial = id_est_territorial", Departamento.class);
+				createQuery("from DEPARTAMENTO where id_est_territorial = :id_zona", Departamento.class)
+				.setParameter("id_zona", idZona);;
 		
 		List<Departamento> allDepartamento = query.getResultList();
 		

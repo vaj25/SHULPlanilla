@@ -27,9 +27,15 @@
 					
 					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
-						<form:label path="numCasa">Numero de casa: </form:label>
+						<form:label path="numCasa">Número de casa: </form:label>
 						<form:input path="numCasa" />
 						<form:errors path="numCasa" />
+					</div>
+					
+					<div class="field">
+						<form:label path="numCalle">Número de calle: </form:label>
+						<form:input path="numCalle" />
+						<form:errors path="numCalle" />
 					</div>
 					
 					<div class="field">
@@ -57,10 +63,26 @@
 					</div>
 					
 					<div class="field">
+						<label>Zona: </label>
+						<select name="zonaid" id="zonaid">
+							<option value="0">Seleccione una Zona</option>
+                			<c:forEach var="zona" items="${zonaList}">
+                				<option value="${zona.getId()}">${zona}</option>
+                			</c:forEach>
+						</select>
+					</div>
+					
+					<div class="field">
+						<label>Departamento: </label>
+						<select name="departamentoid" id="departamentoid">
+							<option value="0">Seleccione un Departamento</option>
+						</select>
+					</div>
+					
+					<div class="field">
 						<form:label path="municipio.id">Municipio: </form:label>
-						<form:select path="municipio.id">
+						<form:select path="municipio.id" cssClass="municipioid">
                 			<form:option value="0" label="Seleccione un Municipio"/>
-                			<form:options items="${municipioList}" itemValue="id" />
             			</form:select>
 						<form:errors path="municipio" />
 					</div>

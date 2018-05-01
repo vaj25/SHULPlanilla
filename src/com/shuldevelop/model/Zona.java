@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity(name = "ZONA")
 @Table(name = "ZONA")
@@ -19,6 +20,7 @@ public class Zona {
 	@Column(name = "zona")
 	private String zona;
 
+	@Transient 
 	@OneToMany(mappedBy = "zona")
 	private List<Departamento> departamento;
 	

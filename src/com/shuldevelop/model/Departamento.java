@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity(name = "DEPARTAMENTO")
 @Table(name = "DEPARTAMENTO")
@@ -26,6 +27,7 @@ public class Departamento {
 	@JoinColumn(name = "id_est_territorial")
 	private Zona zona;
 	
+	@Transient
 	@OneToMany(mappedBy = "departamento")
     private List<Municipio> municipio = new ArrayList<>();
 

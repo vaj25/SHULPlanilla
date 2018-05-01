@@ -8,9 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.shuldevelop.model.Departamento;
 import com.shuldevelop.model.Direccion;
 import com.shuldevelop.model.Municipio;
@@ -84,5 +87,25 @@ public class DireccionTestController {
 		
 		return new ModelAndView("redirect:/welcome.html");
 	}
+	
+	 @RequestMapping(value = "/direccion/getDepartamentoZona", method = RequestMethod.GET, produces = "application/json")
+	 @ResponseBody
+	 public String getDepartamentoZona(@RequestParam int idZona) {
+
+		 List<Departamento> list = departamentoService.findDepartamentoByZona(idZona);
+		 		 
+		 return new Gson().toJson(list);
+		 
+	 }
+	 
+	 @RequestMapping(value = "/direccion/getMunicipioDepartamento", method = RequestMethod.GET, produces = "application/json")
+	 @ResponseBody
+	 public String getMunicipioDepartamento(@RequestParam int idDepartamento) {
+
+		 List<Municipio> list = municipioService.findMunicipioByDepartamento(idDepartamento);
+		 		 
+		 return new Gson().toJson(list);
+		 
+	 }
 	
 }

@@ -2,9 +2,12 @@ package com.shuldevelop.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity(name = "DIRECCION")
@@ -13,6 +16,8 @@ public class Direccion {
 
 	@Id
 	@Column(name = "id_direccion")
+	@SequenceGenerator(name = "SequenceIdDireccion", sequenceName = "SEQ_DIRECCION")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdDireccion")
 	private int id;
 	
 	@Column(name = "num_casa")

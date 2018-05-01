@@ -37,8 +37,8 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 	public List<Municipio> findMunicipioByDepartamento(int idDepartamento) {
 		
 		Query<Municipio> query = session.getCurrentSession().
-				createQuery("from MUNICIPIO where id_departamento:id_departamento", Municipio.class)
-				.setParameter("id_departamento", idDepartamento);
+				createQuery("from MUNICIPIO where id_departamento = :idDepartamento", Municipio.class)
+				.setParameter("idDepartamento", idDepartamento);
 		
 		List<Municipio> allMunicipio = query.getResultList();
 		
