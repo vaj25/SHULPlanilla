@@ -1,4 +1,4 @@
-package com.shuldevelop.service;
+package com.shuldevelop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User.UserBuilder;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shuldevelop.model.Usuario;
+import com.shuldevelop.service.UsuarioService;
 
 @Service
 public class UsuarioDetailsServiceImpl implements UserDetailsService {	

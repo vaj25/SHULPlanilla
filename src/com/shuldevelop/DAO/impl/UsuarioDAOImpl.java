@@ -1,7 +1,10 @@
 
 package com.shuldevelop.DAO.impl;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,45 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				"from Usuario where username = :username and estado=true")
 				.setParameter("username", username)
 				.uniqueResult();
+		
+	}
+
+	@Override
+	public void add(Usuario usuario) {
+		
+		session.getCurrentSession().saveOrUpdate(usuario);
+		
+	}
+
+	@Override
+	public void edit(Usuario usuario) {
+		
+		session.getCurrentSession().saveOrUpdate(usuario);
+		
+	}
+
+	@Override
+	public void delete(int idUsuario) {
+		
+		session.getCurrentSession().delete(idUsuario);
+		
+	}
+
+	@Override
+	public Usuario getUsuario(int idUsuario) {
+		
+		return session.getCurrentSession().get(Usuario.class, idUsuario);
+		
+	}
+
+	@Override
+	public List<Usuario> getAllUsuario() {
+		
+		Query<Usuario> query = session.getCurrentSession().
+				createQuery("from USUARIO", Usuario.class);
+		List<Usuario> allUsuario = query.getResultList();
+		
+		return allUsuario;
 		
 	}
 

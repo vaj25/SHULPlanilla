@@ -1,8 +1,12 @@
 package com.shuldevelop.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,9 @@ public class Rol {
 	
 	@Column(name = "descripcion")
 	private String descripcion;
+	
+	@OneToMany(mappedBy = "rol")
+    private List<Usuario> usuario = new ArrayList<>();
 
 	public String getNombreRol() {
 		return NombreRol;
@@ -37,6 +44,18 @@ public class Rol {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Usuario> getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(List<Usuario> usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

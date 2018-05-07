@@ -1,9 +1,21 @@
 package com.shuldevelop.service;
 
+import java.util.List;
+
 import com.shuldevelop.model.Usuario;
 
 public interface UsuarioService {
 
-	Usuario findUserByUsername (String username);
+	public Usuario findUserByUsername (String username);
+	
+	public void add(Usuario usuario);
+	
+	public void edit(Usuario usuario);
+	
+	public void delete(int idUsuario);
+	
+	public Usuario getUsuario(int idUsuario);
+	
+	public List<Usuario> getAllUsuario();
 	
 }
