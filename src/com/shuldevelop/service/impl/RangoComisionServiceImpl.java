@@ -7,48 +7,48 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shuldevelop.model.RangoComision;
-import com.shuldevelop.service.RangoComisionService;
+import com.shuldevelop.model.RangoRenta;
+import com.shuldevelop.service.RangoRentaService;
 
 @Service
-public class RangoComisionServiceImpl implements RangoComisionService {
+public class RangoRentaServiceImpl implements RangoRentaService {
 
 	@Autowired
-	RangoComisionService rangoComisionDAO;
-	
+	RangoRentaService rangoRentaDAO;
+
 	@Transactional
-	public void add(RangoComision rangoComision) {
-		
-		rangoComisionDAO.add(rangoComision);
+	public void add(RangoRenta rangoRenta) {
+
+		rangoRentaDAO.add(rangoRenta);
 
 	}
 
 	@Transactional
-	public void edit(RangoComision rangoComision) {
-		
-		rangoComisionDAO.edit(rangoComision);
+	public void edit(RangoRenta rangoRenta) {
+
+		rangoRentaDAO.edit(rangoRenta);
 
 	}
 
 	@Transactional
-	public void delete(int idRangoComision) {
-		
-		rangoComisionDAO.delete(idRangoComision);
+	public void delete(int idRangoRenta) {
+
+		rangoRentaDAO.delete(idRangoRenta);
 
 	}
 
 	@Transactional
-	public RangoComision getRangoComision(int idRangoComision) {
-		
-		return rangoComisionDAO.getRangoComision(idRangoComision);
-		
+	public RangoRenta getRangoRenta(int idRangoRenta) {
+
+		return rangoRentaDAO.getRangoRenta(idRangoRenta);
+
 	}
 
 	@Transactional
-	public List<RangoComision> getAllRangoComision() {
-		
-		return rangoComisionDAO.getAllRangoComision();
-		
+	public List<RangoRenta> getAllRangoRenta() {
+
+		return rangoRentaDAO.getAllRangoRenta();
+
 	}
 
 }
