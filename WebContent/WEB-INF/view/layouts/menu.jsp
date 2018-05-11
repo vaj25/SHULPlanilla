@@ -21,6 +21,12 @@
     	</div>
     </div>
     <div class="item">
+        <div class="header">Gestionar Planilla</div>
+        <div class="menu">
+          <a class="item" href="<cj:url value="/rango-renta/index.html" />">Rangos de Renta</a>
+        </div>
+    </div>
+    <div class="item">
     	<div class="header">Administración</div>
     	<div class="menu">
     		<a class="item">Usuarios</a>

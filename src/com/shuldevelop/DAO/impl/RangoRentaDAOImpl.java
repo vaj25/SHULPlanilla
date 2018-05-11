@@ -32,8 +32,9 @@ public class RangoRentaDAOImpl implements RangoRentaDAO {
 
 	@Override
 	public void delete(int idRangoRenta) {
-
-		session.getCurrentSession().delete(idRangoRenta);
+		RangoRenta rangoRenta = new RangoRenta();
+		rangoRenta.setId(idRangoRenta);
+		session.getCurrentSession().delete(rangoRenta);
 
 	}
 

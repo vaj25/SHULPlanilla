@@ -13,9 +13,9 @@ import javax.persistence.Table;
 public class RangoRenta {
 
 	@Id
-	@Column(name = "id_rango_renta")
-	@SequenceGenerator(name = "SequenceIdRangoRenta", sequenceName = "SEQ_RANGO_RENTA")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdRangoRenta")
+	@Column(name = "id_rango_renta")	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_RANGO_RENTA")
+	@SequenceGenerator(name = "SEQ_RANGO_RENTA", sequenceName = "SEQ_RANGO_RENTA", allocationSize = 1, initialValue = 1)
 	private int id;
 
 	@Column(name = "desde")
@@ -33,10 +33,10 @@ public class RangoRenta {
 	@Column(name = "taza")
 	private double taza;
 
-	public RangoComision() {
+	public RangoRenta() {
 	}
 
-	public RangoComision(int id, double desde, double hasta, int periodo, double cuota, double taza) {
+	public RangoRenta(int id, double desde, double hasta, int periodo, double cuota, double taza) {
 		this.id = id;
 		this.desde = desde;
 		this.hasta = hasta;
