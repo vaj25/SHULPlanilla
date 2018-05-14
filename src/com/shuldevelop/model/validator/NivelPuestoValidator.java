@@ -20,8 +20,10 @@ public class NivelPuestoValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numeroNivel", 
 				"required.numeroNivel", "El número de nivel es obligatorio.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "salario", 
-				"required.salario", "El salario es obligatorio.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "salarioMinimo", 
+				"required.salarioMinimo", "El salario mínimo es obligatorio.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "salarioMaximo", 
+				"required.salarioMaximo", "El salario máximo es obligatorio.");
 		
 		NivelPuesto tipoPuesto = (NivelPuesto) arg0;
 		

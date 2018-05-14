@@ -27,7 +27,8 @@
 						<tr>
 							<th>Número</th>
 							<th>Número Tipo</th>
-							<th>Salario</th>
+							<th>Salario Minimo</th>
+							<th>Salario Maximo</th>
 							<th>Acciones</th>
 						</tr>				
 					</thead>
@@ -42,7 +43,10 @@
 									<c:out value="${tipoPuesto.getNumeroNivel()}"></c:out>
 								</td>
 								<td>
-									$ <fmt:formatNumber type="number" minFractionDigits="2" value="${tipoPuesto.getSalario()}" />
+									$ <fmt:formatNumber type="number" minFractionDigits="2" value="${tipoPuesto.getSalarioMinimo()}" />
+								</td>
+								<td>
+									$ <fmt:formatNumber type="number" minFractionDigits="2" value="${tipoPuesto.getSalarioMaximo()}" />
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
