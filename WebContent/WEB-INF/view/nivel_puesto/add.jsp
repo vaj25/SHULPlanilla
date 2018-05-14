@@ -33,9 +33,15 @@
 					</div>
 					
 					<div class="field">
-						<form:label path="salario">Salario: </form:label>
-						<form:input path="salario" type="number" min="0" value="0" step=".01" />
-						<form:errors path="salario" />
+						<form:label path="salarioMinimo">Salario Mínimo: </form:label>
+						<form:input path="salarioMinimo" type="number" min="0" value="0" step=".01" />
+						<form:errors path="salarioMinimo" />
+					</div>
+					
+					<div class="field">
+						<form:label path="salarioMaximo">Salario Máximo: </form:label>
+						<form:input path="salarioMaximo" type="number" min="0" value="0" step=".01" />
+						<form:errors path="salarioMaximo" />
 					</div>
 									
 					<button class="ui primary button" type="submit">Guardar</button>

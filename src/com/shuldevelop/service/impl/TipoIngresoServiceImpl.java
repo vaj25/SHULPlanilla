@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shuldevelop.DAO.TipoIngresoDAO;
 import com.shuldevelop.model.TipoIngreso;
 import com.shuldevelop.service.TipoIngresoService;
 
@@ -14,7 +15,7 @@ import com.shuldevelop.service.TipoIngresoService;
 public class TipoIngresoServiceImpl implements TipoIngresoService {
 
 	@Autowired
-	TipoIngresoService tipoIngresoDAO;
+	TipoIngresoDAO tipoIngresoDAO;
 	
 	@Transactional
 	public void add(TipoIngreso tipoIngreso) {

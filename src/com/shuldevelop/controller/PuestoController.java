@@ -85,8 +85,10 @@ public class PuestoController {
 			return mav;
 		}
 		
-		u.getNivelPuesto().setSalario(nivelPuestoService.getTipoPuesto(
-				u.getNivelPuesto().getId()).getSalario());
+		u.getNivelPuesto().setSalarioMinimo(nivelPuestoService.getTipoPuesto(
+				u.getNivelPuesto().getId()).getSalarioMinimo());
+		u.getNivelPuesto().setSalarioMaximo(nivelPuestoService.getTipoPuesto(
+				u.getNivelPuesto().getId()).getSalarioMaximo());
 		u.getNivelPuesto().setNumeroNivel(nivelPuestoService.getTipoPuesto(
 				u.getNivelPuesto().getId()).getNumeroNivel());
 		

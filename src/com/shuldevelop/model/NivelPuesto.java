@@ -25,8 +25,11 @@ public class NivelPuesto {
 	@Column(name = "numero_nivel")
 	private int numeroNivel;
 	
-	@Column
-	private double salario;
+	@Column(name = "salario_minimo")
+	private double salarioMinimo;
+	
+	@Column(name = "salario_maximo")
+	private double salarioMaximo;
 	
 	@OneToMany(mappedBy = "nivelPuesto")
     private List<Puesto> puesto = new ArrayList<>();
@@ -35,11 +38,11 @@ public class NivelPuesto {
 		super();
 	}
 
-	public NivelPuesto(int id, int numeroNivel, double salario) {
-		super();
+	public NivelPuesto(int id, int numeroNivel, double salarioMinimo, List<Puesto> puesto) {
 		this.id = id;
 		this.numeroNivel = numeroNivel;
-		this.salario = salario;
+		this.salarioMinimo = salarioMinimo;
+		this.puesto = puesto;
 	}
 
 	public int getId() {
@@ -58,12 +61,20 @@ public class NivelPuesto {
 		this.numeroNivel = numeroNivel;
 	}
 
-	public double getSalario() {
-		return salario;
+	public double getSalarioMinimo() {
+		return salarioMinimo;
 	}
 
-	public void setSalario(double salario) {
-		this.salario = salario;
+	public void setSalarioMinimo(double salarioMinimo) {
+		this.salarioMinimo = salarioMinimo;
+	}
+
+	public double getSalarioMaximo() {
+		return salarioMaximo;
+	}
+
+	public void setSalarioMaximo(double salarioMaximo) {
+		this.salarioMaximo = salarioMaximo;
 	}
 
 	public List<Puesto> getPuesto() {
@@ -76,7 +87,8 @@ public class NivelPuesto {
 
 	@Override
 	public String toString() {
-		return numeroNivel + " - $" + String.format("%.2f", salario);
+		return this.numeroNivel + " - $" + String.format("%.2f", this.salarioMinimo)
+				+ " - $" + String.format("%.2f", this.salarioMaximo);
 	}
 	
 }

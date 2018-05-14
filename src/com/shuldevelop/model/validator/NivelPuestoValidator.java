@@ -30,9 +30,14 @@ public class NivelPuestoValidator implements Validator {
 					"El número nivel tiene que ser positivo.");
 		}
 		
-		if ( tipoPuesto.getSalario() < 0 ) {
-			arg1.rejectValue("salario", "salario.incorrect", 
-					"El salario tiene que ser positivo.");
+		if ( tipoPuesto.getSalarioMinimo() < 0 ) {
+			arg1.rejectValue("salarioMinimo", "salarioMinimo.incorrect", 
+					"El salario mínimo tiene que ser positivo.");
+		}
+		
+		if ( tipoPuesto.getSalarioMaximo() < 0 ) {
+			arg1.rejectValue("salarioMaximo", "salarioMaximo.incorrect", 
+					"El salario máximo tiene que ser positivo.");
 		}
 		
 	}

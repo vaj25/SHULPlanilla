@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shuldevelop.DAO.RangoComisionDAO;
 import com.shuldevelop.model.RangoComision;
 import com.shuldevelop.service.RangoComisionService;
 
@@ -14,7 +15,7 @@ import com.shuldevelop.service.RangoComisionService;
 public class RangoComisionServiceImpl implements RangoComisionService {
 
 	@Autowired
-	RangoComisionService rangoComisionDAO;
+	RangoComisionDAO rangoComisionDAO;
 
 	@Transactional
 	public void add(RangoComision rangoComision) {
