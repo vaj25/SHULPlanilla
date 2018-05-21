@@ -24,6 +24,7 @@
         <div class="header">Gestionar Planilla</div>
         <div class="menu">
           <a class="item" href="<cj:url value="/rango-renta/index.html" />">Rangos de Renta</a>
+          <a class="item" href="<cj:url value="/tipo-descuento/index.html" />">Tipos de Descuento</a>
         </div>
     </div>
     <div class="item">
