@@ -1,12 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+	<title>Tipo Ingreso</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
+
+	<c:import url="../layouts/menu.jsp"></c:import>
+	<div class="container">
+		<div class="ui raised very padded text container segment">
+			<div class="ui large breadcrumb">
+				<a class="section" href="<c:url value="/tipo-ingreso/index.html" />">Atras</a>
+			</div>
+			<br><br>
+			<div>
+				<form:form method="post" modelAttribute="TipoIngreso" cssClass="ui form">
+					
+					<h4 class="ui dividing header">Editar Tipo Ingreso</h4>
+					
+					<form:errors path="*" element="div" cssClass="alert" />
+					<div class="field">
+						<form:label path="tipoIngreso">Nombre de tipo de ingreso: </form:label>
+						<form:input path="tipoIngreso" />
+						<form:errors path="tipoIngreso" />
+					</div>
+									
+					<button class="ui primary button" type="submit">Guardar</button>
+					<button class="ui button" type="reset" >Limpiar</button>
+				</form:form>
+			</div>
+		</div>
+	</div>
+	
+	<c:import url="../layouts/footer.jsp"></c:import>
 
 </body>
 </html>

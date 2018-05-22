@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.TipoIngreso;
+import com.shuldevelop.model.validator.TipoIngresoValidator;
 import com.shuldevelop.service.TipoIngresoService;
 
 @Controller
@@ -21,6 +22,8 @@ public class TipoIngresoController {
 
 	@Autowired
 	private TipoIngresoService tipoIngresoService;
+	
+	private TipoIngresoValidator tipoIngresoValidator;
 	
 	@RequestMapping(value = "/tipo-ingreso/index", method = RequestMethod.GET)
 	public ModelAndView tipoIngreso() {
@@ -53,7 +56,7 @@ public class TipoIngresoController {
 			SessionStatus status
  			) {
 		
-//		this.tipoPuestoValidator.validate(u, result);
+		this.tipoIngresoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
@@ -91,7 +94,7 @@ public class TipoIngresoController {
 			HttpServletRequest request
  			) {
 		
-//		this.tipoPuestoValidator.validate(u, result);
+		this.tipoIngresoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();

@@ -33,14 +33,14 @@ public class TipoIngresoDAOImpl implements TipoIngresoDAO {
 	@Override
 	public void delete(int idTipoIngreso) {
 		
-		session.getCurrentSession().delete(idTipoIngreso);
+		session.getCurrentSession().delete(getTipoIngreso(idTipoIngreso));
 
 	}
 
 	@Override
 	public TipoIngreso getTipoIngreso(int idTipoIngreso) {
 		
-		return session.getCurrentSession().get(TipoIngreso.class, idTipoIngreso);
+		return (TipoIngreso) session.getCurrentSession().get(TipoIngreso.class, idTipoIngreso);
 		
 	}
 

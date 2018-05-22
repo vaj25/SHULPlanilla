@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="ui container">
 			<div>
-				<a class="ui positive button" href="<c:url value="/puesto/add.html" />">Agregar</a>
+				<a class="ui positive button" href="<c:url value="/tipo-ingreso/add.html" />">Agregar</a>
 			</div>
 			
 			<br>

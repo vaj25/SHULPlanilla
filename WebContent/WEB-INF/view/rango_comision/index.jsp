@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +17,7 @@
 	<div class="container">
 		<div class="ui container">
 			<div>
-				<a class="ui positive button" href="<c:url value="/puesto/add.html" />">Agregar</a>
+				<a class="ui positive button" href="<c:url value="/rango-comision/add.html" />">Agregar</a>
 			</div>
 			
 			<br>
@@ -40,13 +41,18 @@
 									<c:out value="${rangoComision.getId()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${rangoComision.getDesde()}"></c:out>
+									<fmt:formatNumber minFractionDigits="2" type="currency" 
+										currencySymbol="$"
+										value="${rangoComision.getDesde()}" />
 								</td>
 								<td>
-									<c:out value="${rangoComision.getHasta()}"></c:out>
+									<fmt:formatNumber minFractionDigits="2" type="currency" 
+										currencySymbol="$"
+										value="${rangoComision.getHasta()}" />
 								</td>
 								<td>
-									<c:out value="${rangoComision.getTaza()}"></c:out>
+									<fmt:formatNumber minFractionDigits="2" type="percent"
+										value="${rangoComision.getTasa()}" />
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">

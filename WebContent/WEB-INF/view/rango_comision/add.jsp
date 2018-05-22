@@ -40,8 +40,17 @@
 					
 					<div class="field">
 						<form:label path="tasa">Tasa: </form:label>
-						<form:input path="tasa" type="number" min="0" step="1" value="0" max="100" />
+						<form:input path="tasa" type="number" min="0.1" step="0.1" value="0" max="1" />
 						<form:errors path="tasa" />
+					</div>
+					
+					<div class="field">
+						<form:label path="tipoIngreso.id">Tipo de ingreso: </form:label>
+						<form:select path="tipoIngreso.id">
+                			<form:option value="0" label="Seleccione el tipo de ingreso"/>
+                			<form:options items="${tipoIngresoList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="tipoIngreso" />
 					</div>
 									
 					<button class="ui primary button" type="submit">Guardar</button>

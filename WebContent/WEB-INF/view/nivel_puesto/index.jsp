@@ -43,10 +43,14 @@
 									<c:out value="${tipoPuesto.getNumeroNivel()}"></c:out>
 								</td>
 								<td>
-									$ <fmt:formatNumber type="number" minFractionDigits="2" value="${tipoPuesto.getSalarioMinimo()}" />
+									<fmt:formatNumber minFractionDigits="2" type="currency" 
+										currencySymbol="$"
+										value="${tipoPuesto.getSalarioMinimo()}" />
 								</td>
 								<td>
-									$ <fmt:formatNumber type="number" minFractionDigits="2" value="${tipoPuesto.getSalarioMaximo()}" />
+									<fmt:formatNumber minFractionDigits="2" type="currency" 
+										currencySymbol="$"
+										value="${tipoPuesto.getSalarioMaximo()}" />
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">

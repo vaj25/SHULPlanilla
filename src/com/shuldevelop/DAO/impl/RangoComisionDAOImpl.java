@@ -33,14 +33,14 @@ public class RangoComisionDAOImpl implements RangoComisionDAO {
 	@Override
 	public void delete(int idRangoComision) {
 		
-		session.getCurrentSession().delete(idRangoComision);
+		session.getCurrentSession().delete(getRangoComision(idRangoComision));
 
 	}
 
 	@Override
 	public RangoComision getRangoComision(int idRangoComision) {
 		
-		return session.getCurrentSession().get(RangoComision.class, idRangoComision);
+		return (RangoComision) session.getCurrentSession().get(RangoComision.class, idRangoComision);
 		
 	}
 
