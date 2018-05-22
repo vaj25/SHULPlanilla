@@ -20,9 +20,9 @@ import javax.persistence.Transient;
 public class RangoComision {
 	
 	@Id
-	@Column(name = "id_rango_comision")
-	@SequenceGenerator(name = "SequenceIdRangoComision", sequenceName = "SEQ_RANGO_COMISION")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdRangoComision")
+	@Column(name = "id_rango_comision")	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_RANGO_COMISION")
+	@SequenceGenerator(name = "SEQ_RANGO_COMISION", sequenceName = "SEQ_RANGO_COMISION", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column(name = "desde")

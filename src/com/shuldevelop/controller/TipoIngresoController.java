@@ -56,7 +56,7 @@ public class TipoIngresoController {
 			SessionStatus status
  			) {
 		
-		this.tipoIngresoValidator.validate(u, result);
+//		this.tipoIngresoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
@@ -117,7 +117,7 @@ public class TipoIngresoController {
 		
 		tipoIngresoService.delete(id);
 		
-		return new ModelAndView("redirect:/rtipo-ingreso/index.html");
+		return new ModelAndView("redirect:/tipo-ingreso/index.html");
 	}
 	
 }

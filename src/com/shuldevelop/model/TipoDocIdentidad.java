@@ -14,8 +14,8 @@ public class TipoDocIdentidad {
 
 	@Id
 	@Column(name = "id_tipo_doc_identidad")
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_SEQUENCENAME")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_SEQUENCENAME")
+	@SequenceGenerator(name = "SEQ_SEQUENCENAME", sequenceName = "SEQ_SEQUENCENAME", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column

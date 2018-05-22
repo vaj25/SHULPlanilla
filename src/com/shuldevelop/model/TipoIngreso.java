@@ -18,8 +18,8 @@ public class TipoIngreso {
 
 	@Id
 	@Column(name = "id_tipo_ingreso")
-	@SequenceGenerator(name = "SequenceIdTipoIngreso", sequenceName = "SEQ_TIPO_INGRESO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdTipoIngreso")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TIPO_INGRESO")
+	@SequenceGenerator(name = "SEQ_TIPO_INGRESO", sequenceName = "SEQ_TIPO_INGRESO", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column(name = "tipo_ingreso")

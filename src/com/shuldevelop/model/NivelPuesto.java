@@ -18,8 +18,8 @@ public class NivelPuesto {
 	
 	@Id
 	@Column(name = "id_nivel_puesto")
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_NIVEL_PUESTO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_NIVEL_PUESTO")
+	@SequenceGenerator(name = "SEQ_NIVEL_PUESTO", sequenceName = "SEQ_NIVEL_PUESTO", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column(name = "numero_nivel")

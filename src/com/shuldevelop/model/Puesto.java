@@ -16,8 +16,8 @@ public class Puesto {
 	
 	@Id
 	@Column(name = "id_puesto")
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_PUESTO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PUESTO")
+	@SequenceGenerator(name = "SEQ_PUESTO", sequenceName = "SEQ_PUESTO", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column(name = "puesto")
