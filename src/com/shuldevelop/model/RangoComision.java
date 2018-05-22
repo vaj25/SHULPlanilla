@@ -92,5 +92,10 @@ public class RangoComision {
 	public void setTipoIngreso(TipoIngreso tipoIngreso) {
 		this.tipoIngreso = tipoIngreso;
 	}
+
+	@Override
+	public String toString() {
+		return "RangoComision $" + desde + " - $" + hasta ;
+	}
 	
 }

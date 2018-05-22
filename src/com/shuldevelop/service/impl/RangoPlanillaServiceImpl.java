@@ -5,12 +5,14 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.shuldevelop.DAO.RangoPlanillaDAO;
 import com.shuldevelop.model.RangoPlanilla;
 import com.shuldevelop.model.RangoPlanillaId;
 import com.shuldevelop.service.RangoPlanillaService;
 
+@Service
 public class RangoPlanillaServiceImpl implements RangoPlanillaService {
 
 	@Autowired

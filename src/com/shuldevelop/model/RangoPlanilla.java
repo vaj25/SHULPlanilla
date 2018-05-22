@@ -47,12 +47,12 @@ public class RangoPlanilla {
 		this.venta = venta;
 	}
     
-	public EmpleadoPlanilla getEmpleadoPlanilla() {
+	public PlanillaEmpleado getPlanillaEmpleado() {
 		return getId().getPlanillaEmpleado();
 	}
 	
-	public void setEmpleadoPlanilla(EmpleadoPlanilla empleadoPlanilla) {
-		getId().setPlanillaEmpleado(empleadoPlanilla);
+	public void setPlanillaEmpleado(PlanillaEmpleado planillaEmpleado) {
+		getId().setPlanillaEmpleado(planillaEmpleado);
 	}
 	
 	public RangoComision getRangoComision() {
