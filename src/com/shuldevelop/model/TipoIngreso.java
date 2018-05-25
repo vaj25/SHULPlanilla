@@ -32,7 +32,7 @@ public class TipoIngreso {
 	
 	@Transient
 	@OneToMany(mappedBy = "id.tipoIngreso")
-    private List<IngresoPlanilla> ingresoPlanilla = new ArrayList<>();
+    	private List<IngresoPlanilla> ingresoPlanilla = new ArrayList<>();
 
 	public TipoIngreso() {
 	}

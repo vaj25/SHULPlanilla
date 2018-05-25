@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.RangoComision;
+import com.shuldevelop.model.validator.RangoComisionValidator;
 import com.shuldevelop.service.RangoComisionService;
 
 @Controller
@@ -22,6 +23,12 @@ public class RangoComisionController {
 	@Autowired
 	private RangoComisionService rangoComisionService;
 	
+	private RangoComisionValidator rangoComisionValidator;
+	
+	public RangoComisionController() {
+		this.rangoComisionValidator = new RangoComisionValidator();
+	}
+
 	@RequestMapping(value = "/rango-comision/index", method = RequestMethod.GET)
 	public ModelAndView rangoComision() {
 		
@@ -53,7 +60,7 @@ public class RangoComisionController {
 			SessionStatus status
  			) {
 		
-//		this.tipoPuestoValidator.validate(u, result);
+		this.rangoComisionValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
@@ -91,7 +98,7 @@ public class RangoComisionController {
 			HttpServletRequest request
  			) {
 		
-//		this.tipoPuestoValidator.validate(u, result);
+		this.rangoComisionValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();

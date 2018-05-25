@@ -25,6 +25,10 @@ public class TipoIngresoController {
 	
 	private TipoIngresoValidator tipoIngresoValidator;
 	
+	public TipoIngresoController() {
+		this.tipoIngresoValidator = new TipoIngresoValidator();
+	}
+	
 	@RequestMapping(value = "/tipo-ingreso/index", method = RequestMethod.GET)
 	public ModelAndView tipoIngreso() {
 		
@@ -56,7 +60,7 @@ public class TipoIngresoController {
 			SessionStatus status
  			) {
 		
-//		this.tipoIngresoValidator.validate(u, result);
+		this.tipoIngresoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
