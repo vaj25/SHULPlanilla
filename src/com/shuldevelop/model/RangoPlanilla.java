@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @AssociationOverrides({
   @AssociationOverride(name = "id.planillaEmpleado", joinColumns = @JoinColumn(name = "id_planilla_empleado")),
   @AssociationOverride(name = "id.rangoComision", joinColumns = @JoinColumn(name = "id_rango_comision")) 
- })
+})
 public class RangoPlanilla {
 
 	@EmbeddedId

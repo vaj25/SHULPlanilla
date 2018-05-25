@@ -1,5 +1,6 @@
 package com.shuldevelop.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -28,6 +29,10 @@ public class TipoIngreso {
 	@Transient 
 	@OneToMany(mappedBy = "tipoIngreso")
 	private List<RangoComision> rangoComision;
+	
+	@Transient
+	@OneToMany(mappedBy = "id.tipoIngreso")
+    private List<IngresoPlanilla> ingresoPlanilla = new ArrayList<>();
 
 	public TipoIngreso() {
 	}
@@ -59,6 +64,14 @@ public class TipoIngreso {
 
 	public void setRangoComision(List<RangoComision> rangoComision) {
 		this.rangoComision = rangoComision;
+	}
+
+	public List<IngresoPlanilla> getIngresoPlanilla() {
+		return ingresoPlanilla;
+	}
+
+	public void setIngresoPlanilla(List<IngresoPlanilla> ingresoPlanilla) {
+		this.ingresoPlanilla = ingresoPlanilla;
 	}
 
 	@Override

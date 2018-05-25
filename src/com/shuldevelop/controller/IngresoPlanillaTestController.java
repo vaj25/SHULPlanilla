@@ -11,45 +11,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shuldevelop.model.IngresoPlanilla;
 import com.shuldevelop.model.PlanillaEmpleado;
-import com.shuldevelop.model.RangoComision;
-import com.shuldevelop.model.RangoPlanilla;
+import com.shuldevelop.model.TipoIngreso;
+import com.shuldevelop.service.IngresoPlanillaService;
 import com.shuldevelop.service.PlanillaEmpleadoService;
-import com.shuldevelop.service.RangoComisionService;
-import com.shuldevelop.service.RangoPlanillaService;
+import com.shuldevelop.service.TipoIngresoService;
 
 @Controller
-public class RangoPlanillaTestController {
-
+public class IngresoPlanillaTestController {
+	
 	@Autowired
-	private RangoPlanillaService rangoPlanillaService;
+	private IngresoPlanillaService ingresoPlanillaService;
 
 	@Autowired
 	private PlanillaEmpleadoService planillaEmpleadoService;
 	
 	@Autowired
-	private RangoComisionService rangoComisionService;
+	private TipoIngresoService tipoIngresoService;
 	
-	@RequestMapping(value = "/rango-planilla/add", method = RequestMethod.GET)
-	public ModelAndView addRangoComision() {
+	@RequestMapping(value = "/ingreso-planilla/add", method = RequestMethod.GET)
+	public ModelAndView addIngresoPlanilla() {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		List<PlanillaEmpleado> listPlanillaEmpleado = planillaEmpleadoService.getAllPlanillaEmpleado();
-		List<RangoComision> listRangoComision = rangoComisionService.getAllRangoComision();
+		List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
 		
-		mav.setViewName("test/add_rango_planilla");
-		mav.addObject("RangoPlanilla", new RangoPlanilla());
+		mav.setViewName("test/add_ingreso_planilla");
+		mav.addObject("IngresoPlanilla", new IngresoPlanilla());
 		mav.addObject("planillaEmpleadoList", listPlanillaEmpleado);
-		mav.addObject("rangoComisionList", listRangoComision);
+		mav.addObject("tipoIngresoList", listTipoIngreso);
 		
 		return mav;
 		
 	}
 	
-	@RequestMapping(value = "/rango-planilla/add", method = RequestMethod.POST)
-	public ModelAndView addRangoComision(
-			@ModelAttribute("RangoPlanilla") RangoPlanilla u,
+	@RequestMapping(value = "/ingreso-planilla/add", method = RequestMethod.POST)
+	public ModelAndView addIngresoPlanilla(
+			@ModelAttribute("IngresoPlanilla") IngresoPlanilla u,
 			BindingResult result,
 			SessionStatus status
 			) {
@@ -58,12 +58,12 @@ public class RangoPlanillaTestController {
 			ModelAndView mav = new ModelAndView();
 			
 			List<PlanillaEmpleado> listPlanillaEmpleado = planillaEmpleadoService.getAllPlanillaEmpleado();
-			List<RangoComision> listRangoComision = rangoComisionService.getAllRangoComision();
+			List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
 			
-			mav.setViewName("test/add_rango_planilla");
-			mav.addObject("RangoPlanilla", u);
+			mav.setViewName("test/add_ingreso_planilla");
+			mav.addObject("IngresoPlanilla", new IngresoPlanilla());
 			mav.addObject("planillaEmpleadoList", listPlanillaEmpleado);
-			mav.addObject("rangoComisionList", listRangoComision);
+			mav.addObject("tipoIngresoList", listTipoIngreso);
 			
 			return mav;
 		}
@@ -72,14 +72,15 @@ public class RangoPlanillaTestController {
 			planillaEmpleadoService.getPlanillaEmpleado(u.getPlanillaEmpleado().getId())
 		);
 		
-		u.setRangoComision(
-			rangoComisionService.getRangoComision(u.getRangoComision().getId())
+		u.setTipoIngreso(
+			tipoIngresoService.getTipoIngreso(u.getTipoIngreso().getId())
 		);
 		
-		rangoPlanillaService.add(u);
+		ingresoPlanillaService.add(u);
 		
 		return new ModelAndView("redirect:/welcome.html");
 		
 	}
-		
+
+
 }

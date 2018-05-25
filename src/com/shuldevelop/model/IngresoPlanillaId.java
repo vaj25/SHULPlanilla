@@ -6,15 +6,18 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class RangoPlanillaId implements Serializable {
-	
+public class IngresoPlanillaId implements Serializable {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
     private PlanillaEmpleado planillaEmpleado;
  
 	@ManyToOne
-    private RangoComision rangoComision;
+    private TipoIngreso tipoIngreso;
 
 	public PlanillaEmpleado getPlanillaEmpleado() {
 		return planillaEmpleado;
@@ -24,12 +27,12 @@ public class RangoPlanillaId implements Serializable {
 		this.planillaEmpleado = planillaEmpleado;
 	}
 
-	public RangoComision getRangoComision() {
-		return rangoComision;
+	public TipoIngreso getTipoIngreso() {
+		return tipoIngreso;
 	}
 
-	public void setRangoComision(RangoComision rangoComision) {
-		this.rangoComision = rangoComision;
+	public void setTipoIngreso(TipoIngreso tipoIngreso) {
+		this.tipoIngreso = tipoIngreso;
 	}
-	
+
 }

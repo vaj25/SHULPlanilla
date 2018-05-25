@@ -40,8 +40,9 @@ public class RangoPlanillaDAOImpl implements RangoPlanillaDAO {
 
 	@Override
 	public RangoPlanilla getRangoPlanilla(RangoPlanillaId id) {
-//		return (RangoPlanilla) session.getCurrentSession().get(RangoPlanilla.class, id);
-		return null;
+		
+		return (RangoPlanilla) session.getCurrentSession().get(RangoPlanilla.class, id);
+		
 	}
 
 	@Override
