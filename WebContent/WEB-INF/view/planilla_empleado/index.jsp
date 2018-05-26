@@ -46,7 +46,7 @@
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Venta" data-inverted="">
-										<a href="<c:url value="/rango-planilla/index.html?id=${planilla.getId()}" />">
+										<a href="<c:url value="/rango-planilla/index.html?id_planilla=${planilla.getId()}" />">
 											<i class="large shopping cart icon"></i>
 										</a>
 									</div>

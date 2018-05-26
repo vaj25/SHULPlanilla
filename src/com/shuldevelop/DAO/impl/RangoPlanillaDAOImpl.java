@@ -55,5 +55,15 @@ public class RangoPlanillaDAOImpl implements RangoPlanillaDAO {
 		return allRangoPlanilla;
 		
 	}
+
+	@Override
+	public RangoPlanilla getRangoPlanillaByPlanilla(int idPlanillaEmpleado) {
+		
+		return (RangoPlanilla) session.getCurrentSession().createQuery(
+				"from RANGO_PLANILLA where id_planilla_empleado = :idPlanillaEmpleado")
+				.setParameter("idPlanillaEmpleado", idPlanillaEmpleado)
+				.uniqueResult();
+		
+	}
 	
 }

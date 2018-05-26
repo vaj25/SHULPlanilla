@@ -16,4 +16,6 @@ public interface RangoPlanillaService {
 	public RangoPlanilla getRangoPlanilla(RangoPlanillaId idRangoPlanilla);
 	
 	public List<RangoPlanilla> getAllRangoPlanilla();
+	
+	public RangoPlanilla getRangoPlanillaByPlanilla(int idPlanillaEmpleado);
 }

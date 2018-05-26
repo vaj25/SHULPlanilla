@@ -17,4 +17,6 @@ public interface IngresoPlanillaService {
 	
 	public List<IngresoPlanilla> getAllIngresoPlanilla();
 	
+	public List<IngresoPlanilla> getAllIngresoPlanillaByPlanilla(int idEmpleadoPlanilla);
+	
 }

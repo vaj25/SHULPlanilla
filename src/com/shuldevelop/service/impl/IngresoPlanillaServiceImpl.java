@@ -53,4 +53,11 @@ public class IngresoPlanillaServiceImpl implements IngresoPlanillaService {
 		
 	}
 
+	@Transactional
+	public List<IngresoPlanilla> getAllIngresoPlanillaByPlanilla(int idEmpleadoPlanilla) {
+
+		return ingresoPlanillaDAO.getAllIngresoPlanillaByPlanilla(idEmpleadoPlanilla);
+		
+	}
+
 }

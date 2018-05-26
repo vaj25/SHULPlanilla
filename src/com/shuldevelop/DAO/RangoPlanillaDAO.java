@@ -17,4 +17,6 @@ public interface RangoPlanillaDAO {
 	
 	public List<RangoPlanilla> getAllRangoPlanilla();
 	
+	public RangoPlanilla getRangoPlanillaByPlanilla(int idPlanillaEmpleado);
+	
 }

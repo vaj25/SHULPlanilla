@@ -24,7 +24,7 @@ public class PuestoValidator implements Validator {
 		Puesto puesto = (Puesto) arg0;
 		
 		if (puesto.getNivelPuesto().getId() == 0) {
-			arg1.rejectValue("nivelPuesto", "nivelPuesto.incorrect", 
+			arg1.rejectValue("id", "id.incorrect", 
 					"El nivel del puesto es obligatorio.");
 		}
 

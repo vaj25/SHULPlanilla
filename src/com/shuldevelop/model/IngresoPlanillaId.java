@@ -18,6 +18,14 @@ public class IngresoPlanillaId implements Serializable {
  
 	@ManyToOne
     private TipoIngreso tipoIngreso;
+	
+	public IngresoPlanillaId() {
+	}
+
+	public IngresoPlanillaId(PlanillaEmpleado planillaEmpleado, TipoIngreso tipoIngreso) {
+		this.planillaEmpleado = planillaEmpleado;
+		this.tipoIngreso = tipoIngreso;
+	}
 
 	public PlanillaEmpleado getPlanillaEmpleado() {
 		return planillaEmpleado;

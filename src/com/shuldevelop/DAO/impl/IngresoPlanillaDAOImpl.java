@@ -56,4 +56,16 @@ public class IngresoPlanillaDAOImpl implements IngresoPlanillaDAO {
 		
 	}
 
+	@Override
+	public List<IngresoPlanilla> getAllIngresoPlanillaByPlanilla(int idEmpleadoPlanilla) {
+		
+		Query<IngresoPlanilla> query = session.getCurrentSession().
+				createQuery("from INGRESO_PLANILLA where id_planilla_empleado = :idEmpleadoPlanilla",
+						IngresoPlanilla.class).setParameter("idEmpleadoPlanilla", idEmpleadoPlanilla);
+		List<IngresoPlanilla> allIngresoPlanilla = query.getResultList();
+		
+		return allIngresoPlanilla;
+		
+	}
+
 }

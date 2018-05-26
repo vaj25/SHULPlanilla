@@ -17,6 +17,7 @@ import com.shuldevelop.model.IngresoPlanilla;
 import com.shuldevelop.model.IngresoPlanillaId;
 import com.shuldevelop.model.PlanillaEmpleado;
 import com.shuldevelop.model.TipoIngreso;
+import com.shuldevelop.model.validator.IngresoPlanillaValidator;
 import com.shuldevelop.service.IngresoPlanillaService;
 import com.shuldevelop.service.PlanillaEmpleadoService;
 import com.shuldevelop.service.TipoIngresoService;
@@ -33,6 +34,12 @@ public class IngresoPlanillaController {
 	@Autowired
 	private TipoIngresoService tipoIngresoService;
 	
+	private IngresoPlanillaValidator ingresoPlanillaValidator;
+	
+	public IngresoPlanillaController() {
+		this.ingresoPlanillaValidator = new IngresoPlanillaValidator();
+	}
+
 	@RequestMapping(value = "/ingreso-planilla/index", method = RequestMethod.GET)
 	public ModelAndView ingresoPlanilla(HttpServletRequest request) {
 		
@@ -42,24 +49,24 @@ public class IngresoPlanillaController {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
 			
-			IngresoPlanilla ingresoPlanilla = new IngresoPlanilla();
+			IngresoPlanilla ingresoPlanilla = new IngresoPlanilla();		
 			
-//			if (request.getParameter("idi") != null && !request.getParameter("idi").isEmpty()) {
-//				
-//				int idi = Integer.parseInt(request.getParameter("idi"));
-//				
-//				IngresoPlanillaId ingresoPlanillaId = new IngresoPlanillaId();
-//				
-//				ingresoPlanillaId.setPlanillaEmpleado( planillaEmpleadoService.getPlanillaEmpleado(id) );
-//				ingresoPlanillaId.setTipoIngreso( tipoIngresoService.getTipoIngreso(idi) );
-//				
-//				ingresoPlanilla = ingresoPlanillaService.getIngresoPlanilla(ingresoPlanillaId);
-//			}
+			if (request.getParameter("idi") != null) {
+				int idi = Integer.parseInt(request.getParameter("idi"));
+				
+				IngresoPlanillaId ingresoPlanillaId = new IngresoPlanillaId();
+				
+				ingresoPlanillaId.setPlanillaEmpleado( planillaEmpleadoService.getPlanillaEmpleado(id) );
+				ingresoPlanillaId.setTipoIngreso( tipoIngresoService.getTipoIngreso(idi) );
+				
+				ingresoPlanilla = ingresoPlanillaService.getIngresoPlanilla(ingresoPlanillaId);
+				
+				System.out.println(ingresoPlanilla.getMonto());
+			}
 			
 			PlanillaEmpleado planillaEmpleado = planillaEmpleadoService.getPlanillaEmpleado(id);
-			List<PlanillaEmpleado> listPlanillaEmpleado = planillaEmpleadoService.getAllPlanillaEmpleado();
 			List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
-			List<IngresoPlanilla> listIngresoPlanilla = ingresoPlanillaService.getAllIngresoPlanilla();
+			List<IngresoPlanilla> listIngresoPlanilla = ingresoPlanillaService.getAllIngresoPlanillaByPlanilla(id);
 			
 			
 			mav.setViewName("ingreso_planilla/index");
@@ -67,7 +74,6 @@ public class IngresoPlanillaController {
 			mav.addObject("tipoIngresoList", listTipoIngreso);
 			mav.addObject("planillaEmpleado", planillaEmpleado);
 			mav.addObject("ingresoPlanillaList", listIngresoPlanilla);
-			mav.addObject("planillaEmpleadoList", listPlanillaEmpleado);
 			
 			
 			return mav;
@@ -85,12 +91,14 @@ public class IngresoPlanillaController {
 			SessionStatus status
 			) {
 				
+		ingresoPlanillaValidator.validate(u, result);
+		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
 			
 			PlanillaEmpleado planillaEmpleado = planillaEmpleadoService.getPlanillaEmpleado( u.getPlanillaEmpleado().getId() );
 			List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
-			List<IngresoPlanilla> listIngresoPlanilla = ingresoPlanillaService.getAllIngresoPlanilla();
+			List<IngresoPlanilla> listIngresoPlanilla = ingresoPlanillaService.getAllIngresoPlanillaByPlanilla(u.getPlanillaEmpleado().getId());
 			
 			mav.setViewName("ingreso_planilla/index");
 			mav.addObject("IngresoPlanilla", u);
@@ -111,9 +119,25 @@ public class IngresoPlanillaController {
 		
 		ingresoPlanillaService.add(u);
 		
-		return new ModelAndView("redirect:/ingreso-planilla/index.html");
+		return new ModelAndView("redirect:/ingreso-planilla/index.html?id="+u.getPlanillaEmpleado().getId());
 		
 	}
-
+	
+	@RequestMapping(value = "/ingreso-planilla/delete", method = RequestMethod.GET)
+	public ModelAndView deleteIngresoPlanilla(HttpServletRequest request) {
+		
+		int idPlanilla = Integer.parseInt(request.getParameter("id_planilla"));
+		int idIngreso = Integer.parseInt(request.getParameter("id_ingreso"));
+		
+		TipoIngreso tipoIngreso = tipoIngresoService.getTipoIngreso(idIngreso);
+		
+		PlanillaEmpleado planillaEmpleado = planillaEmpleadoService.getPlanillaEmpleado(idPlanilla);
+		
+		IngresoPlanillaId ingresoPlanillaId = new IngresoPlanillaId(planillaEmpleado, tipoIngreso);
+		
+		ingresoPlanillaService.delete(ingresoPlanillaId);
+		
+		return new ModelAndView("redirect:/ingreso-planilla/index.html?id="+idPlanilla);
+	}
 
 }

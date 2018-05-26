@@ -17,4 +17,6 @@ public interface IngresoPlanillaDAO {
 	
 	public List<IngresoPlanilla> getAllIngresoPlanilla();
 	
+	public List<IngresoPlanilla> getAllIngresoPlanillaByPlanilla(int idEmpleadoPlanilla);
+	
 }

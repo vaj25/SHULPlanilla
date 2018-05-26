@@ -53,4 +53,11 @@ public class RangoPlanillaServiceImpl implements RangoPlanillaService {
 		
 	}
 
+	@Transactional
+	public RangoPlanilla getRangoPlanillaByPlanilla(int idPlanillaEmpleado) {
+		
+		return rangoPlanillaDao.getRangoPlanillaByPlanilla(idPlanillaEmpleado);
+		
+	}
+
 }

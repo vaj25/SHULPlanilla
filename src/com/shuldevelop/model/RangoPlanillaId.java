@@ -16,6 +16,14 @@ public class RangoPlanillaId implements Serializable {
 	@ManyToOne
     private RangoComision rangoComision;
 
+	public RangoPlanillaId() {
+	}
+
+	public RangoPlanillaId(PlanillaEmpleado planillaEmpleado, RangoComision rangoComision) {
+		this.planillaEmpleado = planillaEmpleado;
+		this.rangoComision = rangoComision;
+	}
+
 	public PlanillaEmpleado getPlanillaEmpleado() {
 		return planillaEmpleado;
 	}
