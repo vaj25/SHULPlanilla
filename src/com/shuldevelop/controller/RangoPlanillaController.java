@@ -15,6 +15,7 @@ import com.shuldevelop.model.PlanillaEmpleado;
 import com.shuldevelop.model.RangoComision;
 import com.shuldevelop.model.RangoPlanilla;
 import com.shuldevelop.model.RangoPlanillaId;
+import com.shuldevelop.model.validator.RangoPlanillaValidator;
 import com.shuldevelop.service.PlanillaEmpleadoService;
 import com.shuldevelop.service.RangoComisionService;
 import com.shuldevelop.service.RangoPlanillaService;
@@ -31,6 +32,12 @@ public class RangoPlanillaController {
 	@Autowired
 	private RangoComisionService rangoComisionService;
 	
+	private RangoPlanillaValidator rangoPlanillaValidator;
+		
+	public RangoPlanillaController() {
+		this.rangoPlanillaValidator = new RangoPlanillaValidator();
+	}
+
 	@RequestMapping(value = "/rango-planilla/index", method = RequestMethod.GET)
 	public ModelAndView rangoComision(HttpServletRequest request) {
 		
@@ -73,6 +80,8 @@ public class RangoPlanillaController {
 			BindingResult result,
 			SessionStatus status
 			) {
+		
+		rangoPlanillaValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
