@@ -14,6 +14,8 @@ public interface RangoComisionDAO {
 	
 	public RangoComision getRangoComision(int idRangoComision);
 	
+	public RangoComision getRangoComisionByVenta(double venta);
+	
 	public List<RangoComision> getAllRangoComision();
 	
 }

@@ -19,7 +19,7 @@ public class RangoPlanillaDAOImpl implements RangoPlanillaDAO {
 	
 	@Override
 	public void add(RangoPlanilla rangoPlanilla) {
-		
+				
 		session.getCurrentSession().saveOrUpdate(rangoPlanilla);
 		
 	}

@@ -1,5 +1,6 @@
 package com.shuldevelop.DAO.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -43,6 +44,18 @@ public class RangoComisionDAOImpl implements RangoComisionDAO {
 		return (RangoComision) session.getCurrentSession().get(RangoComision.class, idRangoComision);
 		
 	}
+	
+	@Override
+	public RangoComision getRangoComisionByVenta(double venta) {
+		
+		BigDecimal id = (BigDecimal) session.createEntityManager().createNativeQuery(
+				"SELECT asignarRango(:venta) FROM DUAL")
+				.setParameter("venta", venta)
+				.getSingleResult();
+		
+		return getRangoComision(id.intValue());
+		
+	}
 
 	@Override
 	public List<RangoComision> getAllRangoComision() {
@@ -54,5 +67,6 @@ public class RangoComisionDAOImpl implements RangoComisionDAO {
 		return allRangoComision;
 		
 	}
+
 
 }

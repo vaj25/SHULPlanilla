@@ -44,6 +44,13 @@ public class RangoComisionServiceImpl implements RangoComisionService {
 		return rangoComisionDAO.getRangoComision(idRangoComision);
 
 	}
+	
+	@Transactional
+	public RangoComision getRangoComisionByVenta(double venta) {
+
+		return rangoComisionDAO.getRangoComisionByVenta(venta);
+		
+	}
 
 	@Transactional
 	public List<RangoComision> getAllRangoComision() {

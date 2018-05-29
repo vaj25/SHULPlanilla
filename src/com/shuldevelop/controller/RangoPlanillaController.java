@@ -104,7 +104,7 @@ public class RangoPlanillaController {
 		);
 		
 		u.setRangoComision(
-			rangoComisionService.getRangoComision(u.getRangoComision().getId())
+			rangoComisionService.getRangoComisionByVenta(u.getVenta())
 		);
 		
 		rangoPlanillaService.add(u);
