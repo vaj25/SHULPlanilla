@@ -72,6 +72,8 @@ public class RangoRentaController {
 		}
 
 		rangoRentaService.add(u);
+		rangoRentaService.up(u);
+		
 
 		return new ModelAndView("redirect:/rango-renta/index.html");
 	}

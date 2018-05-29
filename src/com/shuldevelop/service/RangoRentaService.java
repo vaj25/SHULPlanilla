@@ -9,6 +9,8 @@ public interface RangoRentaService {
 	public void add(RangoRenta rangoRenta);
 
 	public void edit(RangoRenta rangoRenta);
+	
+	public void up(RangoRenta rangoRenta);
 
 	public void delete(int idRangoRenta);
 

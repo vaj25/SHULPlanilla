@@ -23,6 +23,13 @@ public class RangoRentaServiceImpl implements RangoRentaService {
 		rangoRentaDAO.add(rangoRenta);
 
 	}
+	
+	@Transactional
+	public void up(RangoRenta rangoRenta) {
+
+		rangoRentaDAO.up(rangoRenta);
+
+	}
 
 	@Transactional
 	public void edit(RangoRenta rangoRenta) {

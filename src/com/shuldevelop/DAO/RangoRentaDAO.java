@@ -7,6 +7,8 @@ import com.shuldevelop.model.RangoRenta;
 public interface RangoRentaDAO {
 
 	public void add(RangoRenta rangoRenta);
+	
+	public void up(RangoRenta rangoRenta);
 
 	public void edit(RangoRenta rangoRenta);
 

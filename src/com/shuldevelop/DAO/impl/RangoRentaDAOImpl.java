@@ -2,6 +2,10 @@ package com.shuldevelop.DAO.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +22,15 @@ public class RangoRentaDAOImpl implements RangoRentaDAO {
 
 	@Override
 	public void add(RangoRenta rangoRenta) {
-
-		session.getCurrentSession().saveOrUpdate(rangoRenta);
-
+		session.getCurrentSession().saveOrUpdate(rangoRenta);  
+	}
+	
+	public void up(RangoRenta rangoRenta) {
+        @SuppressWarnings("deprecation")
+		Query query = session.getCurrentSession().createSQLQuery("CALL actualizarRangoRenta(:idRR)")
+      		  .addEntity(RangoRenta.class)
+      		  .setParameter("idRR",rangoRenta.getId());
+        query.executeUpdate();
 	}
 
 	@Override
