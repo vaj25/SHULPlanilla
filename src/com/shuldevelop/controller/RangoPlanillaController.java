@@ -99,6 +99,10 @@ public class RangoPlanillaController {
 			return mav;
 		}
 		
+		if ( rangoPlanillaService.getRangoPlanilla(u.getId()) != null ) {
+			rangoPlanillaService.delete(u.getId());
+		}		
+		
 		u.setPlanillaEmpleado(
 			planillaEmpleadoService.getPlanillaEmpleado(u.getPlanillaEmpleado().getId())
 		);
