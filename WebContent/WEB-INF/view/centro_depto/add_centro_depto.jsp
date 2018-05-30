@@ -38,7 +38,7 @@
 					
 					<div class="field">
 						<form:label path="id.centroCosto.monto">Monto: </form:label>
-						<form:input path="id.centroCosto.monto" type="number" min="0" value="0" step=".01" />
+						<form:input path="id.centroCosto.monto" type="number" min="0" step=".01" />
 						<form:errors path="id.centroCosto.monto" />
 					</div>
 

@@ -24,8 +24,8 @@
 				<table class="ui single line table">
 					<thead>
 						<tr>
-							<th>Número</th>
-							<th>Estructura</th>
+							<th>Id Centro de Costo</th>
+							<th>Estructura Organizativa</th>
 							<th>Monto</th>
 							<th>Periodicidad</th>
 							<th>año</th>
@@ -38,29 +38,28 @@
 						<c:forEach items="${centroDeptoList}" var="centroDepto">
 							<tr>
 								<td>
-									<c:out value="${centroDepto.getId()}"></c:out>
+									<c:out value="${centroDepto.centroCosto.getId()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${centroDepto.getMonto()}"></c:out>
+									<c:out value="${centroDepto.estructuraOrg.getNombre()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${centroDepto.getPeriodicidad()}"></c:out>
+									<c:out value="${centroDepto.centroCosto.getMonto()}"></c:out>
 								</td>
-								<c:forEach items="${centroDeptoList}" var="genero">
-									<tr>
-										<td>
-											<c:out value="${centroDepto.getAnio()}"></c:out>
-										</td>
-									</tr>					
-								</c:forEach>															
+								<td>
+									<c:out value="${centroDepto.centroCosto.getPeriodicidad()}"></c:out>
+								</td>
+								<td>
+									<c:out value="${centroDepto.getAnio()}"></c:out>
+								</td>
 							    <td>									
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
-										<a href="<c:url value="/genero/edit.html?id=${genero.getId()}" />">
+										<a href="<c:url value="/centro-depto/edit.html?id=${centroDepto.estructuraOrg.getId()}&id2=${centroDepto.centroCosto.getId()}"/>">
 											<i class="large edit icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
-										<a href="<c:url value="/genero/delete.html?id=${genero.getId()}" />">
+										<a href="<c:url value="/centro-depto/delete.html?id=${centroDepto.estructuraOrg.getId()}&id2=${centroDepto.centroCosto.getId()}"/>">
 											<i class="large erase icon"></i>
 										</a>
 									</div>

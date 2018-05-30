@@ -14,7 +14,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.CentroCosto;
-import com.shuldevelop.model.validator.CentroCostoValidator;
 import com.shuldevelop.service.CentroCostoService;
 
 @Controller

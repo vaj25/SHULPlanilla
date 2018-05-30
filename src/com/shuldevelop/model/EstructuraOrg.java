@@ -55,7 +55,7 @@ public class EstructuraOrg{
 
 		@Override
 		public String toString() {
-			return "EstructuraOrg [id=" + id + ", nombre=" + nombre + "]";
+			return nombre;
 		}
 
 		

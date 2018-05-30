@@ -14,10 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.EstructuraOrg;
-import com.shuldevelop.model.Genero;
-import com.shuldevelop.model.PlanillaEmpleado;
-import com.shuldevelop.model.RangoComision;
-import com.shuldevelop.model.RangoPlanillaId;
+import com.shuldevelop.model.validator.CentroDeptoValidator;
 import com.shuldevelop.model.CentroCosto;
 import com.shuldevelop.model.CentroDepto;
 import com.shuldevelop.model.CentroDeptoPK;
@@ -37,6 +34,12 @@ public class CentroDeptoController {
 	@Autowired
 	private CentroCostoService centroCostoService;
 	
+	private  CentroDeptoValidator centroDeptoValidator;
+	
+	public  CentroDeptoController() {
+		this.centroDeptoValidator = new  CentroDeptoValidator();
+	}
+	
 	@RequestMapping(value = "/centro-depto/index", method = RequestMethod.GET)
 	public ModelAndView centroDepto() {
 		
@@ -51,10 +54,6 @@ public class CentroDeptoController {
 		mav.addObject("centroDeptoList", listCentroDepto);
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
 		mav.addObject("centroCostoList", listCentroCosto);
-		System.out.println(listCentroDepto);
-		//System.out.println(listEstructuraOrg);
-		//System.out.println(listCentroCosto);
-		
 		
 		
 		return mav;
@@ -83,17 +82,17 @@ public class CentroDeptoController {
 			BindingResult result,
 			SessionStatus status
 			) {
-				
+		
+		this.centroDeptoValidator.validate(u, result);
+		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
 			
 			List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getDeptoEstructuraOrg();
-			List<CentroCosto> listCentroCosto = centroCostoService.getAllCentroCosto();
 			
 			mav.setViewName("centro_depto/add_centro_depto");
 			mav.addObject("CentroDepto", u);
 			mav.addObject("estructuraOrgList", listEstructuraOrg);
-			mav.addObject("centroCostoList", listCentroCosto);
 				
 			return mav;
 		}
@@ -142,31 +141,32 @@ public class CentroDeptoController {
 	public ModelAndView editCentroDepto(
 			@ModelAttribute("CentroDepto") CentroDepto u,
 			BindingResult result,
-			SessionStatus status,
-			HttpServletRequest request 			
+			SessionStatus status
 			) {
-				
+		
+			this.centroDeptoValidator.validate(u, result);		
 			if (result.hasErrors()) {
-			ModelAndView mav = new ModelAndView();
-			
-			List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getAllEstructuraOrg();
-			
-			mav.setViewName("centro_depto/edit_centro_depto");
-			//mav.addObject("CentroDepto", u);
-			//mav.addObject("estructuraOrgList", listEstructuraOrg);	
+				ModelAndView mav = new ModelAndView();
 				
-			return mav;
-		}
+				List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getDeptoEstructuraOrg();
+				List<CentroCosto> listCentroCosto = centroCostoService.getAllCentroCosto();
+				
+				mav.setViewName("centro_depto/add_centro_depto");
+				mav.addObject("CentroDepto", u);
+				mav.addObject("estructuraOrgList", listEstructuraOrg);
+				mav.addObject("centroCostoList", listCentroCosto);
+					
+				return mav;
+			}
 		
-		u.setEstructuraOrg(
-			estructuraOrgService.getEstructuraOrg(u.getEstructuraOrg().getId())
-		);
+			u.setEstructuraOrg(
+				estructuraOrgService.getEstructuraOrg(u.getEstructuraOrg().getId())
+			);
 
-		//centroCostoService.add(u.getCentroCosto());
-		//centroDeptoService.add(u);
-		
-		
-		return new ModelAndView("redirect:/centro-depto/edit.html?id=1&id2=10");
+			centroCostoService.add(u.getCentroCosto());
+			centroDeptoService.add(u);
+			
+			return new ModelAndView("redirect:/centro-depto/index.html");
 		
 	}
 	
@@ -183,12 +183,11 @@ public class CentroDeptoController {
 
 		centroDeptoPK.setCentroCosto(centroCosto);	
 		centroDeptoPK.setEstructuraOrg(estructuraOrg);
-		System.out.println(centroDeptoPK);
 		centroDeptoService.delete(centroDeptoPK);
 		centroCostoService.delete(idCentroCosto);
 
 		
-		return new ModelAndView("redirect:/centro-depto/add.html");	
+		return new ModelAndView("redirect:/centro-depto/index.html");	
 	}
 	
 	

@@ -15,6 +15,7 @@
     <div class="item">
     	<div class="header">Gestionar Empleados</div>
     	<div class="menu">
+    		<a class="item" href="<cj:url value="/centro-depto/index.html" />">Centro de Costo</a>
     		<a class="item" href="<cj:url value="/tipo-doc-identidad/index.html" />">Tipo Doc Identidad</a>
     		<a class="item" href="<cj:url value="/estado-civil/index.html" />">Estado Civil</a>
     		<a class="item" href="<cj:url value="/genero/index.html" />">Genero</a>

@@ -31,6 +31,11 @@ public class CentroDeptoPK implements Serializable {
 	public void setEstructuraOrg(EstructuraOrg estructuraOrg) {
 		this.estructuraOrg = estructuraOrg;
 	}
+
+	@Override
+	public String toString() {
+		return "centroCosto=" + centroCosto.getId() + ", estructuraOrg=" + estructuraOrg.getId();
+	}
 	
 	
 	
