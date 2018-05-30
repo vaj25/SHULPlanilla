@@ -49,7 +49,7 @@ public class RangoComisionController {
 		
 		mav.setViewName("rango_comision/add");
 		mav.addObject("RangoComision", new RangoComision());
-		
+			
 		return mav;
 	}
 	
@@ -102,7 +102,8 @@ public class RangoComisionController {
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
-						
+			
+			
 			mav.setViewName("rango_comision/edit");
 			mav.addObject("RangoComision", u);
 			

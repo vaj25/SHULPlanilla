@@ -30,7 +30,7 @@ public class GeneroController {
 	}
 	
 	@RequestMapping(value = "/genero/index", method = RequestMethod.GET)
-	public ModelAndView tipoDocIdentidad() {
+	public ModelAndView genero() {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -66,7 +66,7 @@ public class GeneroController {
 			ModelAndView mav = new ModelAndView();
 			
 			mav.setViewName("genero/add");
-			mav.addObject("Genero", new Genero());
+			mav.addObject("Genero", u);
 			
 			return mav;
 		}
@@ -107,7 +107,7 @@ public class GeneroController {
 			Genero genero = generoService.getGenero(id);
 			
 			mav.setViewName("genero/edit");
-			mav.addObject("Genero", genero);
+			mav.addObject("Genero", u);
 			
 			return mav;
 		}
