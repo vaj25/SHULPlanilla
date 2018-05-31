@@ -38,7 +38,7 @@
     	<div class="header">Anonimus</div>
     	<div class="menu">
     		<a class="item">Editar usuario</a>
-    		<a class="item">Cerrar Sesión</a>
+    		<a class="item" href="<cj:url value="/logout.html" />" >Cerrar Sesión</a>
     	</div>
     </div>
 </nav>

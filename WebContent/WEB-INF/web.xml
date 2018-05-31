@@ -6,53 +6,39 @@
   
 	<display-name>SHULPlanilla</display-name>
 	
-	<!-- context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/shulplanilla-security.xml     
-        </param-value>
-    </context-param>
+	 <filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
 	
-	<listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener -->
-  
-	<servlet>
-        <servlet-name>shulplanilla</servlet-name>
-        <servlet-class>
-            org.springframework.web.servlet.DispatcherServlet
-        </servlet-class>
-        <init-param>
-	        <param-name>contextConfigLocation</param-name>
-	        <param-value>/WEB-INF/shulplanilla-servlet.xml</param-value>
-    	</init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>shulplanilla</servlet-name>
-        <url-pattern>/welcome.html</url-pattern>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
-    
-    <!--listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
     
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/shulplanilla-security.xml     
+            /WEB-INF/applicationContext.xml
         </param-value>
     </context-param>
     
-    <filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <servlet>
+        <servlet-name>shulplanilla</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>shulplanilla</servlet-name>
+        <url-pattern>/welcome.html</url-pattern>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
     
 </web-app>

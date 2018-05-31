@@ -21,7 +21,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public Usuario findUserByUsername(String username) {
 		
 		return (Usuario) session.getCurrentSession().createQuery(
-				"from Usuario where username = :username and estado=true")
+				"from USUARIO where username = :username")
 				.setParameter("username", username)
 				.uniqueResult();
 		
@@ -60,6 +60,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 		Query<Usuario> query = session.getCurrentSession().
 				createQuery("from USUARIO", Usuario.class);
+		
 		List<Usuario> allUsuario = query.getResultList();
 		
 		return allUsuario;

@@ -2,17 +2,22 @@ package com.shuldevelop.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity()
-@Table(name = "usuario")
+@Entity(name = "USUARIO")
+@Table(name = "USUARIO")
 public class Usuario {
 	
 	@Id
 	@Column(name = "id_usuario")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO")
+	@SequenceGenerator(name = "SEQ_USUARIO", sequenceName = "SEQ_USUARIO", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column(name = "username", nullable = false)
@@ -20,9 +25,9 @@ public class Usuario {
 	
 	@Column(name = "password", nullable = false)
 	private String password;
-	
+
 	@Column(name = "estado")
-	private boolean estado;
+	private int estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_rol")
@@ -44,16 +49,20 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public boolean isEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Rol getRol() {
