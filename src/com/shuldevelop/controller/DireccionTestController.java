@@ -88,7 +88,7 @@ public class DireccionTestController {
 		return new ModelAndView("redirect:/welcome.html");
 	}
 	
-	 @RequestMapping(value = "/direccion/getDepartamentoZona", method = RequestMethod.GET, produces = "application/json")
+	 @RequestMapping(value = "/direccion/getDepartamentoZona", method = RequestMethod.GET)
 	 @ResponseBody
 	 public String getDepartamentoZona(@RequestParam int idZona) {
 
@@ -98,7 +98,7 @@ public class DireccionTestController {
 		 
 	 }
 	 
-	 @RequestMapping(value = "/direccion/getMunicipioDepartamento", method = RequestMethod.GET, produces = "application/json")
+	 @RequestMapping(value = "/direccion/getMunicipioDepartamento", method = RequestMethod.GET)
 	 @ResponseBody
 	 public String getMunicipioDepartamento(@RequestParam int idDepartamento) {
 

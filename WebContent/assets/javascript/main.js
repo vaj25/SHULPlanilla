@@ -23,9 +23,11 @@ $(document).ready(function () {
 					type: 'get',
 			        url: baseurl + "/direccion/getDepartamentoZona.html?idZona=" + $(this).val(),
 			        contentType: 'application/json',
-			        success: function(data) {
+			        success: function(response) {
 			        	
-			        	for (var i=0, len=data.length; i < len; i++) {
+			        	var data = JSON.parse(response);
+			        	
+			        	for (var i=0; i < data.length; i++) {
 			        		$('#departamentoid').append('<option value="'+ data[i].id +'">' + data[i].nombre + '</option>')
 			        	}
 			        	
@@ -37,9 +39,11 @@ $(document).ready(function () {
 			    						type: 'get',
 			    				        url: baseurl + "/direccion/getMunicipioDepartamento.html?idDepartamento=" + $(this).val(),
 			    				        contentType: 'application/json',
-			    				        success: function(data) {
+			    				        success: function(response) {
 			    				        	
-			    				        	for (var i=0, len=data.length; i < len; i++) {
+			    				        	var data = JSON.parse(response);
+			    				        	
+			    				        	for (var i=0; i < data.length; i++) {
 			    				        		$('.municipioid').append('<option value="'+ data[i].id +'">' + data[i].nombre + '</option>')
 			    				        	}      	
 			    				        	$('.ui.dropdown')
