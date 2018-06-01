@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,9 +36,22 @@ public class UsuarioController {
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	private Usuario user;
+	
 	public UsuarioController() {
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		this.usuarioValidator = new UsuarioValidator();
+	}
+
+	public Usuario getUser() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		this.user = usuarioService.findUserByUsername(userDetails.getUsername());
+		
+		return this.user;
 	}
 
 	@RequestMapping(value = "/usuario/index", method = RequestMethod.GET)
@@ -296,7 +312,7 @@ public class UsuarioController {
 			SessionStatus status,
 			HttpServletRequest request) {
 
-		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
+		Usuario usuario = usuarioService.getUsuario(getUser().getId());
 		
 		if ( bCryptPasswordEncoder.matches(request.getParameter("currentPassword"), usuario.getPassword()) ) {
 			usuario.setPassword(bCryptPasswordEncoder.encode( request.getParameter("password") ));
@@ -310,11 +326,11 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/usuario/edit-pass-user", method = RequestMethod.GET)
-	public ModelAndView editPasswordLoggedIn(HttpServletRequest request) {
+	public ModelAndView editPasswordLoggedIn() {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
+		Usuario usuario = usuarioService.getUsuario(getUser().getId());
 		
 		mav.setViewName("usuario/edit_pass_user");
 		mav.addObject("Usuario", usuario);

@@ -42,7 +42,16 @@ $('.ui.form').form({
 			        prompt     : 'Por faver verifique la password.'
 				}
 			]
-		}
+		},
+		currentPassword: {
+			identifier: 'currentPassword',
+			rules: [
+				{
+					type: 'empty',
+					prompt: 'Por favor, introduzca la password actual.'
+				}
+			]
+		},
 	}
 	
 });
