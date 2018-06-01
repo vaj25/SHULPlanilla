@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<script src="${pageContext.request.contextPath}/assets/javascript/jquery-1.11.3.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/javascript/main.js"></script>
-
 <footer>
 	<div class="ui two column center aligned grid">
 		<div class="column">
@@ -13,3 +10,7 @@
 		</div>
 	</div>
 </footer>
+
+<script src="${pageContext.request.contextPath}/assets/javascript/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/javascript/semantic.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/javascript/main.js"></script>

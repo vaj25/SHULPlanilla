@@ -15,38 +15,40 @@
 <body>
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
-		<div class="ui raised very padded text container segment">
-			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/usuario/index.html" />">Atras</a>
-			</div>
-			<br><br>
-			<div>
-				<form method="post" class="ui form">
-					
-					<div class="field">
-						<label>Nueva Password: </label>
-						<input type="password" name="password" placeholder="password">
+		<div>
+			<form method="post" class="ui raised very padded text container segment form">
+				
+				<div class="ui large breadcrumb">
+					<a class="section" href="<c:url value="/usuario/index.html" />">Atras</a>
+				</div>
+				
+				<h4 class="ui dividing header">Cambiar Contraseña para ${Usuario.getUsername()}</h4>
+				
+				<div class="field">
+					<label>Nueva Password: </label>
+					<input type="password" name="password" placeholder="Password">
+				</div>
+				
+				<div class="field">
+					<label>Confirmar Password: </label>
+					<input type="password" name="confirmPassword" placeholder="Confitmar password">
+				</div>
+				
+				<div class="field">
+					<div class="ui checkbox">
+						<input type="checkbox" name="notificar" value="1" tabindex="0" class="hidden">
+						<label>Notificar por correo electronico al usuario. </label>
 					</div>
-					
-					<div class="field">
-						<label>Confirmar Password: </label>
-						<input type="password" name="confirmPassword" placeholder="Confitmar password">
-					</div>
-					
-					<div class="field">
-						<div class="ui checkbox">
-							<input type="checkbox" name="notificar" value="1" tabindex="0" class="hidden">
-							<label>Notificar por correo electronico al usuario. </label>
-						</div>
-					</div>
+				</div>
 
-					<button class="ui primary button" type="submit">Guardar</button>
-					<button class="ui button" type="reset" >Limpiar</button>
-				</form>
-			</div>
+				<button class="ui primary button" type="submit">Guardar</button>
+				<button class="ui button" type="reset" >Limpiar</button>
+				<div class="ui error message"></div>
+			</form>
 		</div>
 	</div>
 	
 	<c:import url="../layouts/footer.jsp"></c:import>
+	<script src="${pageContext.request.contextPath}/assets/javascript/validation/password-validate.js"></script>
 </body>
 </html>

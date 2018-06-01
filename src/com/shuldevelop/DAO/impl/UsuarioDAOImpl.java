@@ -44,7 +44,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public void delete(int idUsuario) {
 		
-		session.getCurrentSession().delete(idUsuario);
+		session.getCurrentSession().delete(getUsuario(idUsuario));
 		
 	}
 

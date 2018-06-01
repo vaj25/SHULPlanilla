@@ -16,47 +16,33 @@
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div>
-			<form:form method="post" modelAttribute="Usuario" cssClass="ui raised very padded text container segment form">
+			<form method="post" class="ui raised very padded text container segment form">
 				
 				<div class="ui large breadcrumb">
 					<a class="section" href="<c:url value="/usuario/index.html" />">Atras</a>
 				</div>
 				
-				<h4 class="ui dividing header">Nuevo Usuario</h4>
-				
-				<form:errors path="*" element="div" cssClass="alert" />					
-				<div class="field">
-					<form:label path="username">Nombre del Usuario: </form:label>
-					<form:input path="username" />
-					<form:errors path="username" />
-				</div>
+				<h4 class="ui dividing header">Cambiar Contraseña</h4>
 				
 				<div class="field">
-					<form:label path="password">Contraseña: </form:label>
-					<form:input type="password" path="password" />
-					<form:errors path="password" />
+					<label>Nueva Password: </label>
+					<input type="password" name="password" placeholder="Password">
 				</div>
-					
+				
 				<div class="field">
 					<label>Confirmar Password: </label>
 					<input type="password" name="confirmPassword" placeholder="Confitmar password">
 				</div>
-					
+				
 				<div class="field">
-					<form:label path="rol.id">Rol: </form:label>
-					<form:select path="rol.id">
-        	   			<form:option value="0" label="Seleccione un rol"/>
-              			<form:options items="${rolList}" itemValue="id" />
-            		</form:select>
-					<form:errors path="rol" />
+					<label>Password Actual: </label>
+					<input type="password" name="currentPassword" placeholder="Password actual">
 				</div>
-					
-				<form:hidden path="estado" value="3"/>
-									
+
 				<button class="ui primary button" type="submit">Guardar</button>
 				<button class="ui button" type="reset" >Limpiar</button>
 				<div class="ui error message"></div>
-			</form:form>
+			</form>
 		</div>
 	</div>
 	

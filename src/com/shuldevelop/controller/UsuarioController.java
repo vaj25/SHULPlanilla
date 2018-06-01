@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.Rol;
 import com.shuldevelop.model.Usuario;
+import com.shuldevelop.model.validator.UsuarioValidator;
 import com.shuldevelop.service.RolService;
 import com.shuldevelop.service.UsuarioService;
 
@@ -28,10 +29,13 @@ public class UsuarioController {
 	@Autowired
 	private RolService rolService;
 	
+	private UsuarioValidator usuarioValidator;
+	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public UsuarioController() {
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		this.usuarioValidator = new UsuarioValidator();
 	}
 
 	@RequestMapping(value = "/usuario/index", method = RequestMethod.GET)
@@ -66,6 +70,8 @@ public class UsuarioController {
 			@ModelAttribute("Usuario") Usuario u,
 			BindingResult result,
 			SessionStatus status) {
+		
+		usuarioValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			
@@ -110,6 +116,8 @@ public class UsuarioController {
 			@ModelAttribute("Usuario") Usuario u,
 			BindingResult result,
 			SessionStatus status) {
+		
+		usuarioValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			
@@ -200,14 +208,28 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuario/enable", method = RequestMethod.GET)
 	public ModelAndView enableUsuario(HttpServletRequest request) {
 		
-		int id = Integer.parseInt(request.getParameter("id"));
+		ModelAndView mav = new ModelAndView();
 		
-		Usuario usuario = usuarioService.getUsuario(id);
+		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
 		
+		mav.setViewName("usuario/enable_user");
+		mav.addObject("Usuario", usuario);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/usuario/enable", method = RequestMethod.POST)
+	public ModelAndView enableUsuario(
+			SessionStatus status,
+			HttpServletRequest request) {
+		
+		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
+		
+		usuario.setPassword(bCryptPasswordEncoder.encode( request.getParameter("password") ));
 		usuario.setEstado(1);
 		
 		usuarioService.edit(usuario);
-		
+				
 		return new ModelAndView("redirect:/usuario/index.html");
 	}
 	
@@ -222,7 +244,83 @@ public class UsuarioController {
 		
 		usuarioService.edit(usuario);
 		
-		return new ModelAndView("redirect:/usuario/index.html");
+		return new ModelAndView("redirect:/login.html");
+	}
+	
+	@RequestMapping(value = "/usuario/edit-user", method = RequestMethod.GET)
+	public ModelAndView editUsuarioLoggedIn(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<Rol> ListRol = rolService.getAllRol();
+		
+		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
+		
+		mav.setViewName("usuario/edit_user");
+		mav.addObject("Usuario", usuario);
+		mav.addObject("rolList", ListRol);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/usuario/edit-user", method = RequestMethod.POST)
+	public ModelAndView editUsuarioLoggedIn(
+			@ModelAttribute("Usuario") Usuario u,
+			BindingResult result,
+			SessionStatus status) {
+		
+		usuarioValidator.validate(u, result);
+		
+		if (result.hasErrors()) {
+			
+			ModelAndView mav = new ModelAndView();
+			
+			List<Rol> ListRol = rolService.getAllRol();
+			
+			mav.setViewName("usuario/edit_user");
+			mav.addObject("Usuario", u);
+			mav.addObject("rolList", ListRol);
+			
+			return mav;	
+			
+		}
+		
+		usuarioService.edit(u);
+		
+		return new ModelAndView("redirect:/welcome.html");
+		
+	}
+
+	@RequestMapping(value = "/usuario/edit-pass-user", method = RequestMethod.POST)
+	public ModelAndView editPasswordLoggedIn(
+			SessionStatus status,
+			HttpServletRequest request) {
+
+		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
+		
+		if ( bCryptPasswordEncoder.matches(request.getParameter("currentPassword"), usuario.getPassword()) ) {
+			usuario.setPassword(bCryptPasswordEncoder.encode( request.getParameter("password") ));
+			usuarioService.edit(usuario);
+					
+			return new ModelAndView("redirect:/welcome.html");
+		}
+		
+		return new ModelAndView("redirect:/usuario/edit-pass-user.html?id="+request.getParameter("id"));
+		
+	}
+	
+	@RequestMapping(value = "/usuario/edit-pass-user", method = RequestMethod.GET)
+	public ModelAndView editPasswordLoggedIn(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
+		
+		mav.setViewName("usuario/edit_pass_user");
+		mav.addObject("Usuario", usuario);
+		
+		return mav;
+		
 	}
 	
 }
