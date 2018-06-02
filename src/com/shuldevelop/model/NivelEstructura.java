@@ -56,8 +56,13 @@ public class NivelEstructura {
 		this.numero_nivel = numero_nivel;
 	}
 
+	@Override
+	public String toString() {
+		return "NivelEstructura [id=" + id + ", nombre_nivel=" + nombre_nivel + ", numero_nivel=" + numero_nivel + "]";
+	}
+
 	
-	
+		
 	
 	
 	

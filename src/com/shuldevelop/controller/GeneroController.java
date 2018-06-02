@@ -102,9 +102,6 @@ public class GeneroController {
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
-			int id = Integer.parseInt(request.getParameter("id"));
-			
-			Genero genero = generoService.getGenero(id);
 			
 			mav.setViewName("genero/edit");
 			mav.addObject("Genero", u);

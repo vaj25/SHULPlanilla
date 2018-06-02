@@ -18,5 +18,9 @@ public interface EstructuraOrgDAO {
 	
 	public List<EstructuraOrg> getDeptoEstructuraOrg();
 	
+	public List<EstructuraOrg> getNivelEstructuraOrg();
+
+	public List<EstructuraOrg> getListEstEstructuraOrg();
+
 }
 	

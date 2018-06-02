@@ -28,7 +28,7 @@
 					<form:errors path="*" element="div" cssClass="alert" />
 
 					<div class="field">
-						<form:label path="id.estructuraOrg.id">planilla empleado: </form:label>
+						<form:label path="id.estructuraOrg.id">Estructura Organizativa: </form:label>
 						<form:select path="id.estructuraOrg.id">
                 			<form:option value="0" label="Seleccione la planilla empleado"/>
                 			<form:options items="${estructuraOrgList}" itemValue="id" />

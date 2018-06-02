@@ -56,4 +56,15 @@ public class EstructuraOrgServiceImpl implements EstructuraOrgService{
 		return estructuraOrgDAO.getDeptoEstructuraOrg();
 
 	}
+	
+	@Transactional
+	public List<EstructuraOrg> getNivelEstructuraOrg() {
+		return estructuraOrgDAO.getNivelEstructuraOrg();
+
+	}
+	@Transactional
+	public List<EstructuraOrg> getListEstEstructuraOrg() {
+		return estructuraOrgDAO.getListEstEstructuraOrg();
+
+	}
 }

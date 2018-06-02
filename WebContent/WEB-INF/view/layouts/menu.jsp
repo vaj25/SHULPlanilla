@@ -30,9 +30,11 @@
     	<div class="header">Gestionar Empleados</div>
     	<div class="menu">
     		<a class="item" href="<c:url value="/centro-depto/index.html" />">Centro de Costo</a>
+    		<a class="item" href="<c:url value="/estructura-org/index.html" />">Estructura Organizativa</a>
+    		<a class="item" href="<c:url value="/genero/index.html" />">Genero</a>
     		<a class="item" href="<c:url value="/tipo-doc-identidad/index.html" />">Tipo Doc Identidad</a>
     		<a class="item" href="<c:url value="/estado-civil/index.html" />">Estado Civil</a>
-    		<a class="item" href="<c:url value="/genero/index.html" />">Genero</a>
+    		
     	</div>
     </div>
     <div class="item">

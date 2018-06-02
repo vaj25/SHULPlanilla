@@ -16,4 +16,8 @@ public interface EstructuraOrgService {
 	public List<EstructuraOrg> getAllEstructuraOrg();
 	
 	public List<EstructuraOrg> getDeptoEstructuraOrg();
+	
+	public List<EstructuraOrg> getNivelEstructuraOrg();
+	
+	public List<EstructuraOrg> getListEstEstructuraOrg();
 }
