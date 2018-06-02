@@ -23,20 +23,23 @@ public class Rol {
 	private int id;
 	
 	@Column(name = "rol", nullable = false)
-	private String NombreRol;
+	private String nombre;
 	
 	@Column(name = "descripcion")
 	private String descripcion;
 	
 	@OneToMany(mappedBy = "rol")
     private List<Usuario> usuario = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "rol")
+    private List<RolModuloPermiso> rolModuloPermisos = new ArrayList<>();
 
-	public String getNombreRol() {
-		return NombreRol;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreRol(String nombreRol) {
-		NombreRol = nombreRol;
+	public void setNombre(String nombreRol) {
+		nombre = nombreRol;
 	}
 
 	public String getDescripcion() {
@@ -63,8 +66,16 @@ public class Rol {
 		this.id = id;
 	}
 	
+	public List<RolModuloPermiso> getRolModuloPermisos() {
+		return rolModuloPermisos;
+	}
+
+	public void setRolModuloPermisos(List<RolModuloPermiso> rolModuloPermisos) {
+		this.rolModuloPermisos = rolModuloPermisos;
+	}
+
 	public String toString() {
-		return this.NombreRol;
+		return this.nombre;
 	}
 	
 }

@@ -14,27 +14,6 @@ public class PermisoServiceImpl implements PermisoService {
 
 	@Autowired
 	private PermisoDAO permisoDAO;	
-	
-	@Transactional
-	public void add(Permiso permiso) {
-
-		permisoDAO.add(permiso);
-		
-	}
-
-	@Transactional
-	public void edit(Permiso permiso) {
-		
-		permisoDAO.edit(permiso);
-
-	}
-
-	@Transactional
-	public void delete(int idPermiso) {
-		
-		permisoDAO.delete(idPermiso);
-
-	}
 
 	@Transactional
 	public Permiso getPermiso(int idPermiso) {

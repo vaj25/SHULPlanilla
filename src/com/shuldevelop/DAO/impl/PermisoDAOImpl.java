@@ -14,27 +14,6 @@ public class PermisoDAOImpl implements PermisoDAO {
 	private SessionFactory session;
 	
 	@Override
-	public void add(Permiso permiso) {
-		
-		session.getCurrentSession().saveOrUpdate(permiso);
-
-	}
-
-	@Override
-	public void edit(Permiso permiso) {
-		
-		session.getCurrentSession().saveOrUpdate(permiso);
-
-	}
-
-	@Override
-	public void delete(int idPermiso) {
-		
-		session.getCurrentSession().delete(getPermiso(idPermiso));
-
-	}
-
-	@Override
 	public Permiso getPermiso(int idPermiso) {
 		
 		return (Permiso) session.getCurrentSession().get(Permiso.class, idPermiso);

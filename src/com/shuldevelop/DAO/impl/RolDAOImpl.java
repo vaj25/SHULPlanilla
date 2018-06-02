@@ -17,6 +17,27 @@ public class RolDAOImpl implements RolDAO {
 	private SessionFactory session;
 
 	@Override
+	public void add(Rol rol) {
+		
+		session.getCurrentSession().saveOrUpdate(rol);
+		
+	}
+
+	@Override
+	public void edit(Rol rol) {
+		
+		session.getCurrentSession().saveOrUpdate(rol);
+		
+	}
+
+	@Override
+	public void delete(int idRol) {
+		
+		session.getCurrentSession().delete( getRol(idRol) );
+		
+	}
+	
+	@Override
 	public Rol getRol(int idRol) {
 		
 		return session.getCurrentSession().get(Rol.class, idRol);

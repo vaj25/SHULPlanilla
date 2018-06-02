@@ -28,7 +28,7 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
 			builder = org.springframework.security.core.userdetails.User.withUsername(username);
 			builder.disabled( (user.getEstado() == 1) ? false : true);
 			builder.password(user.getPassword());
-			builder.authorities(user.getRol().getNombreRol());
+			builder.authorities(user.getRol().getNombre());
 			
 		} else {
 			

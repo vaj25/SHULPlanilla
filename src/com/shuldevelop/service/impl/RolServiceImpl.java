@@ -18,6 +18,27 @@ public class RolServiceImpl implements RolService {
     private RolDAO rolDao;
 	
 	@Transactional
+	public void add(Rol rol) {
+		
+		rolDao.add(rol);
+		
+	}
+
+	@Transactional
+	public void edit(Rol rol) {
+
+		rolDao.edit(rol);
+		
+	}
+
+	@Transactional
+	public void delete(int idRol) {
+		
+		rolDao.delete(idRol);
+		
+	}
+	
+	@Transactional
 	public Rol getRol(int idRol) {
 		
 		return rolDao.getRol(idRol);

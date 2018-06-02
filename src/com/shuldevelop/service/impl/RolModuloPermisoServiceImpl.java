@@ -2,6 +2,8 @@ package com.shuldevelop.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,35 +17,35 @@ public class RolModuloPermisoServiceImpl implements RolModuloPermisoService {
 	@Autowired
 	private RolModuloPermisoDAO rolModuloPermisoDAO;
 
-	@Override
+	@Transactional
 	public void add(RolModuloPermiso rolModuloPermiso) {
 		
 		rolModuloPermisoDAO.add(rolModuloPermiso);
 
 	}
 
-	@Override
+	@Transactional
 	public void edit(RolModuloPermiso rolModuloPermiso) {
 		
 		rolModuloPermisoDAO.edit(rolModuloPermiso);
 
 	}
 
-	@Override
+	@Transactional
 	public void delete(int idRolModuloPermiso) {
 		
 		rolModuloPermisoDAO.delete(idRolModuloPermiso);
 
 	}
 
-	@Override
+	@Transactional
 	public RolModuloPermiso getRolModuloPermiso(int idRolModuloPermiso) {
 
 		return rolModuloPermisoDAO.getRolModuloPermiso(idRolModuloPermiso);
 		
 	}
 
-	@Override
+	@Transactional
 	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol) {
 		
 		return rolModuloPermisoDAO.getAllRolModuloPermisoByRol(idRol);

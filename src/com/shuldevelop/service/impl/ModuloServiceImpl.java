@@ -53,6 +53,13 @@ public class ModuloServiceImpl implements ModuloService {
 	}
 
 	@Transactional
+	public List<Modulo> getAllModuloParent() {
+
+		return moduloDAO.getAllModuloParent();
+		
+	}
+	
+	@Transactional
 	public List<Modulo> getAllModuloByRol(int idRol) {
 		
 		return moduloDAO.getAllModuloByRol(idRol);

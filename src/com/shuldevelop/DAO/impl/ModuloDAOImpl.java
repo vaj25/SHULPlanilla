@@ -56,6 +56,17 @@ public class ModuloDAOImpl implements ModuloDAO {
 	}
 
 	@Override
+	public List<Modulo> getAllModuloParent() {
+		
+		Query<Modulo> query = session.getCurrentSession()
+				.createQuery("from MODULO WHERE dependencia = null", Modulo.class);
+		
+		List<Modulo> allModulo = query.getResultList();
+		return allModulo;
+		
+	}
+	
+	@Override
 	public List<Modulo> getAllModuloByRol(int idRol) {
 		
 		Query<Modulo> query = session.getCurrentSession()

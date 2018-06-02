@@ -16,6 +16,8 @@ public interface ModuloDAO {
 	
 	public List<Modulo> getAllModulo();
 	
+	public List<Modulo> getAllModuloParent();
+	
 	public List<Modulo> getAllModuloByRol(int idRol);
 	
 }
