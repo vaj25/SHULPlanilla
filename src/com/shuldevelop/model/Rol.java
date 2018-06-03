@@ -3,6 +3,7 @@ package com.shuldevelop.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Rol {
 	@OneToMany(mappedBy = "rol")
     private List<Usuario> usuario = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "rol")
+	@OneToMany(mappedBy = "rol", cascade = CascadeType.REMOVE)
     private List<RolModuloPermiso> rolModuloPermisos = new ArrayList<>();
 
 	public String getNombre() {

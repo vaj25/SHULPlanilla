@@ -164,4 +164,14 @@ public class RolController {
 		return new ModelAndView("redirect:/rol/index.html");
 	}
 	
+	@RequestMapping(value = "/rol/delete", method = RequestMethod.GET)
+	public ModelAndView deleteRol(HttpServletRequest request) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		rolService.delete(id);
+		
+		return new ModelAndView("redirect:/rol/index.html");
+	}
+	
 }

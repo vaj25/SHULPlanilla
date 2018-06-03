@@ -8,8 +8,8 @@
       <c:out value="${requestScope.usuario.getUsername()}" /> <i class="dropdown icon"></i>
       <div class="menu">
         <!-- a class="item">Editar usuario</a -->
-        <a class="item" href="<c:url value="/usuario/edit-pass-user.html" />" >Cambiar contraseña</a>
-        <a class="item" href="<c:url value="/logout.html" />" >Cerrar Sesión</a>
+        <a class="item" href="<c:url value="/usuario/edit-pass-user.html" />" ><i class="key icon"></i> Cambiar contraseña</a>
+        <a class="item" href="<c:url value="/logout.html" />" ><i class="sign out alternate icon"></i> Cerrar Sesión</a>
       </div>
     </div>
     <div class="active blue item" id="date">

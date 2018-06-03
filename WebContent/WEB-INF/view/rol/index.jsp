@@ -45,6 +45,11 @@
 									<c:out value="${rol.getDescripcion()}"></c:out>
 								</td>
 								<td>
+									<div class="ui mini circular icon button" data-tooltip="Gestionar permisos" data-inverted="">
+										<a href="<c:url value="/rol-modulo-permiso/index.html?id=${rol.getId()}" />">
+											<i class="large key icon"></i>
+										</a>
+									</div>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
 										<a href="<c:url value="/rol/edit.html?id=${rol.getId()}" />">
 											<i class="large edit icon"></i>
