@@ -70,9 +70,34 @@ public class ModuloDAOImpl implements ModuloDAO {
 	public List<Modulo> getAllModuloByRol(int idRol) {
 		
 		Query<Modulo> query = session.getCurrentSession()
-				.createQuery("from MODULO", Modulo.class);
+				.createQuery("SELECT a FROM MODULO a " + 
+						"JOIN ROL_MODULO_PERMISO b ON b.modulo = a.id " +
+						"WHERE a.dependencia = NULL "+
+						"AND b.rol.id = :id_rol", Modulo.class)
+				.setParameter("id_rol", idRol);
 		
 		List<Modulo> allModulo = query.getResultList();
+		
+		List<Modulo> modulos = null;
+		
+		for (Modulo modulo : allModulo) {
+			
+			Query<Modulo> query1 = session.getCurrentSession()
+					.createQuery("SELECT a FROM MODULO a " + 
+							"JOIN ROL_MODULO_PERMISO b ON b.modulo = a.id " +
+							"WHERE a.dependencia.id = :mod "+
+							"AND b.rol.id = :id_rol " +
+							"group by a.id, a.nombre, a.descripcion, a.orden, a.dependencia, a.url, a.icono, a.opciones"
+							, Modulo.class)
+					.setParameter("mod", modulo.getId())
+					.setParameter("id_rol", idRol);
+			
+			modulos = query1.getResultList();
+			
+			modulo.setModulos(modulos);
+			
+		}
+		
 		return allModulo;
 		
 	}

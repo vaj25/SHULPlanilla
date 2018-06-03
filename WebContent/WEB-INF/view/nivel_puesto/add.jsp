@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
+	<c:set value="${Usuario}" var="usuario" scope="request" ></c:set> 
+	<c:set value="${modulos}" var="modulos" scope="request" ></c:set>
+	
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div class="ui raised very padded text container segment">

@@ -26,7 +26,7 @@
 				<form:form method="post" modelAttribute="RolModuloPermiso" cssClass="ui form"
 					action="${post_url}">
 					
-					<h4 class="ui dividing header">Gestionar permiso de xxxx</h4>
+					<h4 class="ui dividing header">Gestionar permiso de <c:out value="${rol.getNombre()}"></c:out> </h4>
 					
 					<form:errors path="*" element="div" cssClass="alert" />
 					

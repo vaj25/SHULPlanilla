@@ -41,7 +41,7 @@
 					
 					<div class="field">
 						<form:label path="orden">Orden: </form:label>
-						<form:input path="orden" type="number" min="0" value="0" step="1" />
+						<form:input path="orden" type="number" min="0" step="1" />
 						<form:errors path="orden" />
 					</div>
 					
@@ -84,5 +84,6 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="../layouts/footer.jsp"></c:import>
 </body>
 </html>

@@ -22,7 +22,7 @@
 			<br>
 			
 			<div>
-				<table class="ui single line table">
+				<table class="ui padded table">
 					<thead>
 						<tr>
 							<th>Número</th>

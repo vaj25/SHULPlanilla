@@ -7,7 +7,6 @@
     <div class="ui dropdown item">
       <c:out value="${requestScope.usuario.getUsername()}" /> <i class="dropdown icon"></i>
       <div class="menu">
-        <!-- a class="item">Editar usuario</a -->
         <a class="item" href="<c:url value="/usuario/edit-pass-user.html" />" ><i class="key icon"></i> Cambiar contraseña</a>
         <a class="item" href="<c:url value="/logout.html" />" ><i class="sign out alternate icon"></i> Cerrar Sesión</a>
       </div>
@@ -26,28 +25,22 @@
     <div class="item">
     	<a href="<c:url value="/welcome.html" />">Inicio</a>
     </div>
-    <div class="item">
-    	<div class="header">Gestionar Empleados</div>
-    	<div class="menu">
-    		<a class="item" href="<c:url value="/centro-depto/index.html" />">Centro de Costo</a>
-    		<a class="item" href="<c:url value="/estructura-org/index.html" />">Estructura Organizativa</a>
-    		<a class="item" href="<c:url value="/genero/index.html" />">Genero</a>
-    		<a class="item" href="<c:url value="/tipo-doc-identidad/index.html" />">Tipo Doc Identidad</a>
-    		<a class="item" href="<c:url value="/estado-civil/index.html" />">Estado Civil</a>
-    		
+    
+    <c:forEach items="${requestScope.modulos}" var="modulo" >
+    	<div class="item">
+	    	<div class="header"><c:out value="${modulo.getNombre()}"></c:out></div>
+	    	
+	    	<div class="menu">
+	    		<c:forEach items="${modulo.getModulos()}" var="modu" >
+	    		
+	    			<a class="item" href="<c:url value="/${modu.getUrl()}" />">
+	    				${modu.getNombre()}
+	    			</a>
+	    		
+	    		</c:forEach>
+	    	</div>
+    	
     	</div>
-    </div>
-    <div class="item">
-        <div class="header">Gestionar Planilla</div>
-        <div class="menu">
-          <a class="item" href="<c:url value="/rango-renta/index.html" />">Rangos de Renta</a>
-          <a class="item" href="<c:url value="/tipo-descuento/index.html" />">Tipos de Descuento</a>
-        </div>
-    </div>
-    <div class="item">
-    	<div class="header">Administración</div>
-    	<div class="menu">
-    		<a class="item">Usuarios</a>
-    	</div>
-    </div>
+    </c:forEach>
+    
 </nav>

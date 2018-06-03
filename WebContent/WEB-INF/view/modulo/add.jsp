@@ -59,7 +59,7 @@
 					
 					<div class="field">
 						<form:label path="opciones">Opciones: </form:label>
-						<form:select path="opciones">
+						<form:select path="opciones" cssClass="ui dropdown">
                 			<form:option value="0" label="Seleccione las opciones"/>
                 			<form:option value="1" label="1 - Leer"/>
                 			<form:option value="2" label="2 - Leer / Insertar"/>
@@ -71,7 +71,7 @@
 					
 					<div class="field">
 						<form:label path="dependencia.id">Dependencia: </form:label>
-						<form:select path="dependencia.id">
+						<form:select path="dependencia.id" cssClass="ui dropdown">
                 			<form:option value="0" label="Seleccione un dependencia"/>
                 			<form:options items="${moduloList}" itemValue="id" />
             			</form:select>
@@ -84,5 +84,6 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="../layouts/footer.jsp"></c:import>
 </body>
 </html>

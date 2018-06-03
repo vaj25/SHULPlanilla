@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
+	<c:set value="${Usuario}" var="usuario" scope="request" ></c:set> 
+	<c:set value="${modulos}" var="modulos" scope="request" ></c:set>
+
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div class="ui raised very padded text container segment">
@@ -34,13 +37,13 @@
 					
 					<div class="field">
 						<form:label path="salarioMinimo">Salario Mínimo: </form:label>
-						<form:input path="salarioMinimo" type="number" min="0" value="0" step=".01" />
+						<form:input path="salarioMinimo" type="number" min="0" step=".01" />
 						<form:errors path="salarioMinimo" />
 					</div>
 					
 					<div class="field">
 						<form:label path="salarioMaximo">Salario Máximo: </form:label>
-						<form:input path="salarioMaximo" type="number" min="0" value="0" step=".01" />
+						<form:input path="salarioMaximo" type="number" min="0" step=".01" />
 						<form:errors path="salarioMaximo" />
 					</div>
 
