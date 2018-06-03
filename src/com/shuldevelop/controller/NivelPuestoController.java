@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.NivelPuesto;
@@ -89,7 +90,8 @@ public class NivelPuestoController {
 	public ModelAndView addTipoPuesto(
 			@ModelAttribute("TipoPuesto") NivelPuesto u,
 			BindingResult result,
-			SessionStatus status
+			SessionStatus status,
+			final RedirectAttributes redirectAttributes
  			) {
 		
 		this.tipoPuestoValidator.validate(u, result);
@@ -106,6 +108,8 @@ public class NivelPuestoController {
 		}
 		
 		tipoPuestoService.add(u);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El nivel de puesto ha sido agregado exitosamente.");
 		
 		return new ModelAndView("redirect:/nivel-puesto/index.html");
 	}
@@ -131,7 +135,8 @@ public class NivelPuestoController {
 			@ModelAttribute("TipoPuesto") NivelPuesto u,
 			BindingResult result,
 			SessionStatus status,
-			HttpServletRequest request
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
  			) {
 		
 		this.tipoPuestoValidator.validate(u, result);
@@ -149,15 +154,31 @@ public class NivelPuestoController {
 		
 		tipoPuestoService.edit(u);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El nivel de puesto ha sido editado exitosamente.");
+		
 		return new ModelAndView("redirect:/nivel-puesto/index.html");
 	}
 	
 	@RequestMapping(value = "/nivel-puesto/delete", method = RequestMethod.GET)
-	public ModelAndView deleteTipoPuesto(HttpServletRequest request) {
+	public ModelAndView deleteTipoPuesto(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		tipoPuestoService.delete(id);
+		NivelPuesto nivel = tipoPuestoService.getTipoPuesto(id);
+		
+		if ( nivel.getPuesto() == null && nivel.getPuesto().size() == 0 ) {
+		
+			tipoPuestoService.delete(id);
+			
+			redirectAttributes.addFlashAttribute("messageSuccess", "El nivel de puesto ha sido eliminado exitosamente.");
+			
+		} else {
+			
+			redirectAttributes.addFlashAttribute("messageError", "El nivel de puesto posee dependencia no se puede eliminar.");
+			
+		}
 		
 		return new ModelAndView("redirect:/nivel-puesto/index.html");
 	}
