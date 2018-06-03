@@ -45,4 +45,8 @@ public class TipoDocIdentidad {
 		this.id = id;
 	}
 	
+	@Override
+	public String toString() {
+		return tipo;
+	}
 }

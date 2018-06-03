@@ -16,11 +16,11 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/nivel-estructura/index.html" />">Atras</a>
+				<a class="section" href="<c:url value="/unidad-organizacional/index.html" />">Atras</a>
 			</div>
 			<br><br>
 			<div>
-				<form:form method="post" modelAttribute="NivelEstructura" cssClass="ui form">
+				<form:form method="post" modelAttribute="UnidadOrganizacional" cssClass="ui form">
 					
 					<h4 class="ui dividing header">Editar Unidad Organizacional</h4>
 					

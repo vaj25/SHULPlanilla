@@ -16,8 +16,8 @@ public class Direccion {
 
 	@Id
 	@Column(name = "id_direccion")
-	@SequenceGenerator(name = "SequenceIdDireccion", sequenceName = "SEQ_DIRECCION")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdDireccion")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DIRECCION")
+	@SequenceGenerator(name = "SEQ_DIRECCION", sequenceName = "SEQ_DIRECCION", allocationSize = 1, initialValue = 1)
 	private int id;
 	
 	@Column(name = "num_casa")

@@ -46,6 +46,11 @@ public class Genero {
 			this.id = id;
 		}
 		
+		@Override
+		public String toString() {
+			return genero;
+		}
+		
 	
 
 	

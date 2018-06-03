@@ -44,7 +44,10 @@ public class ProfesionOficio {
 		this.profesion_oficio = profesion_oficio;
 	}
 
-	
+	@Override
+	public String toString() {
+		return profesion_oficio;
+	}
 	
 	
 	
