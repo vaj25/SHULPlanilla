@@ -15,6 +15,22 @@
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div class="ui container">
+			
+			<c:choose>
+				<c:when test="${messageSuccess != null}" >
+					<div class="ui positive message">
+						<div class="header">¡Exito!</div>
+						<p>${messageSuccess}</p>
+					</div>
+				</c:when>
+				<c:when test="${messageError != null}">
+					<div class="ui negative message">
+						<div class="header">¡Error!</div>
+						<p>${messageError}</p>
+					</div>
+				</c:when>
+			</c:choose>
+		
 			<div>
 				<a class="ui positive button" href="<c:url value="/rol/add.html" />">Agregar</a>
 			</div>

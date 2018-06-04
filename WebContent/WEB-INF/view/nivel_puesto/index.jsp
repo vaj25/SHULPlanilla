@@ -12,9 +12,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
-	<c:set value="${Usuario}" var="usuario" scope="request" ></c:set> 
-	<c:set value="${modulos}" var="modulos" scope="request" ></c:set>
-
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div class="ui container">
@@ -27,7 +24,7 @@
 					</div>
 				</c:when>
 				<c:when test="${messageError != null}">
-					<div class="ui positive message">
+					<div class="ui negative message">
 						<div class="header">¡Error!</div>
 						<p>${messageError}</p>
 					</div>

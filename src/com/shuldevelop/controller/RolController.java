@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Permiso;
 import com.shuldevelop.model.Rol;
 import com.shuldevelop.model.RolModuloPermiso;
+import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.validator.RolValidator;
 import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.PermisoService;
 import com.shuldevelop.service.RolModuloPermisoService;
 import com.shuldevelop.service.RolService;
+import com.shuldevelop.service.UsuarioService;
 
 @Controller
 public class RolController {
@@ -38,10 +44,27 @@ public class RolController {
 	@Autowired
 	private PermisoService permisoService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+		
 	private RolValidator rolValidator;
 		
 	public RolController() {
 		rolValidator = new RolValidator();
+	}
+	
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
 	}
 
 	@RequestMapping(value = "/rol/index", method = RequestMethod.GET)
@@ -53,6 +76,8 @@ public class RolController {
 		
 		mav.setViewName("rol/index");
 		mav.addObject("rolList", listRol);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -67,6 +92,8 @@ public class RolController {
 		mav.setViewName("rol/add");
 		mav.addObject("Rol", new Rol());
 		mav.addObject("moduloList", listModulo);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -76,7 +103,8 @@ public class RolController {
 			@ModelAttribute("Rol") Rol u,
 			BindingResult result,
 			SessionStatus status,
-			HttpServletRequest request
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
  			) {
 		
 		this.rolValidator.validate(u, result);
@@ -89,6 +117,8 @@ public class RolController {
 			mav.setViewName("rol/add");
 			mav.addObject("Rol", u);
 			mav.addObject("moduloList", listModulo);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;
 		}
@@ -122,6 +152,8 @@ public class RolController {
 			
 		}
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El rol ha sido agregado exitosamente.");
+		
 		return new ModelAndView("redirect:/rol/index.html");
 	}
 	
@@ -136,6 +168,8 @@ public class RolController {
 		
 		mav.setViewName("rol/edit");
 		mav.addObject("Rol", rol);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -145,7 +179,8 @@ public class RolController {
 			@ModelAttribute("Rol") Rol u,
 			BindingResult result,
 			SessionStatus status,
-			HttpServletRequest request
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
  			) {
 		
 		this.rolValidator.validate(u, result);
@@ -155,21 +190,37 @@ public class RolController {
 			
 			mav.setViewName("rol/edit");
 			mav.addObject("rol", u);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;
 		}
 		
 		rolService.edit(u);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El rol ha sido editado exitosamente.");
+		
 		return new ModelAndView("redirect:/rol/index.html");
 	}
 	
 	@RequestMapping(value = "/rol/delete", method = RequestMethod.GET)
-	public ModelAndView deleteRol(HttpServletRequest request) {
+	public ModelAndView deleteRol(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
+			) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
-		
-		rolService.delete(id);
+						
+		if ( moduloService.hasModuloRolPermiso( id )) {
+			
+			redirectAttributes.addFlashAttribute("messageError", "El rol posee dependencia no se puede eliminar.");
+			
+		} else {
+			
+			rolService.delete(id);
+			redirectAttributes.addFlashAttribute("messageSuccess", "El rol ha sido eliminado exitosamente.");
+			
+		}
 		
 		return new ModelAndView("redirect:/rol/index.html");
 	}

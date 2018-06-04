@@ -37,6 +37,13 @@ public class ModuloServiceImpl implements ModuloService {
 		moduloDAO.delete(idModulo);
 
 	}
+	
+	@Transactional
+	public boolean hasModuloRolPermiso(int idModulo) {
+		
+		return moduloDAO.hasModuloRolPermiso(idModulo);
+		
+	}
 
 	@Transactional
 	public Modulo getModulo(int idModulo) {

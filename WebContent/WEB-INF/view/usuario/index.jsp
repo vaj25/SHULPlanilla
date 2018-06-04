@@ -11,9 +11,28 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
-<c:import url="../layouts/menu.jsp"></c:import>
+	
+	<c:set value="${user}" var="Usuario" scope="request" ></c:set>
+	
+	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div class="ui container">
+			
+			<c:choose>
+				<c:when test="${messageSuccess != null}" >
+					<div class="ui positive message">
+						<div class="header">¡Exito!</div>
+						<p>${messageSuccess}</p>
+					</div>
+				</c:when>
+				<c:when test="${messageError != null}">
+					<div class="ui negative message">
+						<div class="header">¡Error!</div>
+						<p>${messageError}</p>
+					</div>
+				</c:when>
+			</c:choose>
+			
 			<div>
 				<a class="ui positive button" href="<c:url value="/usuario/add.html" />">Agregar</a>
 			</div>
@@ -46,7 +65,7 @@
 									<c:out value="${usuario.getEstado()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${usuario.getRol().getNombreRol()}"></c:out>
+									<c:out value="${usuario.getRol().getNombre()}"></c:out>
 								</td>
 								<td>
 									<c:choose>

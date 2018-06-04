@@ -39,6 +39,11 @@ public class PuestoDAOImpl implements PuestoDAO {
 		session.getCurrentSession().delete(getPuesto(idPuesto));
 		
 	}
+	
+	public boolean hasPuestoEmpleado(int idPuesto) {
+		
+		return false;
+	}
 
 	
 	public Puesto getPuesto(int idPuesto) {

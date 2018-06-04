@@ -12,6 +12,8 @@ public interface PuestoService {
 	
 	public void delete(int idPuesto);
 	
+	public boolean hasPuestoEmpleado(int idPuesto);
+	
 	public Puesto getPuesto(int idPuesto);
 	
 	public List<Puesto> getAllPuesto();

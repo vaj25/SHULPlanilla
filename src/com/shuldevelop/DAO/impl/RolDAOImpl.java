@@ -38,6 +38,25 @@ public class RolDAOImpl implements RolDAO {
 	}
 	
 	@Override
+	public boolean hasRolModuloPermiso(int idRol) {
+		
+		Query<Long> query = session.getCurrentSession()
+				.createQuery("SELECT count(a) FROM ROL a " + 
+						"JOIN ROL_MODULO_PERMISO b ON b.rol = a.id " +
+						"WHERE a.id = :id_rol ", Long.class)
+				.setParameter("id_rol", idRol);
+		
+		Long count = query.uniqueResult();
+		
+		if ( count > 0 ) {
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	@Override
 	public Rol getRol(int idRol) {
 		
 		return session.getCurrentSession().get(Rol.class, idRol);

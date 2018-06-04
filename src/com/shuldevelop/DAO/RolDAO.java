@@ -12,6 +12,8 @@ public interface RolDAO {
 	
 	public void delete(int idRol);
 	
+	public boolean hasRolModuloPermiso(int idRol);
+	
 	public Rol getRol(int idRol);
 	
 	public List<Rol> getAllRol();

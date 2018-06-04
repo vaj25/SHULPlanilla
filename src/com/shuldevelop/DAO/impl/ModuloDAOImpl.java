@@ -36,6 +36,25 @@ public class ModuloDAOImpl implements ModuloDAO {
 		session.getCurrentSession().delete(getModulo(idModulo));
 
 	}
+	
+	@Override
+	public boolean hasModuloRolPermiso(int idModulo) {
+		
+		Query<Long> query = session.getCurrentSession()
+				.createQuery("SELECT count(a) FROM MODULO a " + 
+						"JOIN ROL_MODULO_PERMISO b ON b.modulo = a.id " +
+						"WHERE a.id = :id_mod ", Long.class)
+				.setParameter("id_mod", idModulo);
+		
+		Long count = query.uniqueResult();
+		
+		if ( count > 0 ) {
+			return true;
+		}
+		
+		return false;
+		
+	}
 
 	@Override
 	public Modulo getModulo(int idModulo) {

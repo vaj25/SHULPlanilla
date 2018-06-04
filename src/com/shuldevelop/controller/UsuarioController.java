@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Rol;
 import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.validator.UsuarioValidator;
+import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.RolService;
 import com.shuldevelop.service.UsuarioService;
 
@@ -32,26 +35,30 @@ public class UsuarioController {
 	@Autowired
 	private RolService rolService;
 	
+	@Autowired
+	private ModuloService moduloService;
+	
 	private UsuarioValidator usuarioValidator;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	private Usuario user;
 	
 	public UsuarioController() {
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		this.usuarioValidator = new UsuarioValidator();
 	}
 
-	public Usuario getUser() {
-		
+	public Usuario getUsuario() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
 		
-		this.user = usuarioService.findUserByUsername(userDetails.getUsername());
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
 		
-		return this.user;
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
 	}
 
 	@RequestMapping(value = "/usuario/index", method = RequestMethod.GET)
@@ -63,6 +70,8 @@ public class UsuarioController {
 		
 		mav.setViewName("usuario/index");
 		mav.addObject("usuarioList", ListUsuario);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -77,6 +86,8 @@ public class UsuarioController {
 		mav.setViewName("usuario/add");
 		mav.addObject("Usuario", new Usuario());
 		mav.addObject("rolList", ListRol);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -85,7 +96,8 @@ public class UsuarioController {
 	public ModelAndView addUsuario(
 			@ModelAttribute("Usuario") Usuario u,
 			BindingResult result,
-			SessionStatus status) {
+			SessionStatus status,
+			final RedirectAttributes redirectAttributes) {
 		
 		usuarioValidator.validate(u, result);
 		
@@ -98,6 +110,8 @@ public class UsuarioController {
 			mav.setViewName("usuario/add");
 			mav.addObject("Usuario", u);
 			mav.addObject("rolList", ListRol);
+			mav.addObject("user", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;
 			
@@ -107,6 +121,8 @@ public class UsuarioController {
 		u.setEstado(1);
 		
 		usuarioService.add(u);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido agregado exitosamente.");
 		
 		return new ModelAndView("redirect:/usuario/index.html");
 	}
@@ -123,6 +139,8 @@ public class UsuarioController {
 		mav.setViewName("usuario/edit");
 		mav.addObject("Usuario", usuario);
 		mav.addObject("rolList", ListRol);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -131,7 +149,8 @@ public class UsuarioController {
 	public ModelAndView editUsuario(
 			@ModelAttribute("Usuario") Usuario u,
 			BindingResult result,
-			SessionStatus status) {
+			SessionStatus status,
+			final RedirectAttributes redirectAttributes) {
 		
 		usuarioValidator.validate(u, result);
 		
@@ -144,12 +163,16 @@ public class UsuarioController {
 			mav.setViewName("usuario/edit");
 			mav.addObject("Usuario", u);
 			mav.addObject("rolList", ListRol);
+			mav.addObject("user", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;			
 			
 		}
 		
 		usuarioService.edit(u);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido editado exitosamente.");
 		
 		return new ModelAndView("redirect:/usuario/index.html");
 		
@@ -158,12 +181,15 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuario/edit-pass", method = RequestMethod.POST)
 	public ModelAndView editPasswordUsuario(
 			SessionStatus status,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 				
 		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
 		
 		usuario.setPassword(bCryptPasswordEncoder.encode( request.getParameter("password") ));
 		usuarioService.edit(usuario);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "La password ha sido cambiada exitosamente.");
 				
 		return new ModelAndView("redirect:/usuario/index.html");
 		
@@ -178,23 +204,31 @@ public class UsuarioController {
 		
 		mav.setViewName("usuario/edit_pass");
 		mav.addObject("Usuario", usuario);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 		
 	}
 	
 	@RequestMapping(value = "/usuario/delete", method = RequestMethod.GET)
-	public ModelAndView deleteUsuario(HttpServletRequest request) {
+	public ModelAndView deleteUsuario(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		usuarioService.delete(id);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido elimnado exitosamente.");
+		
 		return new ModelAndView("redirect:/usuario/index.html");
 	}
 	
 	@RequestMapping(value = "/usuario/inactivate", method = RequestMethod.GET)
-	public ModelAndView inactivateUsuario(HttpServletRequest request) {
+	public ModelAndView inactivateUsuario(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
@@ -204,11 +238,15 @@ public class UsuarioController {
 		
 		usuarioService.edit(usuario);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido inactivado exitosamente.");
+		
 		return new ModelAndView("redirect:/usuario/index.html");
 	}
 	
 	@RequestMapping(value = "/usuario/activate", method = RequestMethod.GET)
-	public ModelAndView activateUsuario(HttpServletRequest request) {
+	public ModelAndView activateUsuario(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
@@ -218,11 +256,15 @@ public class UsuarioController {
 		
 		usuarioService.edit(usuario);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido activado exitosamente.");
+		
 		return new ModelAndView("redirect:/usuario/index.html");
 	}
 	
 	@RequestMapping(value = "/usuario/enable", method = RequestMethod.GET)
-	public ModelAndView enableUsuario(HttpServletRequest request) {
+	public ModelAndView enableUsuario(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -230,6 +272,8 @@ public class UsuarioController {
 		
 		mav.setViewName("usuario/enable_user");
 		mav.addObject("Usuario", usuario);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -237,7 +281,8 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuario/enable", method = RequestMethod.POST)
 	public ModelAndView enableUsuario(
 			SessionStatus status,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
 		
@@ -245,12 +290,16 @@ public class UsuarioController {
 		usuario.setEstado(1);
 		
 		usuarioService.edit(usuario);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido desbloqueado exitosamente.");
 				
 		return new ModelAndView("redirect:/usuario/index.html");
 	}
 	
 	@RequestMapping(value = "/usuario/disable", method = RequestMethod.GET)
-	public ModelAndView disableUsuario(HttpServletRequest request) {
+	public ModelAndView disableUsuario(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
@@ -259,6 +308,8 @@ public class UsuarioController {
 		usuario.setEstado(3);
 		
 		usuarioService.edit(usuario);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido bloqueado exitosamente.");
 		
 		return new ModelAndView("redirect:/login.html");
 	}
@@ -275,6 +326,8 @@ public class UsuarioController {
 		mav.setViewName("usuario/edit_user");
 		mav.addObject("Usuario", usuario);
 		mav.addObject("rolList", ListRol);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -283,7 +336,8 @@ public class UsuarioController {
 	public ModelAndView editUsuarioLoggedIn(
 			@ModelAttribute("Usuario") Usuario u,
 			BindingResult result,
-			SessionStatus status) {
+			SessionStatus status,
+			final RedirectAttributes redirectAttributes) {
 		
 		usuarioValidator.validate(u, result);
 		
@@ -296,12 +350,16 @@ public class UsuarioController {
 			mav.setViewName("usuario/edit_user");
 			mav.addObject("Usuario", u);
 			mav.addObject("rolList", ListRol);
+			mav.addObject("user", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;	
 			
 		}
 		
 		usuarioService.edit(u);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El usuario ha sido editado exitosamente.");
 		
 		return new ModelAndView("redirect:/welcome.html");
 		
@@ -310,18 +368,21 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuario/edit-pass-user", method = RequestMethod.POST)
 	public ModelAndView editPasswordLoggedIn(
 			SessionStatus status,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 
-		Usuario usuario = usuarioService.getUsuario(getUser().getId());
+		Usuario usuario = usuarioService.getUsuario(getUsuario().getId());
 		
 		if ( bCryptPasswordEncoder.matches(request.getParameter("currentPassword"), usuario.getPassword()) ) {
 			usuario.setPassword(bCryptPasswordEncoder.encode( request.getParameter("password") ));
 			usuarioService.edit(usuario);
+			
+			redirectAttributes.addFlashAttribute("messageSuccess", "La password ha sido cambiada exitosamente.");
 					
 			return new ModelAndView("redirect:/welcome.html");
 		}
 		
-		return new ModelAndView("redirect:/usuario/edit-pass-user.html?id="+request.getParameter("id"));
+		return new ModelAndView("redirect:/usuario/edit-pass-user.html").addObject("id", request.getParameter("id"));
 		
 	}
 	
@@ -330,10 +391,12 @@ public class UsuarioController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Usuario usuario = usuarioService.getUsuario(getUser().getId());
+		Usuario usuario = usuarioService.getUsuario(getUsuario().getId());
 		
 		mav.setViewName("usuario/edit_pass_user");
 		mav.addObject("Usuario", usuario);
+		mav.addObject("user", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 		

@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
+
+	<c:set value="${user}" var="Usuario" scope="request" ></c:set>
+
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div>

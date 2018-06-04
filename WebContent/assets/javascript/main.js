@@ -11,6 +11,9 @@ $(document).ready(function () {
 	
 	$('.ui.checkbox').checkbox();
 	
+	$('.ui.accordion').accordion();
+
+	
 	var date = new Date();
 	
 	$('#date').html( days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' de ' + date.getFullYear());

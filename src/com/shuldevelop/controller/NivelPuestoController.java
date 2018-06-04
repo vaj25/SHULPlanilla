@@ -168,7 +168,7 @@ public class NivelPuestoController {
 		
 		NivelPuesto nivel = tipoPuestoService.getTipoPuesto(id);
 		
-		if ( nivel.getPuesto() == null && nivel.getPuesto().size() == 0 ) {
+		if ( nivel.getPuesto().size() == 0 ) {
 		
 			tipoPuestoService.delete(id);
 			

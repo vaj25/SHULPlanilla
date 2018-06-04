@@ -12,6 +12,8 @@ public interface ModuloDAO {
 	
 	public void delete(int idModulo);
 	
+	public boolean hasModuloRolPermiso(int idModulo);
+	
 	public Modulo getModulo(int idModulo);
 	
 	public List<Modulo> getAllModulo();
