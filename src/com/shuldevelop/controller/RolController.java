@@ -131,23 +131,27 @@ public class RolController {
 		
 		String[] modulos = request.getParameterValues("modulos");
 		
-		for (String id : modulos) {
-			
-			modulo = moduloService.getModulo(Integer.parseInt(id));
-			
-			for (int i = 1; i <= 4; i++) {
-				
-				rolModuloPermiso = new RolModuloPermiso();
-				
-				permiso = permisoService.getPermiso(i);
-				
-				rolModuloPermiso.setModulo(modulo);
-				rolModuloPermiso.setPermiso(permiso);
-				rolModuloPermiso.setRol(u);
-				rolModuloPermiso.setEstado(true);
-				
-				rolModuloPermisoService.add(rolModuloPermiso);
+		if (modulos != null) {
 
+			for (String id : modulos) {
+				
+				modulo = moduloService.getModulo(Integer.parseInt(id));
+				
+				for (int i = 1; i <= 4; i++) {
+					
+					rolModuloPermiso = new RolModuloPermiso();
+					
+					permiso = permisoService.getPermiso(i);
+					
+					rolModuloPermiso.setModulo(modulo);
+					rolModuloPermiso.setPermiso(permiso);
+					rolModuloPermiso.setRol(u);
+					rolModuloPermiso.setEstado(true);
+					
+					rolModuloPermisoService.add(rolModuloPermiso);
+					
+				}
+				
 			}
 			
 		}
@@ -210,15 +214,15 @@ public class RolController {
 			) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
-						
-		if ( moduloService.hasModuloRolPermiso( id )) {
-			
-			redirectAttributes.addFlashAttribute("messageError", "El rol posee dependencia no se puede eliminar.");
-			
-		} else {
-			
+		
+		try {
+
 			rolService.delete(id);
 			redirectAttributes.addFlashAttribute("messageSuccess", "El rol ha sido eliminado exitosamente.");
+			
+		} catch (Exception e) {
+						
+			redirectAttributes.addFlashAttribute("messageError", "El rol posee dependencia no se puede eliminar.");
 			
 		}
 		

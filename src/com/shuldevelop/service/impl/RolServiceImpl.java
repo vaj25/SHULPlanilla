@@ -39,13 +39,6 @@ public class RolServiceImpl implements RolService {
 	}
 	
 	@Transactional
-	public boolean hasRolModuloPermiso(int idRol) {
-		
-		return rolDao.hasRolModuloPermiso(idRol);
-		
-	}
-	
-	@Transactional
 	public Rol getRol(int idRol) {
 		
 		return rolDao.getRol(idRol);

@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Permiso;
 import com.shuldevelop.model.Rol;
 import com.shuldevelop.model.RolModuloPermiso;
+import com.shuldevelop.model.Usuario;
+import com.shuldevelop.model.validator.RolModuloPermisoValidator;
 import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.PermisoService;
 import com.shuldevelop.service.RolModuloPermisoService;
 import com.shuldevelop.service.RolService;
+import com.shuldevelop.service.UsuarioService;
 
 @Controller
 public class RolModuloPermisoController {
@@ -36,8 +43,29 @@ public class RolModuloPermisoController {
 	
 	@Autowired
 	private PermisoService permisoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	private RolModuloPermisoValidator rolModuloPermisoValidator;
 
 	public RolModuloPermisoController() {
+		
+		rolModuloPermisoValidator = new RolModuloPermisoValidator();		
+	}
+	
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
 	}
 	
 	@RequestMapping(value = "/rol-modulo-permiso/index", method = RequestMethod.GET)
@@ -58,6 +86,8 @@ public class RolModuloPermisoController {
 		mav.addObject("rol", rol);
 		mav.addObject("rolModuloPermisoList", listRolModuloPermiso);
 		mav.addObject("moduloList", listModulo);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 		
@@ -68,10 +98,11 @@ public class RolModuloPermisoController {
 			@ModelAttribute("RolModuloPermiso") RolModuloPermiso u,
 			BindingResult result,
 			SessionStatus status,
-			HttpServletRequest request
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
  			) {
 		
-//		this.rolValidator.validate(u, result);
+		this.rolModuloPermisoValidator.validate(u, result);
 		
 		if (result.hasErrors()) {
 			ModelAndView mav = new ModelAndView();
@@ -88,6 +119,8 @@ public class RolModuloPermisoController {
 			mav.addObject("rol", rol);
 			mav.addObject("rolModuloPermisoList", listRolModuloPermiso);
 			mav.addObject("moduloList", listModulo);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;
 		}
@@ -114,12 +147,16 @@ public class RolModuloPermisoController {
 			rolModuloPermisoService.add(rolModuloPermiso);		
 		}
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El permiso ha sido agregado exitosamente.");
 		
 		return new ModelAndView("redirect:/rol-modulo-permiso/index.html").addObject("id", u.getRol().getId());
 	}
 	
 	@RequestMapping(value = "/rol-modulo-permiso/disable", method = RequestMethod.GET)
-	public ModelAndView rolModuloPermisoDisable(HttpServletRequest request) {
+	public ModelAndView rolModuloPermisoDisable(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
+			) {
 		
 		int idPermiso = Integer.parseInt(request.getParameter("id"));
 		
@@ -128,12 +165,17 @@ public class RolModuloPermisoController {
 		
 		rolModuloPermisoService.edit(permiso);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El permiso ha sido deshabilitado exitosamente.");
+		
 		return new ModelAndView("redirect:/rol-modulo-permiso/index.html").addObject("id", permiso.getRol().getId());
 		
 	}
 	
 	@RequestMapping(value = "/rol-modulo-permiso/enable", method = RequestMethod.GET)
-	public ModelAndView rolModuloPermisoEnable(HttpServletRequest request) {
+	public ModelAndView rolModuloPermisoEnable(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
+			) {
 		
 		int idPermiso = Integer.parseInt(request.getParameter("id"));
 		
@@ -142,17 +184,32 @@ public class RolModuloPermisoController {
 		
 		rolModuloPermisoService.edit(permiso);
 		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El permito ha sido habilitado exitosamente.");
+		
 		return new ModelAndView("redirect:/rol-modulo-permiso/index.html").addObject("id", permiso.getRol().getId());
 		
 	}
 	
 	@RequestMapping(value = "/rol-modulo-permiso/delete", method = RequestMethod.GET)
-	public ModelAndView rolModuloPermisoDelete(HttpServletRequest request) {
+	public ModelAndView rolModuloPermisoDelete(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
+			) {
 		
 		int idPermiso = Integer.parseInt(request.getParameter("id"));
 		
 		RolModuloPermiso permiso = rolModuloPermisoService.getRolModuloPermiso(idPermiso);
-		rolModuloPermisoService.delete(permiso.getId());
+		
+		try {
+			
+			rolModuloPermisoService.delete(permiso.getId());
+			redirectAttributes.addFlashAttribute("messageSuccess", "El permiso ha sido eliminado exitosamente.");
+			
+		} catch (Exception e) {
+						
+			redirectAttributes.addFlashAttribute("messageError", "El permiso no ha podido ser eliminado.");
+			
+		}
 		
 		return new ModelAndView("redirect:/rol-modulo-permiso/index.html").addObject("id", permiso.getRol().getId());
 		

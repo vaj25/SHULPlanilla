@@ -11,8 +11,6 @@ public interface RolService {
 	public void edit(Rol rol);
 	
 	public void delete(int idRol);
-	
-	public boolean hasRolModuloPermiso(int idRol);
 
 	public Rol getRol(int idRol);
 	

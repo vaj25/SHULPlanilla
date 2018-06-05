@@ -193,17 +193,17 @@ public class PuestoController {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		if ( puestoService.hasPuestoEmpleado(id) ) {
+		try {
 			
-			redirectAttributes.addFlashAttribute("messageError", "El puesto posee dependencia no se puede eliminar.");
-			
-		} else {
-		
 			puestoService.delete(id);
 			redirectAttributes.addFlashAttribute("messageSuccess", "El puesto ha sido eliminado exitosamente.");
 			
+		} catch (Exception e) {
+						
+			redirectAttributes.addFlashAttribute("messageError", "El puesto posee dependencia no se puede eliminar.");
+			
 		}
-		
+				
 		return new ModelAndView("redirect:/puesto/index.html");
 	}
 	

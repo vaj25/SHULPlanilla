@@ -16,7 +16,24 @@
 	
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
+	
+		<c:choose>
+				<c:when test="${messageSuccess != null}" >
+					<div class="ui positive message">
+						<div class="header">¡Exito!</div>
+						<p>${messageSuccess}</p>
+					</div>
+				</c:when>
+				<c:when test="${messageError != null}">
+					<div class="ui negative message">
+						<div class="header">¡Error!</div>
+						<p>${messageError}</p>
+					</div>
+				</c:when>
+			</c:choose>
+		
 		<div class="ui raised very padded text container segment">
+		
 			<div class="ui large breadcrumb">
 				<a class="section" href="<c:url value="/rol/index.html" />">Atras</a>
 			</div>

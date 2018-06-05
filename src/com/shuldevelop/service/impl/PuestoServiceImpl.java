@@ -37,13 +37,6 @@ public class PuestoServiceImpl implements PuestoService {
 		puestoDAO.delete(idPuesto);
 
 	}
-	
-	@Transactional
-	public boolean hasPuestoEmpleado(int idPuesto) {
-		
-		return puestoDAO.hasPuestoEmpleado(idPuesto);
-		
-	}
 
 	@Transactional
 	public Puesto getPuesto(int idPuesto) {
