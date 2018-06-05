@@ -31,13 +31,7 @@
 						<form:input path="idEmpleado" />
 						<form:errors path="idEmpleado" />
 					</div>
-
-					<div class="field">
-						<form:label path="idTipoDescuento">Tipo descuento: </form:label>
-						<form:input path="idTipoDescuento" type="number" min="0" value="0" />
-						<form:errors path="idTipoDescuento" />
-					</div>
-
+					
 					<button class="ui primary button" type="submit">Guardar</button>
 					<button class="ui button" type="reset" >Limpiar</button>
 				</form:form>

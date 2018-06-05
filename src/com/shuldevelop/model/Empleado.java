@@ -21,85 +21,85 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity(name="Empleado")
 @Table(name="Empleado")
 public class Empleado {
-	
+
 	@Id
 	@Column(name="id_empleado")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_EMPLEADO")
 	@SequenceGenerator(name = "SEQ_EMPLEADO", sequenceName = "SEQ_EMPLEADO", allocationSize = 1, initialValue = 1)
 	private int id;
-	
+
 	@Column(name="primer_nombre")
 	private String primer_nombre;
-	
+
 	@Column(name="segundo_nombre")
 	private String segundo_nombre;
-	
+
 	@Column(name="primer_apellido")
 	private String primer_apellido;
-	
+
 	@Column(name="segundo_apellido")
 	private String segundo_apellido;
-	
+
 	@Column(name="apellido_casada")
 	private String apellido_casada;
-	
+
 	@Column(name="fecha_nacimiento")
-	@DateTimeFormat(pattern = "yyyy-MM-dd") 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_nacimiento;
-	
+
 	@Column(name="fecha_ingreso")
-	@DateTimeFormat(pattern = "yyyy-MM-dd") 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_ingreso;
-	
+
 	@Column(name="nit")
 	private String nit;
-	
+
 	@Column(name="isss")
 	private int isss;
-	
+
 	@Column(name="nup")
 	private int nup;
-	
+
 	@Column(name="doc_identidad")
 	private String doc_identidad;
-	
+
 	@Column(name="email_pers")
 	private String email_pers;
-	
+
 	@Column(name="email_inst")
 	private String email_inst;
-	
+
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="id_direccion")
 	private Direccion direccion;
-	
+
 	@ManyToOne
 	@JoinColumn(name="id_estado_civil")
 	private EstadoCivil estadoCivil;
-	
-	
+
+
 	@ManyToOne
 	@JoinColumn(name="id_genero")
 	private Genero genero;
-	
+
 	@ManyToOne
 	@JoinColumn(name="id_tipo_doc_identidad")
 	private TipoDocIdentidad tipoDocIdentidad;
-	
-	
+
+
 	@ManyToOne
 	@JoinColumn(name="id_profesion_oficio")
 	private ProfesionOficio profesionOficio;
-	
+
 	@ManyToOne
 	@JoinColumn(name="emp_id_empleado")
 	private Empleado jefe;
-	
+
 	@OneToMany(mappedBy="jefe")
 	private Set<Empleado> subordinado = new HashSet<Empleado>();
 
 	public Empleado() {
-		
+
 	}
 
 	public Empleado(int id, String primer_nombre, String segundo_nombre, String primer_apellido,
@@ -297,22 +297,22 @@ public class Empleado {
 	public void setSubordinado(Set<Empleado> subordinado) {
 		this.subordinado = subordinado;
 	}
-	
+
 	@Override
 	public String toString() {
-		return primer_nombre+" "+primer_apellido;
+		return primer_nombre+" "+segundo_nombre+" "+primer_apellido+" "+segundo_apellido;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

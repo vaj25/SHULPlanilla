@@ -11,38 +11,34 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
-	
+
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
 		<div class="ui container">
 			<div>
 				<a class="ui positive button" href="<c:url value="/planilla-empleado/add.html" />">Agregar</a>
 			</div>
-			
+
 			<br>
-			
+
 			<div>
 				<table class="ui single line table">
 					<thead>
 						<tr>
 							<th>Número</th>
 							<th>Empleado</th>
-							<th>Tipo descuento</th>
 							<th>Acciones</th>
-						</tr>				
+						</tr>
 					</thead>
 					<tbody>
-					
+
 						<c:forEach items="${planillaEmpleadoList}" var="planilla">
 							<tr>
 								<td>
 									<c:out value="${planilla.getId()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${planilla.getIdEmpleado()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${planilla.getIdTipoDescuento()}"></c:out>
+									<c:out value="${planilla.getEmpleado()}"></c:out>
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Venta" data-inverted="">
@@ -71,15 +67,15 @@
 										</a>
 									</div>
 								</td>
-							</tr>					
+							</tr>
 						</c:forEach>
-						
+
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-	
+
 	<c:import url="../layouts/footer.jsp"></c:import>
 
 </body>
