@@ -10,7 +10,12 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <http auto-config="true">
+    <beans:bean id="customAuthenticationFailureHandler"
+      class="com.shuldevelop.service.CustomAuthenticationFailureHandler">
+    	<beans:property name="defaultFailureUrl" value="/login.html?error=default"/>
+	</beans:bean>
+    
+    <http auto-config="true" use-expressions="true">
     	<intercept-url pattern="/login.html" access="permitAll" />
        	<intercept-url pattern="/**" access="isAuthenticated()" />
         <logout logout-url="/logout.html" logout-success-url="/login.html"/>
@@ -19,7 +24,8 @@
         	login-processing-url="/loginAction.html"
         	username-parameter="username"
             password-parameter="password"
-        	authentication-failure-url="/login.html?error=true" />
+            authentication-failure-handler-ref="customAuthenticationFailureHandler"  />
+        <access-denied-handler error-page="/welcome.html?error=true"/>
 		<csrf disabled="true"/>
     </http>
     
