@@ -48,6 +48,7 @@ public class IngresoPlanillaController {
 			ModelAndView mav = new ModelAndView();
 			
 			int id = Integer.parseInt(request.getParameter("id"));
+			int idPl = Integer.parseInt(request.getParameter("id_pl"));
 			
 			IngresoPlanilla ingresoPlanilla = new IngresoPlanilla();		
 			
@@ -74,7 +75,7 @@ public class IngresoPlanillaController {
 			mav.addObject("tipoIngresoList", listTipoIngreso);
 			mav.addObject("planillaEmpleado", planillaEmpleado);
 			mav.addObject("ingresoPlanillaList", listIngresoPlanilla);
-			
+			mav.addObject("idPl", idPl);
 			
 			return mav;
 			

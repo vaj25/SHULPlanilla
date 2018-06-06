@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,6 +46,8 @@ public class RangoPlanillaController {
 		
 		int idPlanilla = Integer.parseInt(request.getParameter("id_planilla"));
 		
+		int idPl = Integer.parseInt(request.getParameter("id_pl"));
+		
 		int idRango = 1;
 		
 		RangoPlanilla rangoPlanilla = rangoPlanillaService.getRangoPlanillaByPlanilla(idPlanilla);
@@ -69,6 +72,7 @@ public class RangoPlanillaController {
 		mav.setViewName("rango_planilla/index");
 		mav.addObject("RangoPlanilla", rangoPlanilla);
 		mav.addObject("RangoPlanillaId", rangoPlanillaId);
+		mav.addObject("idPl", idPl);
 		
 		return mav;
 		

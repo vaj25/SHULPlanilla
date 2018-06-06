@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Tipo de Descuento</title>
+	<title>Planilla</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="ui container">
 			<div>
-				<a class="ui positive button" href="<c:url value="/planilla-planilla/add.html" />">Agregar</a>
+				<a class="ui positive button" href="<c:url value="/planilla-planilla/add.html" />">Agregar</a>				
 			</div>
 
 			<br>
@@ -48,6 +48,11 @@
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
 										<a href="<c:url value="/planilla-planilla/delete.html?id=${planilla.getId()}" />">
 											<i class="large erase icon"></i>
+										</a>
+									</div>
+									<div class="ui mini circular icon button" data-tooltip="Empleados" data-inverted="">
+										<a href="<c:url value="/planilla-empleado/index.html?id=${planilla.getId()}" />">
+											<i class="large calculator icon"></i>
 										</a>
 									</div>
 								</td>

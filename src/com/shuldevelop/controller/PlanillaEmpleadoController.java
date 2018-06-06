@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,13 +24,14 @@ public class PlanillaEmpleadoController {
 	private PlanillaEmpleadoService planillaEmpleadoService;
 	
 	@RequestMapping(value = "/planilla-empleado/index", method = RequestMethod.GET)
-	public ModelAndView planillaEmpleado() {
+	public ModelAndView planillaEmpleado(@RequestParam("id") int idPlanilla) {
 		ModelAndView mav = new ModelAndView();
-		
-		List<PlanillaEmpleado> listPlanillaEmpleado = planillaEmpleadoService.getAllPlanillaEmpleado();
+
+		List<PlanillaEmpleado> listPlanillaEmpleado = planillaEmpleadoService.getAllPlanillaEmpleado(idPlanilla);
 		
 		mav.setViewName("planilla_empleado/index");
 		mav.addObject("planillaEmpleadoList", listPlanillaEmpleado);
+		mav.addObject("idPl", idPlanilla);
 		
 		return mav;
 	}

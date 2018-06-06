@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/planilla-empleado/index.html" />">Atras</a>
+				<a class="section" href="<c:url value="/planilla-empleado/index.html?id=${idPl}" />">Atras</a>
 			</div>
 			<br><br>
 			<div>
@@ -25,7 +25,7 @@
 				<form:form method="post" modelAttribute="RangoPlanilla" cssClass="ui form"
 					action="${post_url}">
 
-					<h4 class="ui dividing header">Venta para xxx</h4>
+					<h4 class="ui dividing header">Venta para ${RangoPlanilla.getPlanillaEmpleado().getEmpleado() }</h4>
 
 					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">

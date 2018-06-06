@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/planilla-empleado/index.html" />">Atras</a>
+				<a class="section" href="<c:url value="/planilla-empleado/index.html?id=${idPl}"/>">Atras</a>
 			</div>
 			<br><br>
 			<div>
@@ -26,7 +26,7 @@
 				<form:form method="post" modelAttribute="IngresoPlanilla" cssClass="ui form"
 					action="${post_url}">
 					
-					<h4 class="ui dividing header">Gestionar ingresos de xxxx</h4>
+					<h4 class="ui dividing header">Gestionar ingresos de ${planillaEmpleado.getEmpleado()}</h4>
 					
 					<form:errors path="*" element="div" cssClass="alert" />
 					

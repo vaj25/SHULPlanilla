@@ -45,10 +45,10 @@ public class PlanillaEmpleadoDAOImpl implements PlanillaEmpleadoDAO {
 	}
 
 	@Override
-	public List<PlanillaEmpleado> getAllPlanillaEmpleado() {
+	public List<PlanillaEmpleado> getAllPlanillaEmpleado(int idPlanilla) {
 
 		Query<PlanillaEmpleado> query = session.getCurrentSession().
-				createQuery("from PLANILLA_EMPLEADO", PlanillaEmpleado.class);
+				createQuery("from PLANILLA_EMPLEADO WHERE id_planilla="+idPlanilla, PlanillaEmpleado.class);
 		List<PlanillaEmpleado> allPlanillaEmpleado = query.getResultList();
 		return allPlanillaEmpleado;
 		

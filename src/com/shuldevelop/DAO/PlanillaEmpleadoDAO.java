@@ -14,6 +14,6 @@ public interface PlanillaEmpleadoDAO {
 	
 	public PlanillaEmpleado getPlanillaEmpleado(int idPlanillaEmpleado);
 	
-	public List<PlanillaEmpleado> getAllPlanillaEmpleado();
+	public List<PlanillaEmpleado> getAllPlanillaEmpleado(int idPlanilla);
 	
 }

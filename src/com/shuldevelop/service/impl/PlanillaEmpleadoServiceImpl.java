@@ -46,9 +46,9 @@ public class PlanillaEmpleadoServiceImpl implements PlanillaEmpleadoService {
 	}
 
 	@Transactional
-	public List<PlanillaEmpleado> getAllPlanillaEmpleado() {
+	public List<PlanillaEmpleado> getAllPlanillaEmpleado(int idPlanilla) {
 		
-		return planillaEmpleadoDAO.getAllPlanillaEmpleado();
+		return planillaEmpleadoDAO.getAllPlanillaEmpleado(idPlanilla);
 		
 	}
 

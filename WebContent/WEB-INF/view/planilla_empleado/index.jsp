@@ -17,6 +17,7 @@
 		<div class="ui container">
 			<div>
 				<a class="ui positive button" href="<c:url value="/planilla-empleado/add.html" />">Agregar</a>
+				<a class="section" href="<c:url value="/planilla-planilla/index.html" />">Atras</a>
 			</div>
 
 			<br>
@@ -42,27 +43,28 @@
 								</td>
 								<td>
 									<div class="ui mini circular icon button" data-tooltip="Venta" data-inverted="">
-										<a href="<c:url value="/rango-planilla/index.html?id_planilla=${planilla.getId()}" />">
+										<a href="<c:url value="/rango-planilla/index.html?id_planilla=${planilla.getId()}
+										&id_pl=${idPl}"/>">
 											<i class="large shopping cart icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Gestionar Ingresos" data-inverted="">
-										<a href="<c:url value="/ingreso-planilla/index.html?id=${planilla.getId()}" />">
+										<a href="<c:url value="/ingreso-planilla/index.html?id=${planilla.getId()}&id_pl=${idPl}" />">
 											<i class="large dollar sign icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Gestionar Descuentos" data-inverted="">
-										<a href="<c:url value="/ingreso-planilla/index.html?id=${planilla.getId()}" />">
+										<a href="<c:url value="/ingreso-planilla/index.html?id=${planilla.getId()}&id_pl=${idPl}" />">
 											<i class="large percent icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
-										<a href="<c:url value="/planilla-empleado/edit.html?id=${planilla.getId()}" />">
+										<a href="<c:url value="/planilla-empleado/edit.html?id=${planilla.getId()}&id_pl=${idPl}" />">
 											<i class="large edit icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
-										<a href="<c:url value="/planilla-empleado/delete.html?id=${planilla.getId()}" />">
+										<a href="<c:url value="/planilla-empleado/delete.html?id=${planilla.getId()}&id_pl=${idPl}" />">
 											<i class="large erase icon"></i>
 										</a>
 									</div>
