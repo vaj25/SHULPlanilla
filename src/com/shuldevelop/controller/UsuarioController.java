@@ -18,10 +18,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.shuldevelop.model.Empleado;
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Rol;
 import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.validator.UsuarioValidator;
+import com.shuldevelop.service.EmpleadoService;
 import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.RolService;
 import com.shuldevelop.service.UsuarioService;
@@ -34,6 +36,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private RolService rolService;
+	
+	@Autowired
+	private EmpleadoService empleadoService;
 	
 	@Autowired
 	private ModuloService moduloService;
@@ -82,10 +87,12 @@ public class UsuarioController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<Rol> ListRol = rolService.getAllRol();
+		List<Empleado> ListEmpleado = empleadoService.getAllEmpleado();
 		
 		mav.setViewName("usuario/add");
 		mav.addObject("Usuario", new Usuario());
 		mav.addObject("rolList", ListRol);
+		mav.addObject("empleadoList", ListEmpleado);
 		mav.addObject("user", getUsuario());
 		mav.addObject("modulos", getModulos());
 		
@@ -106,10 +113,12 @@ public class UsuarioController {
 			ModelAndView mav = new ModelAndView();
 			
 			List<Rol> ListRol = rolService.getAllRol();
+			List<Empleado> ListEmpleado = empleadoService.getAllEmpleado();
 			
 			mav.setViewName("usuario/add");
 			mav.addObject("Usuario", u);
 			mav.addObject("rolList", ListRol);
+			mav.addObject("empleadoList", ListEmpleado);
 			mav.addObject("user", getUsuario());
 			mav.addObject("modulos", getModulos());
 			
@@ -133,12 +142,14 @@ public class UsuarioController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<Rol> ListRol = rolService.getAllRol();
+		List<Empleado> ListEmpleado = empleadoService.getAllEmpleado();
 		
 		Usuario usuario = usuarioService.getUsuario(Integer.parseInt(request.getParameter("id")));
 		
 		mav.setViewName("usuario/edit");
 		mav.addObject("Usuario", usuario);
 		mav.addObject("rolList", ListRol);
+		mav.addObject("empleadoList", ListEmpleado);
 		mav.addObject("user", getUsuario());
 		mav.addObject("modulos", getModulos());
 		
@@ -159,10 +170,12 @@ public class UsuarioController {
 			ModelAndView mav = new ModelAndView();
 			
 			List<Rol> ListRol = rolService.getAllRol();
+			List<Empleado> ListEmpleado = empleadoService.getAllEmpleado();
 			
 			mav.setViewName("usuario/edit");
 			mav.addObject("Usuario", u);
 			mav.addObject("rolList", ListRol);
+			mav.addObject("empleadoList", ListEmpleado);
 			mav.addObject("user", getUsuario());
 			mav.addObject("modulos", getModulos());
 			

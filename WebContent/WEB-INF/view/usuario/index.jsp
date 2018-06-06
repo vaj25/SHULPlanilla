@@ -62,7 +62,7 @@
 									<c:out value="${usuario.getUsername()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${usuario.getEstado()}"></c:out>
+									<c:out value="${usuario.getEmpleado()}"></c:out>
 								</td>
 								<td>
 									<c:out value="${usuario.getRol().getNombre()}"></c:out>

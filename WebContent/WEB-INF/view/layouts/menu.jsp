@@ -4,7 +4,7 @@
 <div class="ui inverted tiny menu">
   <div class="right menu">
     <div class="ui dropdown item">
-      <c:out value="${requestScope.Usuario.getUsername()}" /> <i class="dropdown icon"></i>
+      <c:out value="${requestScope.Usuario.getEmpleado()}" /> <i class="dropdown icon"></i>
       <div class="menu">
         <a class="item" href="<c:url value="/usuario/edit-pass-user.html" />" ><i class="key icon"></i> Cambiar contraseña</a>
         <a class="item" href="<c:url value="/logout.html" />" ><i class="sign out alternate icon"></i> Cerrar Sesión</a>

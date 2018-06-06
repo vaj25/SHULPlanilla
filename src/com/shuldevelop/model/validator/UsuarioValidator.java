@@ -27,6 +27,11 @@ public class UsuarioValidator implements Validator {
 					"El rol es obligatorio.");
 		}
 		
+		if (usuario.getEmpleado().getId() == 0) {
+			arg1.rejectValue("empleado", "empleado.incorrect", 
+					"El empleado es obligatorio.");
+		}
+		
 	}
 
 }

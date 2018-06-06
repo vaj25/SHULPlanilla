@@ -25,9 +25,13 @@ public class Usuario {
 	
 	@Column(name = "password", nullable = false)
 	private String password;
-
+	
 	@Column(name = "estado")
 	private int estado;
+
+	@ManyToOne
+	@JoinColumn(name = "id_empleado")
+	private Empleado empleado;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_rol")
@@ -71,6 +75,14 @@ public class Usuario {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
 }

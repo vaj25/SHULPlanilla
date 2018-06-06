@@ -47,14 +47,23 @@
 					
 				<div class="field">
 					<form:label path="rol.id">Rol: </form:label>
-					<form:select path="rol.id">
+					<form:select path="rol.id" cssClass="ui fluid search dropdown">
         	   			<form:option value="0" label="Seleccione un rol"/>
               			<form:options items="${rolList}" itemValue="id" />
             		</form:select>
 					<form:errors path="rol" />
 				</div>
+				
+				<div class="field">
+					<form:label path="empleado.id">Empleado: </form:label>
+					<form:select path="empleado.id" cssClass="ui fluid search dropdown">
+        	   			<form:option value="0" label="Seleccione un empleado"/>
+              			<form:options items="${empleadoList}" itemValue="id" />
+            		</form:select>
+					<form:errors path="empleado" />
+				</div>
 					
-				<form:hidden path="estado" value="3"/>
+				<form:hidden path="estado" value="1"/>
 									
 				<button class="ui primary button" type="submit">Guardar</button>
 				<button class="ui button" type="reset" >Limpiar</button>

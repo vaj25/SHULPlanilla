@@ -16,37 +16,49 @@
 		.column {
 			max-width: 450px;
 		}
+		
+		.container-message {
+			position: absolute;
+			width: 600px;
+			margin: 1em 28%;
+		}
 	</style>
 </head>
 <body>
 
 	<c:choose>
 		<c:when test="${param.error == 'disable'}" >
-			<div class="ui compact floating negative message">
-				<i class="close icon"></i>
-				<div class="header">¡Error!</div>
-				<p>
-					Lo sentimos su usuario ha sido bloqueado, por favor envie un mensaje al
-					administrador haciendo click <a>aquí</a>.
-				</p>
+			<div class="container-message">
+				<div class="ui negative message">
+					<i class="close icon"></i>
+					<div class="header">¡Error!</div>
+					<p>
+						Lo sentimos su usuario ha sido bloqueado, por favor envie un mensaje al
+						administrador haciendo click <a>aquí</a>.
+					</p>
+				</div>
 			</div>
 		</c:when>
 		<c:when test="${param.error == 'credential'}">
-			<div class="ui inline cookie nag">
-				<i class="close icon"></i>
-				<div class="title">¡Error!</div>
-				<p>
-					Lo sentimos sus credenciales son incorrectas.
-				</p>
+			<div class="container-message">
+				<div class="ui negative message">
+					<i class="close icon"></i>
+					<div class="header">¡Error!</div>
+					<p>
+						Lo sentimos sus credenciales son incorrectas.
+					</p>
+				</div>
 			</div>
 		</c:when>
 		<c:when test="${param.error == 'default'}">
-			<div class="ui compact center aligned grid negative message">
-				<i class="close icon"></i>
-				<div class="header">¡Error!</div>
-				<p>
-					Lo sentimos ha ocurrido un error en la trasacción.
-				</p>
+			<div class="container-message">
+				<div class="ui negative message">
+					<i class="close icon"></i>
+					<div class="header">¡Error!</div>
+					<p>
+						Lo sentimos ha ocurrido un error en la trasacción.
+					</p>
+				</div>
 			</div>
 		</c:when>
 	</c:choose>

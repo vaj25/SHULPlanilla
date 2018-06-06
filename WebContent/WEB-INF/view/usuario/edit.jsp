@@ -37,11 +37,20 @@
 										
 					<div class="field">
 						<form:label path="rol.id">Nivel de Puesto: </form:label>
-						<form:select path="rol.id">
+						<form:select path="rol.id" cssClass="ui fluid search dropdown">
                 			<form:option value="0" label="Seleccione un nivel de puesto"/>
                 			<form:options items="${rolList}" itemValue="id" />
             			</form:select>
 						<form:errors path="rol" />
+					</div>
+					
+					<div class="field">
+						<form:label path="empleado.id">Empleado: </form:label>
+						<form:select path="empleado.id" cssClass="ui fluid search dropdown">
+        	   				<form:option value="0" label="Seleccione un empleado"/>
+              				<form:options items="${empleadoList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="empleado" />
 					</div>
 					
 					<form:hidden path="password" value="${rol.password}"/>
