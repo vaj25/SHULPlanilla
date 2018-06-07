@@ -54,6 +54,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return session.getCurrentSession().get(Usuario.class, idUsuario);
 		
 	}
+	
+	@Override
+	public Usuario getUsuarioAdmin() {
+		
+		return (Usuario) session.getCurrentSession().createQuery(
+				"from USUARIO where id_rol = 1")
+				.uniqueResult();
+		
+	}
 
 	@Override
 	public List<Usuario> getAllUsuario() {

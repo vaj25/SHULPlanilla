@@ -17,6 +17,7 @@
     
     <http auto-config="true" use-expressions="true">
     	<intercept-url pattern="/login.html" access="permitAll" />
+    	<intercept-url pattern="/send-mail.html" access="permitAll" />
        	<intercept-url pattern="/**" access="isAuthenticated()" />
         <logout logout-url="/logout.html" logout-success-url="/login.html"/>
         <form-login login-page="/login.html"

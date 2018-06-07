@@ -34,7 +34,7 @@
 					<div class="header">¡Error!</div>
 					<p>
 						Lo sentimos su usuario ha sido bloqueado, por favor envie un mensaje al
-						administrador haciendo click <a>aquí</a>.
+						administrador haciendo click <a class="section" href="<c:url value="/send-mail.html" />">aquí</a>.
 					</p>
 				</div>
 			</div>
@@ -61,12 +61,22 @@
 				</div>
 			</div>
 		</c:when>
+		<c:when test="${message == 'send'}">
+			<div class="container-message">
+				<div class="ui positive message">
+					<i class="close icon"></i>
+					<div class="header">¡Exito!</div>
+					<p>El mensaje ha sido enviado con exito.</p>
+				</div>
+			</div>
+		</c:when>
 	</c:choose>
 	
 	<div class="ui middle aligned center aligned grid">	
 		<div class="column">
 			
 			<form action="${pageContext.request.contextPath}/loginAction.html" method="post" class="ui form">
+				<div class="ui error message"></div>
 				<div class="ui stacked secondary segment">
 					<div class="field">
 						<label>Username: </label>
@@ -79,6 +89,10 @@
 					</div>
 					
 					<button class="ui fluid large blue button" type="submit">Login</button>
+					
+					<br>
+					<p>¿No tienes una cuenta?  <a class="section" href="<c:url value="/send-mail.html" />">Solicitala</a>. </p>
+					
 				</div>
 			</form>
 			
@@ -96,9 +110,31 @@
 		  })
 		;
 		
-		$('.cookie.nag')
-		  .nag('show')
-		;
+		$('.ui.form').form({
+			
+			on: 'blur',
+			fields: {
+				username: {
+					identifier: 'username',
+					rules: [
+						{
+							type: 'empty',
+							prompt: 'Por favor, el username es obligatorio.'
+						}
+					]
+				},
+				password: {
+					identifier: 'password',
+					rules: [
+						{					
+							type: 'empty',
+							prompt: 'Por favor, la password es obligatoria.'
+						}
+					]
+				},
+			}
+			
+		});
 	</script>
 </body>
 </html>

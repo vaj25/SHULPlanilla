@@ -50,6 +50,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return userDao.getUsuario(idUsuario);
 		
 	}
+	
+	@Transactional
+	public Usuario getUsuarioAdmin() {
+		
+		return userDao.getUsuarioAdmin();
+		
+	}
 
 	@Transactional
 	public List<Usuario> getAllUsuario() {

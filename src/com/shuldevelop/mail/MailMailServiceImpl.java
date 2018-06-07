@@ -16,9 +16,9 @@ public class MailMailServiceImpl implements MailMailService{
 	   
 		 SimpleMailMessage message = new SimpleMailMessage();  
 	     message.setFrom(from);  
-	     message.setTo(to);  
-	     message.setSubject(subject);  
-	     message.setText(msg);  
+	     message.setTo(to);
+	     message.setSubject(subject);
+	     message.setText(msg);
 	       
 	     mailSender.send(message);     
 	}

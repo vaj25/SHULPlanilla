@@ -52,9 +52,9 @@
 	    <property name="username" value="alb2594@gmail.com" />  
 	    <property name="password" value="3JRoMIBAKbbR" />  
 	    <property name="javaMailProperties">
-	       <props>  
-	          <prop key="mail.smtp.starttls.enable">true</prop>
-	        </props>  
+		    <props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>  
 	    </property>  
 	</bean>
 	<bean id="mailMail" class="com.shuldevelop.mail.MailMailServiceImpl">  

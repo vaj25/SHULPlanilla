@@ -14,6 +14,8 @@ public interface UsuarioDAO {
 	
 	public Usuario getUsuario(int idUsuario);
 	
+	public Usuario getUsuarioAdmin();
+	
 	public List<Usuario> getAllUsuario();
 	
 	public Usuario findUserByUsername (String username);

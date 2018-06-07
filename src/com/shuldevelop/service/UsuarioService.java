@@ -16,6 +16,8 @@ public interface UsuarioService {
 	
 	public Usuario getUsuario(int idUsuario);
 	
+	public Usuario getUsuarioAdmin();
+	
 	public List<Usuario> getAllUsuario();
 	
 }
