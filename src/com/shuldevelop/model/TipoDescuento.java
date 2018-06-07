@@ -57,4 +57,9 @@ public class TipoDescuento {
 		this.taza = taza;
 	}
 
+	@Override
+	public String toString() {
+		return "Tipo de Descuento: " + tipo;
+	}
+
 }

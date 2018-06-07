@@ -54,7 +54,7 @@
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Gestionar Descuentos" data-inverted="">
-										<a href="<c:url value="/ingreso-planilla/index.html?id=${planilla.getId()}&id_pl=${idPl}" />">
+										<a href="<c:url value="/descuento-planilla/index.html?id=${planilla.getId()}&id_pl=${idPl}" />">
 											<i class="large percent icon"></i>
 										</a>
 									</div>
