@@ -11,8 +11,10 @@ public interface RolModuloPermisoService {
 	
 	public void delete(int idRolModuloPermiso);
 	
+	public int getCountRolModuloPermisoByRol(int idRol);
+	
 	public RolModuloPermiso getRolModuloPermiso(int idRolModuloPermiso);
 	
-	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol);
+	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol, int page, int perPage);
 	
 }

@@ -36,6 +36,19 @@ public class RolModuloPermisoDAOImpl implements RolModuloPermisoDAO {
 		session.getCurrentSession().delete(getRolModuloPermiso(idRolModuloPermiso));
 
 	}
+	
+	@Override
+	public int getCountRolModuloPermisoByRol(int idRol) {
+		
+		Query<Long> query = session.getCurrentSession()
+				.createQuery("SELECT count(id) FROM ROL_MODULO_PERMISO WHERE id_rol = :id_rol", Long.class)
+				.setParameter("id_rol", idRol);
+				
+		int countRolModuloPermiso =  (int) (long) query.uniqueResult();
+		
+		return countRolModuloPermiso;
+		
+	}
 
 	@Override
 	public RolModuloPermiso getRolModuloPermiso(int idRolModuloPermiso) {
@@ -45,16 +58,18 @@ public class RolModuloPermisoDAOImpl implements RolModuloPermisoDAO {
 	}
 	
 	@Override
-	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol) {
+	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol, int page, int perPage) {
 		
 		Query<RolModuloPermiso> query = session.getCurrentSession()
 				.createQuery("from ROL_MODULO_PERMISO WHERE id_rol = :id_rol", RolModuloPermiso.class)
 				.setParameter("id_rol", idRol);
+		
+		query.setMaxResults(perPage);
+	    query.setFirstResult(page * perPage);
 				
 		List<RolModuloPermiso> allRolModuloPermiso = query.getResultList();
 		return allRolModuloPermiso;
 		
 	}
-
 
 }

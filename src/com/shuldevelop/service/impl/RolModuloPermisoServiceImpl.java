@@ -37,6 +37,13 @@ public class RolModuloPermisoServiceImpl implements RolModuloPermisoService {
 		rolModuloPermisoDAO.delete(idRolModuloPermiso);
 
 	}
+	
+	@Transactional
+	public int getCountRolModuloPermisoByRol(int idRol) {
+		
+		return rolModuloPermisoDAO.getCountRolModuloPermisoByRol(idRol);
+		
+	}
 
 	@Transactional
 	public RolModuloPermiso getRolModuloPermiso(int idRolModuloPermiso) {
@@ -46,9 +53,9 @@ public class RolModuloPermisoServiceImpl implements RolModuloPermisoService {
 	}
 
 	@Transactional
-	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol) {
+	public List<RolModuloPermiso> getAllRolModuloPermisoByRol(int idRol, int page, int perPage) {
 		
-		return rolModuloPermisoDAO.getAllRolModuloPermisoByRol(idRol);
+		return rolModuloPermisoDAO.getAllRolModuloPermisoByRol(idRol, page, perPage);
 		
 	}
 

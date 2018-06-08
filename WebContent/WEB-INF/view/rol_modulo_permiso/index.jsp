@@ -151,7 +151,11 @@
 			</div>
 		</div>
 		
-		
+		<c:set var="url" value="${pageContext.request.contextPath}/rol-modulo-permiso/index.html?id=${param.id}" scope="request"></c:set>
+		<c:set var="simbol" value="&" scope="request"></c:set>
+		<c:set value="${totalCount}" var="totalCount" scope="request" ></c:set>	
+		<c:import url="../layouts/pagination.jsp"></c:import>
+	
 	</div>
 	
 	<c:import url="../layouts/footer.jsp"></c:import>

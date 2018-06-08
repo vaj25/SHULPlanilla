@@ -48,6 +48,8 @@ public class RolModuloPermisoController {
 	private UsuarioService usuarioService;
 	
 	private RolModuloPermisoValidator rolModuloPermisoValidator;
+	
+	private static final int LIMITITEMSPERPAGE = 10;
 
 	public RolModuloPermisoController() {
 		
@@ -75,7 +77,14 @@ public class RolModuloPermisoController {
 		
 		int idRol = Integer.parseInt(request.getParameter("id"));
 		
-		List<RolModuloPermiso> listRolModuloPermiso = rolModuloPermisoService.getAllRolModuloPermisoByRol(idRol);
+		int page = 1;
+		
+		if ( request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));;
+		}
+		
+		List<RolModuloPermiso> listRolModuloPermiso = rolModuloPermisoService
+				.getAllRolModuloPermisoByRol(idRol, page, LIMITITEMSPERPAGE);
 		
 		List<Modulo> listModulo = moduloService.getAllModulo();
 		
@@ -88,6 +97,7 @@ public class RolModuloPermisoController {
 		mav.addObject("moduloList", listModulo);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
+		mav.addObject("totalCount", rolModuloPermisoService.getCountRolModuloPermisoByRol(idRol));
 		
 		return mav;
 		
@@ -109,7 +119,8 @@ public class RolModuloPermisoController {
 			
 			Rol rol = rolService.getRol(u.getRol().getId());
 			
-			List<RolModuloPermiso> listRolModuloPermiso = rolModuloPermisoService.getAllRolModuloPermisoByRol(rol.getId());
+			List<RolModuloPermiso> listRolModuloPermiso = rolModuloPermisoService.
+					getAllRolModuloPermisoByRol(rol.getId(), 1, LIMITITEMSPERPAGE);
 			
 			List<Modulo> listModulo = moduloService.getAllModulo();
 			
