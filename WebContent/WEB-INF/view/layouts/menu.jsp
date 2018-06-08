@@ -1,21 +1,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
-<div class="ui inverted tiny menu">
-  <div class="right menu">
-    <div class="ui dropdown item">
-      <c:out value="${requestScope.Usuario.getEmpleado()}" /> <i class="dropdown icon"></i>
-      <div class="menu">
-        <a class="item" href="<c:url value="/usuario/edit-pass-user.html" />" ><i class="key icon"></i> Cambiar contraseña</a>
-        <a class="item" href="<c:url value="/logout.html" />" ><i class="sign out alternate icon"></i> Cerrar Sesión</a>
-      </div>
-    </div>
-    <div class="active blue item" id="date">
-    </div>
-  </div>
+<div id="h-menu" class="ui inverted tiny menu">
+	<a class="item" id="colapse">
+		<i class="sidebar icon"></i>Menu
+	</a>
+  	<div class="right menu">
+    	<div class="ui dropdown item">
+      		<c:out value="${requestScope.Usuario.getEmpleado()}" /> <i class="dropdown icon"></i>
+      		<div class="menu">
+        		<a class="item" href="<c:url value="/usuario/edit-pass-user.html" />" ><i class="key icon"></i> Cambiar contraseña</a>
+        		<a class="item" href="<c:url value="/logout.html" />" ><i class="sign out alternate icon"></i> Cerrar Sesión</a>
+      		</div>
+    	</div>
+    	<div class="active blue item" id="date">
+    	</div>
+  	</div>
 </div>
 
-<nav class="ui vertical inverted sticky accordion menu fixed top">
+<nav id="v-menu" class="ui vertical inverted sticky accordion menu fixed top">
     <div class="item">
 	    <div class="header">
 	         SHULPlanilla

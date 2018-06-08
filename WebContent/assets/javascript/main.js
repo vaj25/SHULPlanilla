@@ -7,13 +7,21 @@ var baseurl = "http://localhost:8080/SHULPlanilla";
 
 $(document).ready(function () {
 	
+	var w = $(window).width();
+	if(w < 1000) {
+		$('#colapse').click(function() {
+			$('nav').toggle();
+		});
+		
+		$('footer > div').removeClass('grid');
+	}
+	
 	$('.ui.dropdown').dropdown();
 	
 	$('.ui.checkbox').checkbox();
 	
 	$('.ui.accordion').accordion();
 
-	
 	var date = new Date();
 	
 	$('#date').html( days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' de ' + date.getFullYear());
