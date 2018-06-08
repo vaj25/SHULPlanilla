@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="ui container">
 			<div>
-				<a class="ui positive button" href="<c:url value="/planilla-empleado/add.html" />">Agregar</a>
+				<a class="ui positive button" href="<c:url value="/planilla-empleado/add.html?id=${idPl}" />">Agregar</a>
 				<a class="section" href="<c:url value="/planilla-planilla/index.html" />">Atras</a>
 			</div>
 

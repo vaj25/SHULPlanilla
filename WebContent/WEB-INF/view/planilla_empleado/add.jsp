@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/planilla-empleado/index.html" />">Atras</a>
+				<a class="section" href="<c:url value="/planilla-empleado/index.html?id=${idPl}"/>">Atras</a>
 			</div>
 			<br><br>
 			<div>
@@ -25,11 +25,14 @@
 
 					<h4 class="ui dividing header">Nuevo planilla para empleado</h4>
 
-					<form:errors path="*" element="div" cssClass="alert" />
+					<form:errors path="*" element="div" cssClass="alert" />								
 					<div class="field">
-						<form:label path="idEmpleado">Empleado: </form:label>
-						<form:input path="idEmpleado" />
-						<form:errors path="idEmpleado" />
+						<form:label path="Empleado.id">Empleado: </form:label>
+						<form:select path="Empleado.id">
+                			<form:option value="0" label="Seleccione el Empleado"/>
+                			<form:options items="${empleadoList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="empleado.id" />
 					</div>
 					
 					<button class="ui primary button" type="submit">Guardar</button>

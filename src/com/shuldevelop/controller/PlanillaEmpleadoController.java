@@ -14,7 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shuldevelop.model.Departamento;
+import com.shuldevelop.model.Empleado;
+import com.shuldevelop.model.EstadoCivil;
+import com.shuldevelop.model.Genero;
+import com.shuldevelop.model.Municipio;
 import com.shuldevelop.model.PlanillaEmpleado;
+import com.shuldevelop.model.ProfesionOficio;
+import com.shuldevelop.model.TipoDocIdentidad;
+import com.shuldevelop.model.Zona;
+import com.shuldevelop.service.EmpleadoService;
 import com.shuldevelop.service.PlanillaEmpleadoService;
 
 @Controller
@@ -22,6 +31,9 @@ public class PlanillaEmpleadoController {
 
 	@Autowired
 	private PlanillaEmpleadoService planillaEmpleadoService;
+	@Autowired
+	
+	private EmpleadoService empleadoService;
 	
 	@RequestMapping(value = "/planilla-empleado/index", method = RequestMethod.GET)
 	public ModelAndView planillaEmpleado(@RequestParam("id") int idPlanilla) {
@@ -37,12 +49,16 @@ public class PlanillaEmpleadoController {
 	}
 	
 	@RequestMapping(value = "/planilla-empleado/add", method = RequestMethod.GET)
-	public ModelAndView addPlanillaEmpleado() {
+	public ModelAndView addPlanillaEmpleado(@RequestParam("id") int idPlanilla) {
 		
-		ModelAndView mav = new ModelAndView();
-		
+		ModelAndView mav = new ModelAndView();	
+
+		List<Empleado> ListEmpleado = empleadoService.getAllEmpleado();	
+
+		mav.addObject("empleadoList", ListEmpleado);		
 		mav.setViewName("planilla_empleado/add");
 		mav.addObject("PlanillaEmpleado", new PlanillaEmpleado());
+		mav.addObject("idPl", idPlanilla);
 		
 		return mav;
 	}

@@ -79,6 +79,7 @@
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
 										<a href="<c:url value="/descuento-planilla/index.html?
 											id=${descuentoPlanilla.getPlanillaEmpleado().getId()}
+											&id_pl=${descuentoPlanilla.getPlanillaEmpleado().getPlanilla().getId()}
 											&idi=${descuentoPlanilla.getTipoDescuento().getId()}" />">
 											<i class="large edit icon"></i>
 										</a>
@@ -86,6 +87,7 @@
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
 										<a href="<c:url value="/descuento-planilla/delete.html?
 											id_planilla=${descuentoPlanilla.getPlanillaEmpleado().getId()}
+											&id_pl=${descuentoPlanilla.getPlanillaEmpleado().getPlanilla().getId()}
 											&id_descuento=${descuentoPlanilla.getTipoDescuento().getId()}" />">
 											<i class="large erase icon"></i>
 										</a>

@@ -27,6 +27,10 @@ public class PlanillaEmpleado {
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="id_empleado")
 	private Empleado empleado;
+	
+	@ManyToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name="id_planilla")
+	private Planilla planilla;
 
 	public PlanillaEmpleado() {
 	}
@@ -46,4 +50,14 @@ public class PlanillaEmpleado {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+	
+	public Planilla getPlanilla() {
+		return planilla;
+	}
+
+	public void setPlanilla(Planilla planilla) {
+		this.planilla = planilla;
+	}
+	
+	
 }

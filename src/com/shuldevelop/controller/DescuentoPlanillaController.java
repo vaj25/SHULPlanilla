@@ -120,7 +120,8 @@ public class DescuentoPlanillaController {
 
 		descuentoPlanillaService.add(u);
 
-		return new ModelAndView("redirect:/descuento-planilla/index.html?id="+u.getPlanillaEmpleado().getId());
+		return new ModelAndView("redirect:/descuento-planilla/index.html?id="+u.getPlanillaEmpleado().getId()+
+				"&id_pl="+u.getPlanillaEmpleado().getPlanilla().getId());
 
 	}
 
@@ -129,6 +130,7 @@ public class DescuentoPlanillaController {
 
 		int idPlanilla = Integer.parseInt(request.getParameter("id_planilla"));
 		int idDescuento = Integer.parseInt(request.getParameter("id_descuento"));
+		int idPl = Integer.parseInt(request.getParameter("id_pl"));
 
 		TipoDescuento tipoDescuento = tipoDescuentoService.getTipoDescuento(idDescuento);
 
@@ -138,7 +140,7 @@ public class DescuentoPlanillaController {
 
 		descuentoPlanillaService.delete(descuentoPlanillaId);
 
-		return new ModelAndView("redirect:/descuento-planilla/index.html?id="+idPlanilla);
+		return new ModelAndView("redirect:/descuento-planilla/index.html?id="+idPlanilla+"&id_pl="+idPl);
 	}
 
 }
