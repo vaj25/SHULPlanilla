@@ -53,5 +53,58 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		List<Empleado> allSub = query.getResultList();
 		return allSub;
 	}
-
+	
+	@Override
+	public List<Empleado> getDui(String dui) {
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where doc_identidad = :dui",Empleado.class)
+				.setParameter("dui", dui);
+		List<Empleado> alldui = query.getResultList();
+		return alldui;
+	}
+	
+	@Override
+	public List<Empleado> getNit(String Nnit){
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where nit = :Nnit",Empleado.class)
+				.setParameter("Nnit", Nnit);
+		List<Empleado> allnit = query.getResultList();
+		return allnit;
+	}
+	
+	@Override
+	public List<Empleado> getIsss(int Nisss){
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where isss = :Nisss",Empleado.class)
+				.setParameter("Nisss", Nisss);
+		List<Empleado> allisss = query.getResultList();
+		return allisss;
+	}
+	
+	@Override
+	public List<Empleado> getNup(long Nnup){
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where nup = :Nnup",Empleado.class)
+				.setParameter("Nnup", Nnup);
+		List<Empleado> allnup = query.getResultList();
+		return allnup;
+	}
+	
+	@Override
+	public List<Empleado> getEmpEmail(String emailEmp){
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where email_pers = :emailEmp",Empleado.class)
+				.setParameter("emailEmp", emailEmp);
+		List<Empleado> allEmail = query.getResultList();
+		return allEmail;
+	}
+	
+	@Override
+	public List<Empleado> getInsEmail(String emailInst){
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where email_inst = :emailInst",Empleado.class)
+				.setParameter("emailInst", emailInst);
+		List<Empleado> allEmailIns = query.getResultList();
+		return allEmailIns;
+	}
 }

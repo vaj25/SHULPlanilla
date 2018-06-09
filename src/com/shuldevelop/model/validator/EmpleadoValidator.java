@@ -1,6 +1,12 @@
 package com.shuldevelop.model.validator;
 
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -64,16 +70,58 @@ public class EmpleadoValidator implements Validator {
 		}
 		
 		if(empleado.getTipoDocIdentidad().getId()==0) {
-			arg1.rejectValue("tipoDocIdentidad.id", "tipoDocIdentidad.incorrect", "Seleccione un estado civil");
+			arg1.rejectValue("tipoDocIdentidad.id", "tipoDocIdentidad.incorrect", "Seleccione un tipo de documento");
 		}
 		
 		if(empleado.getProfesionOficio().getId()==0) {
-			arg1.rejectValue("profesionOficio.id", "profesionOficio.incorrect", "Seleccione un estado civil");
+			arg1.rejectValue("profesionOficio.id", "profesionOficio.incorrect", "Seleccione una profesion");
 		}
 		
+		if(empleado.getTipoDocIdentidad().getId()==1) {
+			if(empleado.getDoc_identidad().length() < 10 || empleado.getDoc_identidad().length() > 10) {
+				arg1.rejectValue("doc_identidad", "doc_identidad.incorrect", "Formato invalido para Dui");
+			}
+		}
 		
+		if(empleado.getFecha_ingreso()!=null && empleado.getFecha_ingreso()!=null) {
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate fechaNac=empleado.getFecha_nacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate fechaIng=empleado.getFecha_ingreso().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Period periodo = Period.between(fechaNac, fechaIng);
+		if(periodo.getYears()<18) {
+			arg1.rejectValue("fecha_nacimiento", "fecha_nacimiento.incorrect", "Debe ser mayor de 18 años");
+		}
+		}
 		
+		Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+	            Pattern.CASE_INSENSITIVE);
 		
+		if(!(pattern.matcher(empleado.getEmail_pers()).matches())) {
+			arg1.rejectValue("email_pers", "email_pers.incorrect", "Formato de email invalido");
+		}
+		
+		if(!(pattern.matcher(empleado.getEmail_inst()).matches())) {
+			arg1.rejectValue("email_inst", "email_inst.incorrect", "Formato de email invalido");
+		}
+		
+		String str=Integer.toString(empleado.getIsss());
+		if(str.length()!=9) {
+			arg1.rejectValue("isss", "isss.incorrect", "Formato invalido para No. ISSS");
+		}
+		
+		String str2=Long.toString(empleado.getNup());
+		if(str2.length()!=12) {
+			arg1.rejectValue("nup", "nup.incorrect", "Formato invalido para NUP");
+		}
+		
+		if(empleado.getNit().length()!=17) {
+			arg1.rejectValue("nit", "nit.incorrect", "Formato no valido para NIT");
+		}
+		
+		Pattern pattern1=Pattern.compile("^[0-9]{4}-{1}[0-9]{6}-{1}[0-9]{3}-{1}[0-9]{1}$");
+		if(!(pattern1.matcher(empleado.getNit()).matches())) {
+			arg1.rejectValue("nit", "nit.incorrect", "Formato incorrecto para NIT");
+		}
 		
 		
 

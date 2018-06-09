@@ -37,33 +37,35 @@
 					<thead>
 						<tr>
 							<th>Número</th>
-							<th>Primer Nombre</th>
-							<th>Segundo Nombre</th>
-							<th>Primer Apellido</th>
-							<th>Segundo Apellido</th>
-							<th>Apellido Casada</th>
-							<th>Fecha de nacimiento</th>
-							<th>Genero</th>
+							<th>Nombre</th>
+							
+							
+							
+							
+							
+							
 							<th>Fecha de ingreso</th>
 							<th>NIT</th>
 							<th>ISSS</th>
 							<th>NUP</th>
-							<th>Tipo Documento Identidad</th>
-							<th>Documento de Identidad</th>
+							
+							<th>Doc. Identidad</th>
 							<th>Email</th>
-							<th>Email Inst</th>
-							<th>Colonia</th>
-							<th>Avenida</th>
-							<th>Num Calle</th>
-							<th>Num Casa</th>
-							<th>Pasaje</th>
-							<th>Poligono</th>
-							<th>Municipio</th>
-							<th>Departamento</th>
-							<th>Zona</th>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							<th>Jefe</th>
-							<th>Estado Civil</th>
-							<th>Profesion o Oficio</th>
+							
+							<th>Profesion</th>
+							<th>Estado</th>
+							<th>Acciones</th>
 							
 							
 						</tr>				
@@ -77,27 +79,15 @@
 								</td>
 								<td>
 									<c:out value="${empleado.getPrimer_nombre()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${empleado.getSegundo_nombre()}"></c:out>
-								</td>
-								<td>
+									
 									<c:out value="${empleado.getPrimer_apellido()}"></c:out>
 								</td>
-								<td>
-									<c:out value="${empleado.getSegundo_apellido()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${empleado.getApellido_casada()}"></c:out>
-								</td>
-								<td>
-									
-									<fmt:formatDate pattern = "dd-MM-yyyy" value = "${empleado.getFecha_nacimiento()}" />
-									
-								</td>
-								<td>
-									<c:out value="${empleado.getGenero().getGenero()}"></c:out>
-								</td>
+								
+								
+								
+								
+								
+								
 								<td>
 									<fmt:formatDate pattern = "dd-MM-yyyy" value = "${empleado.getFecha_ingreso()}" />
 								</td>
@@ -110,57 +100,69 @@
 								<td>
 									<c:out value="${empleado.getNup()}"></c:out>
 								</td>
-								<td>
-									<c:out value="${empleado.getTipoDocIdentidad().getTipo()}"></c:out>
-								</td>
+								
 								<td>
 									<c:out value="${empleado.getDoc_identidad()}"></c:out>
 								</td>
 								<td>
 									<c:out value="${empleado.getEmail_pers()}"></c:out>
 								</td>
-								<td>
-									<c:out value="${empleado.getEmail_inst()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${empleado.getDireccion().getColonia()}"></c:out>			
-								</td>
-								<td>									
-									<c:out value="${empleado.getDireccion().getAvenida()}"></c:out>									
-								</td>
-								<td>
-									<c:out value="${empleado.getDireccion().getNumCalle()}"></c:out>
-								</td>
-								<td>									
-									<c:out value="${empleado.getDireccion().getNumCasa()}"></c:out>									
-								</td>
-								<td>						
-									<c:out value="${empleado.getDireccion().getPasaje()}"></c:out>									
-								</td>
-								<td>								
-									<c:out value="${empleado.getDireccion().getPoligono()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${empleado.getDireccion().getMunicipio().getNombre()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${empleado.getDireccion().getMunicipio().getDepartamento().getNombre()}"></c:out>
-								</td>
-								<td>
-									<c:out value="${empleado.getDireccion().getMunicipio().getDepartamento().getZona().getZona()}"></c:out>
-								</td>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
 								<td>
 									<c:out value="${empleado.getJefe().getPrimer_nombre()}"></c:out>
 									<c:out value="${empleado.getJefe().getPrimer_apellido()}"></c:out>
 									
 								</td>
-								<td>
-									<c:out value="${empleado.getEstadoCivil().getEstadoCivil()}"></c:out>
-								</td>
+								
 								<td>
 									<c:out value="${empleado.getProfesionOficio().getProfesion_oficio()}"></c:out>
 								</td>
 								<td>
+									<c:choose>
+										<c:when test = "${empleado.getEstado() == 1 }" >
+											Activo
+										</c:when>
+										<c:when test = "${empleado.getEstado() == 2 }" >
+											Inactivo
+										</c:when>
+										<c:when test = "${empleado.getEstado() == 3 }" >
+											Bloqueado
+										</c:when>
+									</c:choose>
+								</td>
+								<td>
+									<c:choose>
+										<c:when test = "${empleado.getEstado() == 1 }" >
+											<div class="ui mini circular icon button" data-tooltip="Desactivar" data-inverted="">
+												<a href="<c:url value="/empleado/inactivate.html?id=${empleado.getId()}" />">
+													<i class="large lock icon"></i>
+												</a>
+											</div>
+										</c:when>
+										<c:when test = "${empleado.getEstado() == 2 }" >
+											<div class="ui mini circular icon button" data-tooltip="Activar" data-inverted="">
+												<a href="<c:url value="/empleado/activate.html?id=${empleado.getId()}" />">
+													<i class="large unlock icon"></i>
+												</a>
+											</div>
+										</c:when>
+										<c:when test = "${empleado.getEstado() == 3 }" >
+											<div class="ui mini circular icon button" data-tooltip="Activar" data-inverted="">
+												<a href="<c:url value="/empleado/enable.html?id=${empleado.getId()}" />">
+													<i class="large unlock alternate icon"></i>
+												</a>
+											</div>
+										</c:when>
+									</c:choose>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
 										<a href="<c:url value="/empleado/edit.html?id=${empleado.getId()}" />">
 											<i class="large edit icon"></i>

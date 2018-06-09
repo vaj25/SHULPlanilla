@@ -58,8 +58,8 @@ public class Empleado {
 	private int isss;
 
 	@Column(name="nup")
-	private int nup;
-
+	private long nup;
+	
 	@Column(name="doc_identidad")
 	private String doc_identidad;
 
@@ -68,6 +68,9 @@ public class Empleado {
 
 	@Column(name="email_inst")
 	private String email_inst;
+	
+	@Column(name = "estado")
+	private int estado;
 
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="id_direccion")
@@ -104,7 +107,7 @@ public class Empleado {
 
 	public Empleado(int id, String primer_nombre, String segundo_nombre, String primer_apellido,
 			String segundo_apellido, String apellido_casada, Date fecha_nacimiento, Date fecha_ingreso, String nit,
-			int isss, int nup, String doc_identidad, String email_pers, String email_inst, Direccion direccion,
+			int isss, long nup, String doc_identidad, String email_pers, String email_inst,int estado, Direccion direccion,
 			EstadoCivil estadoCivil, Genero genero, TipoDocIdentidad tipoDocIdentidad, ProfesionOficio profesionOficio,
 			Empleado jefe) {
 		super();
@@ -122,6 +125,7 @@ public class Empleado {
 		this.doc_identidad = doc_identidad;
 		this.email_pers = email_pers;
 		this.email_inst = email_inst;
+		this.estado = estado;
 		this.direccion = direccion;
 		this.estadoCivil = estadoCivil;
 		this.genero = genero;
@@ -210,11 +214,11 @@ public class Empleado {
 		this.isss = isss;
 	}
 
-	public int getNup() {
+	public long getNup() {
 		return nup;
 	}
 
-	public void setNup(int nup) {
+	public void setNup(long nup) {
 		this.nup = nup;
 	}
 
@@ -240,6 +244,14 @@ public class Empleado {
 
 	public void setEmail_inst(String email_inst) {
 		this.email_inst = email_inst;
+	}
+	
+	public int getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public Direccion getDireccion() {

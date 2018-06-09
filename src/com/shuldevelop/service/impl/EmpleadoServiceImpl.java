@@ -44,5 +44,35 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	public List<Empleado> getAllSub(int idEmpleado){
 		return empleadoDAO.getAllSub(idEmpleado);
 	}
+	
+	@Transactional
+	public List<Empleado> getDui(String dui){
+		return empleadoDAO.getDui(dui);
+	}
+	
+	@Transactional
+	public List<Empleado> getNit(String Nnit){
+		return empleadoDAO.getNit(Nnit);
+	}
+	
+	@Transactional
+	public List<Empleado> getIsss(int Nisss){
+		return empleadoDAO.getIsss(Nisss);
+	}
+	
+	@Transactional
+	public List<Empleado> getNup(long Nnup){
+		return empleadoDAO.getNup(Nnup);
+	}
+	
+	@Transactional
+	public List<Empleado> getEmpEmail(String emailEmp){
+		return empleadoDAO.getEmpEmail(emailEmp);
+	}
+	
+	@Transactional
+	public List<Empleado> getInsEmail(String emailInst){
+		return empleadoDAO.getInsEmail(emailInst);
+	}
 
 }

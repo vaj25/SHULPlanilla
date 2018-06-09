@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Departamento;
 import com.shuldevelop.model.Empleado;
@@ -129,9 +130,69 @@ public class EmpleadoController {
 			return mav;
 		}
 		
+		List<Empleado> empDui=empleadoService.getDui(u.getDoc_identidad());
+		List<Empleado> Empemail=empleadoService.getEmpEmail(u.getEmail_pers());
+		List<Empleado> empNit=empleadoService.getNit(u.getNit());
+		List<Empleado> empIsss=empleadoService.getIsss(u.getIsss());
+		List<Empleado> empNup=empleadoService.getNup(u.getNup());
+		List<Empleado> insEmail=empleadoService.getInsEmail(u.getEmail_inst());
 		
-		empleadoService.add(u);
-		return new ModelAndView("redirect:/empleado/index.html");
+		if(empDui.size()==0 && Empemail.size()==0 && empNit.size()==0 && empIsss.size()==0 
+				&& empNup.size()==0 && insEmail.size()==0 ) {
+			u.setEstado(1);
+			empleadoService.add(u);
+			return new ModelAndView("redirect:/empleado/index.html");
+			
+		}
+		
+		else {
+			
+			
+			ModelAndView mav = new ModelAndView();
+			List<Empleado> ListEmpleado = empleadoService.getAllEmpleado();
+			List<Genero> ListGenero = generoService.getAllGenero();
+			List<EstadoCivil> ListEstadoCivil = estadoCivilService.getAllEstadoCivil();
+			List<TipoDocIdentidad> ListTipoDocIdentidad = tipoDocIdentidadService.getAllTipoDocIdentidad();
+			List<ProfesionOficio> ListProfesionOficio = profesionOficioService.getAllProfesionOficio();
+			List<Departamento> ListDepartamento = departamentoService.getAllDepartamento();
+			List<Zona> ListZona = zonaService.getAllZona();
+			List<Municipio> ListMunicipio = municipioService.getAllMunicipio();
+			
+			
+			
+			
+			mav.setViewName("empleado/add");
+			mav.addObject("Empleado", u);
+			mav.addObject("empleadoList", ListEmpleado);
+			mav.addObject("generoList", ListGenero);
+			mav.addObject("estadoCivilList", ListEstadoCivil);
+			mav.addObject("tipoDocIdentidadList",ListTipoDocIdentidad);
+			mav.addObject("profesionOficioList", ListProfesionOficio);
+			mav.addObject("departamentoList", ListDepartamento);
+			mav.addObject("municipioList", ListMunicipio);
+			mav.addObject("zonaList", ListZona);
+			mav.addObject("mensaje0", "mensaje");
+			if(empDui.size()==1) {
+				mav.addObject("mensaje", "!Error Dui duplicado!");
+			}
+			if(Empemail.size()==1) {
+				mav.addObject("mensaje1", "Error email ya existe");
+			}
+			if(empNit.size()==1) {
+				mav.addObject("mensaje2", "Error NIT duplicado");
+			}
+			if(empIsss.size()==1) {
+				mav.addObject("mensaje3", "Error No. de Isss Duplicado");
+			}
+			if(empNup.size()==1) {
+				mav.addObject("mensaje4", "Error NUP Duplicado");
+			}
+			if(insEmail.size()==1) {
+				mav.addObject("mensaje5", "Error email institucional duplicado");
+			}
+			return mav;
+		}
+		
 		
 	}
 	
@@ -221,6 +282,32 @@ public class EmpleadoController {
 		
 		
 		
+	}
+	
+	@RequestMapping(value = "/empleado/inactivate", method = RequestMethod.GET)
+	public ModelAndView inactivateEmpleado(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		Empleado empleado = empleadoService.getEmpleado(id);
+		empleado.setEstado(2);
+		empleadoService.edit(empleado);
+		redirectAttributes.addFlashAttribute("messageSuccess", "El empleado ha sido inactivado exitosamente.");
+		return new ModelAndView("redirect:/empleado/index.html");
+	}
+	
+	@RequestMapping(value = "/empleado/activate", method = RequestMethod.GET)
+	public ModelAndView activateEmpleado(
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		Empleado empleado = empleadoService.getEmpleado(id);
+		empleado.setEstado(1);
+		empleadoService.edit(empleado);
+		redirectAttributes.addFlashAttribute("messageSuccess", "El empleado ha sido activado exitosamente.");
+		return new ModelAndView("redirect:/empleado/index.html");
 	}
 	
 	

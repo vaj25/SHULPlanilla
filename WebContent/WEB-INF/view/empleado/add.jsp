@@ -22,10 +22,232 @@
 				<a class="section" href="<c:url value="/empleado/index.html" />">Atras</a>
 			</div>
 			<br><br>
+			<c:forEach items="${mensaje0}" var="empleado">
+			 <div class="ui red message">
+			  <div class="header">
+			    ¡ERROR!
+			  </div>
+			  <p>${mensaje}</p>
+			  <p>${mensaje1}</p>
+			  <p>${mensaje2}</p>
+			  <p>${mensaje3}</p>
+			  <p>${mensaje4}</p>
+			  <p>${mensaje5}</p>
+			</div>
+			</c:forEach>
 			<div>
-				<form:form method="post" modelAttribute="Empleado" cssClass="ui form">
-					
-					<h4 class="ui dividing header">Nuevo Empleado</h4>
+				
+	<form:form method="post" modelAttribute="Empleado" class="ui form">
+  <h4 class="ui dividing header">Nuevo Empleado</h4>
+  			<div class="field">
+    		<label>Nombre</label>
+    		<div class="two fields">
+      		<div class="field">
+        		<form:label path="primer_nombre"></form:label>
+				<form:input path="primer_nombre" placeholder="Primer Nombre" />
+				<form:errors path="primer_nombre" />
+      		</div>
+      		<div class="field">
+        		<form:label path="segundo_nombre"></form:label>
+				<form:input path="segundo_nombre" placeholder="Segundo Nombre"/>
+				<form:errors path="segundo_nombre" />
+      		</div>
+   			</div>   
+   			</div>
+   			<div class="field">
+    			<label>Apellidos</label>
+   			<div class="three fields">   
+      			<div class="field">
+        			<form:label path="primer_apellido"></form:label>
+					<form:input path="primer_apellido" placeholder="Primer Apellido"/>
+					<form:errors path="primer_apellido" />
+     			 </div>
+      		 	<div class="field">
+        			<form:label path="segundo_apellido"></form:label>
+					<form:input path="segundo_apellido" placeholder="Segundo Apellido" />
+					<form:errors path="segundo_apellido" />
+      			</div>
+      			<div class="field">
+        			<form:label path="apellido_casada"></form:label>
+					<form:input path="apellido_casada" placeholder="Apellido Casada"/>
+					<form:errors path="apellido_casada" />
+      			</div>
+   			</div>   
+   			</div>
+   			
+   			<div class="field">
+    			<label></label>
+    		<div class="three fields">
+      			<div class="field">
+					<form:label path="estadoCivil.id">Estado Civil </form:label>
+					<form:select path="estadoCivil.id" class="ui fluid dropdown">
+                	<form:option value="0" label="Estado Civil"/>
+               	 	<form:options items="${estadoCivilList}" itemValue="id" />
+            		</form:select>
+					<form:errors path="estadoCivil.id" />
+				</div>
+				<div class="field">
+					<form:label path="genero.id"> Genero</form:label>
+					<form:select path="genero.id" class="ui fluid dropdown">
+                	<form:option value="0" label="Genero"/>
+                	<form:options items="${generoList}" itemValue="id" />
+            		</form:select>
+					<form:errors path="genero.id" />
+				</div>
+      			<div class="field">
+					<form:label path="fecha_nacimiento"> Fecha de nacimiento</form:label>
+					<form:input type="date" path="fecha_nacimiento"/>
+					<form:errors path="fecha_nacimiento" />
+				</div>
+      
+   			</div>   
+   			</div>
+      		
+      		<div class="field">
+    			<label>Documentos</label>
+   			<div class="three fields">   
+      			<div class="field">
+						<form:label path="tipoDocIdentidad.id"></form:label>
+						<form:select path="tipoDocIdentidad.id" class="ui fluid dropdown">
+                		<form:option value="0" label="Tipo de Documento"/>
+                		<form:options items="${tipoDocIdentidadList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="tipoDocIdentidad.id" />
+				</div>
+      		 	<div class="field">
+						<form:label path="doc_identidad"></form:label>
+						<form:input path="doc_identidad" placeholder="Documento identidad" />
+						<form:errors path="doc_identidad" />
+				</div>
+      			<div class="field">
+						<form:label path="nit"></form:label>
+						<form:input path="nit" placeholder="NIT"/>
+						<form:errors path="nit" />
+				</div>
+   			</div>   
+   			</div>
+   			<div class="field">
+    			<label></label>
+   			<div class="two fields">   
+      			<div class="field">
+						<form:label path="isss">ISSS</form:label>
+						<form:input path="isss" type="number" placeholder="ISSS" />
+						<form:errors path="isss" />
+					</div>
+      		 	<div class="field">
+						<form:label path="nup">NUP</form:label>
+						<form:input  path="nup" type="number" placeholder="NUP" />
+						<form:errors path="nup" />
+				</div>
+   			</div>   
+   			</div>
+   			<div class="field">
+    			<label></label>
+   			<div class="three fields">   
+      			<div class="field">
+						<form:label path="fecha_ingreso">Fecha Ingreso: </form:label>
+						<form:input  type="date" path="fecha_ingreso"/>
+						<form:errors path="fecha_ingreso" />
+					</div>
+      		 	<div class="field">
+						<form:label path="profesionOficio.id">Profesion o Oficio: </form:label>
+						<form:select path="profesionOficio.id" class="ui fluid dropdown">
+                			<form:option value="0" label="Profesion"/>
+                			<form:options items="${profesionOficioList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="profesionOficio.id" />
+				</div>
+				<div class="field">
+						<form:label path="jefe.id">Jefe: </form:label>
+						<form:select path="jefe.id" class="ui fluid dropdown">
+                			<form:option value="0" label="Jefe"/>
+                			<form:options items="${empleadoList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="jefe" />
+				</div>
+   			</div>   
+   			</div>
+   			
+   			<div class="field">
+    			<label>Email</label>
+   			<div class="two fields">   
+      			<div class="field">
+						<form:label path="email_pers"></form:label>
+						<form:input path="email_pers" placeholder="Email Persona" />
+						<form:errors path="email_pers" />
+					</div>
+      		 	<div class="field">
+						<form:label path="email_inst"></form:label>
+						<form:input path="email_inst" placeholder="Email Institucion"/>
+						<form:errors path="email_inst" />
+				</div>
+   			</div>   
+   			</div>
+   			
+   			<div class="field">
+    			<label>Dirección</label>
+   			<div class="two fields">   
+      			<div class="field">
+						<form:label path="direccion.numCalle"></form:label>
+						<form:input path="direccion.numCalle" placeholder="Numero de Calle" />
+						<form:errors path="direccion.numCalle" />
+					</div>
+      		 	<div class="field">
+						<form:label path="direccion.avenida"></form:label>
+						<form:input path="direccion.avenida" placeholder="Avenida" />
+						<form:errors path="direccion.avenida" />
+				</div>
+				<div class="field">
+						<form:label path="direccion.poligono"></form:label>
+						<form:input path="direccion.poligono" placeholder="Poligono"/>
+						<form:errors path="direccion.poligono" />
+				</div>
+				
+   			</div>   
+   			</div>
+   			
+   			<div class="field">
+    			<label></label>
+   			<div class="three fields">   
+      			<div class="field">
+						<form:label path="direccion.colonia"></form:label>
+						<form:input path="direccion.colonia" placeholder="Colonia"/>
+						<form:errors path="direccion.colonia" />
+					</div>
+      		 	<div class="field">
+						<form:label path="direccion.pasaje"></form:label>
+						<form:input path="direccion.pasaje" placeholder="Pasaje"/>
+						<form:errors path="direccion.pasaje" />
+				</div>
+				<div class="field">
+						<form:label path="direccion.numCasa"></form:label>
+						<form:input path="direccion.numCasa" placeholder="Numero de Casa"/>
+						<form:errors path="direccion.numCasa" />
+					</div>
+				
+   			</div>   
+   			</div>
+   			<div class="field">
+    			<label></label>
+   			<div class="three fields">   
+      			<div class="field">
+						<form:label path="direccion.municipio.id"></form:label>
+						<form:select path="direccion.municipio.id" class="ui fluid dropdown">
+                			<form:option value="0" label="Seleccione el Municipio"/>
+                			<form:options items="${municipioList}" itemValue="id" />
+            			</form:select>
+						<form:errors path="direccion.municipio.id" />
+					</div>
+      		 	
+				
+   			</div>   
+   			</div>
+      <button class="ui primary button" type="submit">Guardar</button>
+					<button class="ui button" type="reset" >Limpiar</button>
+    
+  
+  </form:form>
+				<%-- 	<h4 class="ui dividing header">Nuevo Empleado</h4>
 					
 					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
@@ -173,14 +395,14 @@
                 			<form:options items="${empleadoList}" itemValue="id" />
             			</form:select>
 						<form:errors path="jefe" />
-					</div>
+					</div> 
 					
 						
 				
 									
 					<button class="ui primary button" type="submit">Guardar</button>
 					<button class="ui button" type="reset" >Limpiar</button>
-				</form:form>
+				</form:form> --%>
 			</div>
 		</div>
 	</div>
@@ -189,4 +411,3 @@
 </body>
 				
 </html>
-
