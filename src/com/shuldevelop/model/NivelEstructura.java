@@ -58,7 +58,7 @@ public class NivelEstructura {
 
 	@Override
 	public String toString() {
-		return "NivelEstructura [id=" + id + ", nombre_nivel=" + nombre_nivel + ", numero_nivel=" + numero_nivel + "]";
+		return nombre_nivel;
 	}
 
 	

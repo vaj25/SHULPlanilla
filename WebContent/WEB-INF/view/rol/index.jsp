@@ -36,7 +36,20 @@
 			</div>
 			
 			<br>
-			
+			<c:choose>
+				<c:when test="${messageSuccess != null}" >
+					<div class="ui positive message">
+						<div class="header">¡Exito!</div>
+						<p>${messageSuccess}</p>
+					</div>
+				</c:when>
+				<c:when test="${messageError != null}">
+					<div class="ui positive message">
+						<div class="header">¡Error!</div>
+						<p>${messageError}</p>
+					</div>
+				</c:when>
+			</c:choose>		
 			<div>
 				<table class="ui single line table">
 					<thead>

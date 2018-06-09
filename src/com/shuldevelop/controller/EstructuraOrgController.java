@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,12 +17,15 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.EstructuraOrg;
+import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.NivelEstructura;
 import com.shuldevelop.model.UnidadOrganizacional;
+import com.shuldevelop.model.Usuario;
 import com.shuldevelop.service.EstructuraOrgService;
+import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.NivelEstructuraService;
 import com.shuldevelop.service.UnidadOrganizacionalService;
-
+import com.shuldevelop.service.UsuarioService;
 import com.shuldevelop.model.validator.EstructuraOrgValidator;
 
 @Controller
@@ -37,10 +43,30 @@ public class EstructuraOrgController {
 	@Autowired
 	private EstructuraOrgService estEstructuraOrgService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ModuloService moduloService;
+	
 	private  EstructuraOrgValidator estructuraOrgValidator;
 
 	public  EstructuraOrgController() {
 		this.estructuraOrgValidator = new  EstructuraOrgValidator();
+	}
+	
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
 	}
 	
 	@RequestMapping(value = "/estructura-org/index", method = RequestMethod.GET)
@@ -54,6 +80,8 @@ public class EstructuraOrgController {
 		mav.setViewName("estructura_org/index");
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
 		mav.addObject("mensaje", null);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 
 		
 		return mav;
@@ -74,6 +102,8 @@ public class EstructuraOrgController {
 		mav.addObject("unidadOrganizacionalList", listUnidadOrganizacional);
 		mav.addObject("nivelEstructuraList", listNivelEstructura);
 		mav.addObject("estEstructuraOrgList", listEstEstructuraOrg);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		
 		return mav;
@@ -101,7 +131,9 @@ public class EstructuraOrgController {
 			mav.addObject("unidadOrganizacionalList", listUnidadOrganizacional);
 			mav.addObject("nivelEstructuraList", listNivelEstructura);
 			mav.addObject("estEstructuraOrgList", listEstEstructuraOrg);
-				
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
+			
 			return mav;
 		}
 		
@@ -115,8 +147,14 @@ public class EstructuraOrgController {
 			estEstructuraOrgService.getEstructuraOrg(u.getEstEstructuraOrg().getId())
 		);		
 		estructuraOrgService.add(u);
-				
-		return new ModelAndView("redirect:/estructura-org/index.html");
+		ModelAndView mav = new ModelAndView();		
+		List<EstructuraOrg> listEstructuraOrg= estructuraOrgService.getAllEstructuraOrg();
+		mav.setViewName("estructura_org/index");
+		mav.addObject("estructuraOrgList", listEstructuraOrg);
+		mav.addObject("messageSuccess", "La Estructura Organizativa se ingresó correctamente ");	
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());	
+		return mav;
 	}
 	
 	@RequestMapping(value = "/estructura-org/edit", method = RequestMethod.GET)
@@ -137,6 +175,8 @@ public class EstructuraOrgController {
 		mav.addObject("unidadOrganizacionalList", listUnidadOrganizacional);
 		mav.addObject("nivelEstructuraList", listNivelEstructura);
 		mav.addObject("estEstructuraOrgList", listEstEstructuraOrg);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 			
 		return mav;		
 		
@@ -164,6 +204,8 @@ public class EstructuraOrgController {
 			mav.addObject("unidadOrganizacionalList", listUnidadOrganizacional);
 			mav.addObject("nivelEstructuraList", listNivelEstructura);
 			mav.addObject("estEstructuraOrgList", listEstEstructuraOrg);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 				
 			return mav;
 		}
@@ -179,7 +221,12 @@ public class EstructuraOrgController {
 		);		
 		estructuraOrgService.add(u);
 				
-		return new ModelAndView("redirect:/estructura-org/index.html");
+		ModelAndView mav = new ModelAndView();		
+		List<EstructuraOrg> listEstructuraOrg= estructuraOrgService.getAllEstructuraOrg();
+		mav.setViewName("estructura_org/index");
+		mav.addObject("estructuraOrgList", listEstructuraOrg);
+		mav.addObject("messageSuccess", "La Estructura Organizativa se editó correctamente ");		
+		return mav;
 	}
 	
 	
@@ -188,40 +235,28 @@ public class EstructuraOrgController {
 		
 		ModelAndView mav = new ModelAndView();
 		int idEstructuraOrg = Integer.parseInt(request.getParameter("id"));
-
-		List<EstructuraOrg> listEstEstructuraOrg= estEstructuraOrgService.getAllEstructuraOrg();
-		EstructuraOrg estructuraOrg = estructuraOrgService.getEstructuraOrg(idEstructuraOrg);
-
-		if(estructuraOrg.getEstEstructuraOrg()==null) {	
-			
-			if(listEstEstructuraOrg!=null) {
-				
-				if(listEstEstructuraOrg.size()==1) {
-					estructuraOrgService.delete(idEstructuraOrg);
-					return new ModelAndView("redirect:/estructura-org/index.html");					
-				}else {
-					System.out.println(listEstEstructuraOrg);
-					
-					List<EstructuraOrg> listEstructuraOrg= estructuraOrgService.getAllEstructuraOrg();
-					mav.setViewName("estructura_org/index_delete");
-					mav.addObject("estructuraOrgList", listEstructuraOrg);
-					mav.addObject("mensaje", "!Puede que alguna estructura organizativa dependa de la estructura que intenta borrar! ");
-					return mav;
-										
-				}
-					
-			}else {
-				estructuraOrgService.delete(idEstructuraOrg);
-				return new ModelAndView("redirect:/estructura-org/index.html");
-			}
-
-			
-		}else {
+		List<EstructuraOrg> listEstEstructuraOrg= estEstructuraOrgService.getListEstEstructuraOrg(idEstructuraOrg);
+		
+		if(listEstEstructuraOrg.size()==0) {
 			estructuraOrgService.delete(idEstructuraOrg);
-			return new ModelAndView("redirect:/estructura-org/index.html");
-		}
-	
+			List<EstructuraOrg> listEstructuraOrg= estructuraOrgService.getAllEstructuraOrg();
+			mav.setViewName("estructura_org/index");
+			mav.addObject("estructuraOrgList", listEstructuraOrg);
+			mav.addObject("messageSuccess", "!La Estructura Organizativa se ha borrado correctamente! ");
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
+			return mav;
+		}else {
+			List<EstructuraOrg> listEstructuraOrg= estructuraOrgService.getAllEstructuraOrg();
+			mav.setViewName("estructura_org/index");
+			mav.addObject("estructuraOrgList", listEstructuraOrg);
+			mav.addObject("messageError", "!Puede que alguna Estructura Organizativa dependa de la estructura que intenta borrar! ");
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
+			return mav;
+		}	
 
+		
 	}
 	
 	

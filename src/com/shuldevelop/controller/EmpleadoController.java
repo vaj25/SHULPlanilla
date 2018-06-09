@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +21,11 @@ import com.shuldevelop.model.Departamento;
 import com.shuldevelop.model.Empleado;
 import com.shuldevelop.model.EstadoCivil;
 import com.shuldevelop.model.Genero;
+import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Municipio;
 import com.shuldevelop.model.ProfesionOficio;
 import com.shuldevelop.model.TipoDocIdentidad;
+import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.Zona;
 import com.shuldevelop.model.validator.EmpleadoValidator;
 import com.shuldevelop.service.DepartamentoService;
@@ -28,9 +33,11 @@ import com.shuldevelop.service.DireccionService;
 import com.shuldevelop.service.EmpleadoService;
 import com.shuldevelop.service.EstadoCivilService;
 import com.shuldevelop.service.GeneroService;
+import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.MunicipioService;
 import com.shuldevelop.service.ProfesionOficioService;
 import com.shuldevelop.service.TipoDocIdentidadService;
+import com.shuldevelop.service.UsuarioService;
 import com.shuldevelop.service.ZonaService;
 
 @Controller
@@ -53,11 +60,29 @@ public class EmpleadoController {
 	private TipoDocIdentidadService tipoDocIdentidadService;
 	@Autowired
 	private ProfesionOficioService profesionOficioService;
+	@Autowired
+	private UsuarioService usuarioService;
+	@Autowired
+	private ModuloService moduloService;
 	
 	private EmpleadoValidator empleadoValidator;
 	
 	public EmpleadoController() {
 		this.empleadoValidator = new EmpleadoValidator();
+	}
+	
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
 	}
 	
 	@RequestMapping(value = "/empleado/index", method = RequestMethod.GET)
@@ -67,6 +92,8 @@ public class EmpleadoController {
 		List<Empleado> listEmpleado = empleadoService.getAllEmpleado();
 		mav.setViewName("empleado/index");
 		mav.addObject("empleadoList",listEmpleado);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		return mav;
 		
 	}
@@ -94,6 +121,8 @@ public class EmpleadoController {
 		mav.addObject("departamentoList", ListDepartamento);
 		mav.addObject("municipioList", ListMunicipio);
 		mav.addObject("zonaList", ListZona);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -127,6 +156,8 @@ public class EmpleadoController {
 			mav.addObject("departamentoList", ListDepartamento);
 			mav.addObject("municipioList", ListMunicipio);
 			mav.addObject("zonaList", ListZona);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			return mav;
 		}
 		
@@ -221,6 +252,8 @@ public class EmpleadoController {
 	mav.addObject("departamentoList", ListDepartamento);
 	mav.addObject("municipioList", ListMunicipio);
 	mav.addObject("zonaList", ListZona);
+	mav.addObject("Usuario", getUsuario());
+	mav.addObject("modulos", getModulos());
 	return mav;
 	}
 	
@@ -252,6 +285,8 @@ public class EmpleadoController {
 			mav.addObject("departamentoList", ListDepartamento);
 			mav.addObject("municipioList", ListMunicipio);
 			mav.addObject("zonaList", ListZona);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			return mav;
 		}
 		empleadoService.edit(u);
@@ -275,6 +310,8 @@ public class EmpleadoController {
 			mav.setViewName("empleado/index");
 			mav.addObject("empleadoList",listEmpleado);
 			mav.addObject("mensaje", "!Error no es posible Eliminar este Empleado ! ");
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			return mav;
 			
 			

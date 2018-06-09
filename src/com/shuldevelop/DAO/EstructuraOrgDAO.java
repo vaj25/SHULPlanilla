@@ -20,7 +20,7 @@ public interface EstructuraOrgDAO {
 	
 	public List<EstructuraOrg> getNivelEstructuraOrg();
 
-	public List<EstructuraOrg> getListEstEstructuraOrg();
+	public List<EstructuraOrg> getListEstEstructuraOrg(int id_estructura_org);
 
 }
 	

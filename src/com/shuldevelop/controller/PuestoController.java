@@ -181,7 +181,7 @@ public class PuestoController {
 		redirectAttributes.addFlashAttribute("messageSuccess", "El puesto ha sido editado exitosamente.");
 		
 		puestoService.edit(u);
-		
+		redirectAttributes.addFlashAttribute("messageSuccess", "El Puesto se editó exitosamente.");
 		return new ModelAndView("redirect:/puesto/index.html");
 	}
 	

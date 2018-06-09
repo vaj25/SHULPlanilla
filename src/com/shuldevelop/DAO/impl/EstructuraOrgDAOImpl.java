@@ -86,14 +86,14 @@ public class EstructuraOrgDAOImpl implements EstructuraOrgDAO{
 	}
 	
 	@Override
-	public List<EstructuraOrg> getListEstEstructuraOrg() {
+	public List<EstructuraOrg> getListEstEstructuraOrg(int id_estructura_org) {
 		// TODO Auto-generated method stub
 		Query<EstructuraOrg> query = session.getCurrentSession().
-				createQuery("from ESTRUCTURA_ORG ", EstructuraOrg.class);
+				createQuery("from ESTRUCTURA_ORG where EST_ID_ESTRUCTURA_ORG = :ID_ESTRUCTURA_ORG", EstructuraOrg.class)
+				.setParameter("ID_ESTRUCTURA_ORG", id_estructura_org);
 		
-		List<EstructuraOrg> getListEstEstructuraOrg = query.getResultList();
-				
-		return getListEstEstructuraOrg;
+		List<EstructuraOrg> ListEstEstructuraOrg = query.getResultList();
+		return ListEstEstructuraOrg;
 	}	
 	
 }

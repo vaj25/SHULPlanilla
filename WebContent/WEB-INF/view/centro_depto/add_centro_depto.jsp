@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/rango-comision/index.html" />">Atras</a>
+				<a class="section" href="<c:url value="/centro-depto/index.html" />">Atras</a>
 			</div>
 			<br><br>
 			<div>
@@ -30,7 +30,7 @@
 					<div class="field">
 						<form:label path="id.estructuraOrg.id">Estructura Organizativa: </form:label>
 						<form:select path="id.estructuraOrg.id">
-                			<form:option value="0" label="Seleccione la planilla empleado"/>
+                			<form:option value="0" label="Seleccione la Estructura Organizativa"/>
                 			<form:options items="${estructuraOrgList}" itemValue="id" />
             			</form:select>
 						<form:errors path="id.estructuraOrg.id" />

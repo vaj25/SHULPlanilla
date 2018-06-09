@@ -63,8 +63,8 @@ public class EstructuraOrgServiceImpl implements EstructuraOrgService{
 
 	}
 	@Transactional
-	public List<EstructuraOrg> getListEstEstructuraOrg() {
-		return estructuraOrgDAO.getListEstEstructuraOrg();
+	public List<EstructuraOrg> getListEstEstructuraOrg(int id_estructura_org) {
+		return estructuraOrgDAO.getListEstEstructuraOrg(id_estructura_org);
 
 	}
 }

@@ -51,6 +51,7 @@ public class RolModuloPermisoController {
 	
 	private static final int LIMITITEMSPERPAGE = 10;
 
+
 	public RolModuloPermisoController() {
 		
 		rolModuloPermisoValidator = new RolModuloPermisoValidator();		
@@ -154,7 +155,6 @@ public class RolModuloPermisoController {
 			rolModuloPermiso.setPermiso(permiso);
 			rolModuloPermiso.setRol(rol);
 			rolModuloPermiso.setEstado(true);
-			
 			rolModuloPermisoService.add(rolModuloPermiso);		
 		}
 		

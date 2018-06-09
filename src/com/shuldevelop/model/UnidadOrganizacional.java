@@ -136,9 +136,7 @@ public class UnidadOrganizacional {
 
 	@Override
 	public String toString() {
-		return "UnidadOrganizacional [id=" + id + ", unidad_org=" + unidad_org + ", direccion=" + direccion
-				+ ", representante=" + representante + ", nit=" + nit + ", nic=" + nic + ", telefono=" + telefono
-				+ ", email_pers=" + email_pers + ", site_web=" + site_web + "]";
+		return unidad_org;
 	}
 	
 	

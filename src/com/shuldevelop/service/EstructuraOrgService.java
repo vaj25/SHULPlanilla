@@ -19,5 +19,5 @@ public interface EstructuraOrgService {
 	
 	public List<EstructuraOrg> getNivelEstructuraOrg();
 	
-	public List<EstructuraOrg> getListEstEstructuraOrg();
+	public List<EstructuraOrg> getListEstEstructuraOrg(int id_estructura_org);
 }

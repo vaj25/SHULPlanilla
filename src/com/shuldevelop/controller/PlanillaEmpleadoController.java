@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,18 +16,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Departamento;
 import com.shuldevelop.model.Empleado;
 import com.shuldevelop.model.EstadoCivil;
 import com.shuldevelop.model.Genero;
 import com.shuldevelop.model.Municipio;
+import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.PlanillaEmpleado;
 import com.shuldevelop.model.ProfesionOficio;
 import com.shuldevelop.model.TipoDocIdentidad;
 import com.shuldevelop.model.Zona;
 import com.shuldevelop.service.EmpleadoService;
+import com.shuldevelop.model.Usuario;
+import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.PlanillaEmpleadoService;
+import com.shuldevelop.service.UsuarioService;
 
 @Controller
 public class PlanillaEmpleadoController {
@@ -35,6 +43,26 @@ public class PlanillaEmpleadoController {
 	
 	private EmpleadoService empleadoService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ModuloService moduloService;
+	
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
+	}
+	
 	@RequestMapping(value = "/planilla-empleado/index", method = RequestMethod.GET)
 	public ModelAndView planillaEmpleado(@RequestParam("id") int idPlanilla) {
 		ModelAndView mav = new ModelAndView();
@@ -44,6 +72,8 @@ public class PlanillaEmpleadoController {
 		mav.setViewName("planilla_empleado/index");
 		mav.addObject("planillaEmpleadoList", listPlanillaEmpleado);
 		mav.addObject("idPl", idPlanilla);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -59,6 +89,8 @@ public class PlanillaEmpleadoController {
 		mav.setViewName("planilla_empleado/add");
 		mav.addObject("PlanillaEmpleado", new PlanillaEmpleado());
 		mav.addObject("idPl", idPlanilla);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -67,7 +99,8 @@ public class PlanillaEmpleadoController {
 	public ModelAndView addPlanillaEmpleado(
 			@ModelAttribute("PlanillaEmpleado") PlanillaEmpleado u,
 			BindingResult result,
-			SessionStatus status
+			SessionStatus status,
+			final RedirectAttributes redirectAttributes
  			) {
 		
 //		this.tipoDocIdentidadValidator.validate(u, result);
@@ -77,12 +110,14 @@ public class PlanillaEmpleadoController {
 			
 			mav.setViewName("planilla_empleado/add");
 			mav.addObject("PlanillaEmpleado", u);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;
 		}
 		
 		planillaEmpleadoService.add(u);
-		
+		redirectAttributes.addFlashAttribute("messageSuccess", "Planilla Empleado se agregó exitosamente.");
 		return new ModelAndView("redirect:/planilla-empleado/index.html");
 	}
 	
@@ -96,6 +131,8 @@ public class PlanillaEmpleadoController {
 		
 		mav.setViewName("planilla_empleado/edit");
 		mav.addObject("PlanillaEmpleado", planillaEmpleado);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 		
 		return mav;
 	}
@@ -105,7 +142,8 @@ public class PlanillaEmpleadoController {
 			@ModelAttribute("PlanillaEmpleado") PlanillaEmpleado u,
 			BindingResult result,
 			SessionStatus status,
-			HttpServletRequest request
+			HttpServletRequest request,
+			final RedirectAttributes redirectAttributes
  			) {
 		
 //		this.tipoDocIdentidadValidator.validate(u, result);
@@ -115,22 +153,25 @@ public class PlanillaEmpleadoController {
 			
 			mav.setViewName("planilla_empleado/edit");
 			mav.addObject("PlanillaEmpleado", u);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 			
 			return mav;
 		}
 		
 		planillaEmpleadoService.edit(u);
-		
+		redirectAttributes.addFlashAttribute("messageSuccess", "Planilla Empleado se editó exitosamente.");
 		return new ModelAndView("redirect:/planilla-empleado/index.html");
 	}
 	
 	@RequestMapping(value = "/planilla-empleado/delete", method = RequestMethod.GET)
-	public ModelAndView deletePlanillaEmpleado(HttpServletRequest request) {
+	public ModelAndView deletePlanillaEmpleado(HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		planillaEmpleadoService.delete(id);
-		
+		redirectAttributes.addFlashAttribute("messageSuccess", "Planilla Empleado se eliminó exitosamente.");
 		return new ModelAndView("redirect:/planilla-empleado/index.html");
 	}
 	
