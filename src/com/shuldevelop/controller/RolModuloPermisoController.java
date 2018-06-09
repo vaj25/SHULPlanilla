@@ -149,12 +149,6 @@ public class RolModuloPermisoController {
 				
 			}
 			
-			rolModuloPermiso.setModulo(modulo);
-			rolModuloPermiso.setPermiso(permiso);
-			rolModuloPermiso.setRol(rol);
-			rolModuloPermiso.setEstado(true);
-			
-			rolModuloPermisoService.add(rolModuloPermiso);		
 		}
 		
 		redirectAttributes.addFlashAttribute("messageSuccess", "El permiso ha sido agregado exitosamente.");
