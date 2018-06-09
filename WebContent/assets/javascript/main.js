@@ -16,7 +16,7 @@ $(document).ready(function () {
 		$('footer > div').removeClass('grid');
 	}
 	
-	$('.ui.dropdown').dropdown();
+	$('#h-menu .ui.dropdown').dropdown();
 	
 	$('.ui.checkbox').checkbox();
 	
@@ -74,4 +74,5 @@ $(document).ready(function () {
 			}
 		});
 	});
+		
 });

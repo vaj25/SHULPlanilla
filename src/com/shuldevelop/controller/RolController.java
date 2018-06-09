@@ -130,27 +130,39 @@ public class RolController {
 		RolModuloPermiso rolModuloPermiso;
 		
 		String[] modulos = request.getParameterValues("modulos");
-		
-		if (modulos != null) {
+		String[] permisos = request.getParameterValues("data-permisos");
+	
+		if (modulos != null && permisos != null) {
 
+			int j = 0;
+			
 			for (String id : modulos) {
 				
 				modulo = moduloService.getModulo(Integer.parseInt(id));
 				
-				for (int i = 1; i <= 4; i++) {
+				String[] aPermiso = permisos[j].split(",");
+				aPermiso[0] = "0";
+				
+				for (String i : aPermiso) {
 					
-					rolModuloPermiso = new RolModuloPermiso();
-					
-					permiso = permisoService.getPermiso(i);
-					
-					rolModuloPermiso.setModulo(modulo);
-					rolModuloPermiso.setPermiso(permiso);
-					rolModuloPermiso.setRol(u);
-					rolModuloPermiso.setEstado(true);
-					
-					rolModuloPermisoService.add(rolModuloPermiso);
+					if (i != "0") {
+						
+						rolModuloPermiso = new RolModuloPermiso();
+						
+						permiso = permisoService.getPermiso( Integer.parseInt(i) );
+						
+						rolModuloPermiso.setModulo(modulo);
+						rolModuloPermiso.setPermiso(permiso);
+						rolModuloPermiso.setRol(u);
+						rolModuloPermiso.setEstado(true);
+						
+						rolModuloPermisoService.add(rolModuloPermiso);
+						
+					}
 					
 				}
+			
+				j++;
 				
 			}
 			

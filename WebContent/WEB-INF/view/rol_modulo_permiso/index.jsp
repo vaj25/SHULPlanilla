@@ -39,57 +39,25 @@
 			</div>
 			<br><br>
 			<div>
-				<c:url var="post_url" value="/rol-modulo-permiso/index.html" />
-				<form:form method="post" modelAttribute="RolModuloPermiso" cssClass="ui form"
-					action="${post_url}">
+				<form method="post" class="ui form">
 					
-					<h4 class="ui dividing header">Gestionar permiso de <c:out value="${rol.getNombre()}"></c:out> </h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					
+					<h4 class="ui dividing header">Permisos</h4>
+
 					<div class="field">
-						<form:label path="modulo.id">Modulo: </form:label>
-						<form:select path="modulo.id" cssClass="ui dropdown">
-                			<form:option value="0" label="Seleccione el modulo"/>
-                			<form:options items="${moduloList}" itemValue="id" />
-            			</form:select>
-						<form:errors path="modulo.id" />
+						<label>Modulos: </label>
+						<select multiple name="modulos" id="modulos" class="ui selection dropdown">
+                			<c:forEach var="modulo" items="${moduloList}">
+                				<option value="${modulo.getId()}">${modulo}</option>
+                			</c:forEach>
+						</select>
 					</div>
 					
-					<form:hidden path = "rol.id" value = "${rol.getId()}"/>
+					<select style="display:none;" id="data-permisos" name="data-permisos" multiple></select>
 					
-					<div class="grouped fields">
-						<label>Permisos: </label>
-						
-						<div class="field">
-							<div class="ui checkbox">
-	      						<input type="checkbox" name="permisos" value="1" class="hidden">  						
-	      						<label>Leer</label>
-	   						</div>
-   						</div>
-   						<div class="field">
-	   						<div class="ui checkbox">
-	      						<input type="checkbox" name="permisos" value="2" class="hidden">
-	      						<label>Insertar</label>
-	   						</div>
-   						</div>
-   						<div class="field">
-	   						<div class="ui checkbox">
-	      						<input type="checkbox" name="permisos" value="3" class="hidden">   						
-	      						<label>Actualizar</label>
-	   						</div>
-   						</div>
-   						<div class="field">
-	   						<div class="ui checkbox">
-	      						<input type="checkbox" name="permisos" value="4" class="hidden">
-	      						<label>Elimnar</label>
-	   						</div>
-   						</div>
-					</div>
-		
 					<button class="ui primary button" type="submit">Guardar</button>
 					<button class="ui button" type="reset" >Limpiar</button>
-				</form:form>
+					
+				</form>
 			</div>
 		</div>
 		
@@ -153,12 +121,57 @@
 		
 		<c:set var="url" value="${pageContext.request.contextPath}/rol-modulo-permiso/index.html?id=${param.id}" scope="request"></c:set>
 		<c:set var="simbol" value="&" scope="request"></c:set>
-		<c:set value="${totalCount}" var="totalCount" scope="request" ></c:set>	
-		<c:import url="../layouts/pagination.jsp"></c:import>
+		<c:set value="${totalCount}" var="totalCount" scope="request" ></c:set>
+		<c:set value="${perPage}" var="perPage" scope="request" ></c:set>
+		<c:if test="${totalCount > perPage}">
+			<c:import url="../layouts/pagination.jsp"></c:import>		
+		</c:if>
 	
 	</div>
 	
+		<div class="ui loger modal">
+		<div class="header">Header</div>
+		<div class="scrolling content">
+			<div class="grouped fields">
+				<label>Permisos: </label>
+							
+				<div class="field">
+					<div class="ui checkbox">
+		      			<input type="checkbox" name="permisos" value="1" class="hidden">  						
+		      			<label>Leer</label>
+		   			</div>
+	   			</div>
+	   			<div class="field">
+		   			<div class="ui checkbox">
+		      			<input type="checkbox" name="permisos" value="2" class="hidden">
+		      			<label>Insertar</label>
+		   			</div>
+	   			</div>
+	   			<div class="field">
+		   			<div class="ui checkbox">
+		      			<input type="checkbox" name="permisos" value="3" class="hidden">   						
+		      			<label>Actualizar</label>
+		   			</div>
+	   			</div>
+	   			<div class="field">
+		   			<div class="ui checkbox">
+		      			<input type="checkbox" name="permisos" value="4" class="hidden">
+		      			<label>Elimnar</label>
+		   			</div>
+	   			</div>
+			</div>
+			
+			<br><br>	
+	    
+		    <div class="actions">
+			    <div class="ui approve primary button">Aceptar</div>
+			    <div class="ui cancel negative button">Cancelar</div>
+		  	</div>
+	  	</div>
+	</div>
+	
 	<c:import url="../layouts/footer.jsp"></c:import>
+	<script src="${pageContext.request.contextPath}/assets/javascript/modulo-permiso.js"></script>
 	
 </body>
 </html>

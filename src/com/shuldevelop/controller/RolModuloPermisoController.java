@@ -9,8 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
@@ -22,7 +20,6 @@ import com.shuldevelop.model.Permiso;
 import com.shuldevelop.model.Rol;
 import com.shuldevelop.model.RolModuloPermiso;
 import com.shuldevelop.model.Usuario;
-import com.shuldevelop.model.validator.RolModuloPermisoValidator;
 import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.PermisoService;
 import com.shuldevelop.service.RolModuloPermisoService;
@@ -47,14 +44,9 @@ public class RolModuloPermisoController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	private RolModuloPermisoValidator rolModuloPermisoValidator;
-	
 	private static final int LIMITITEMSPERPAGE = 10;
 
-
-	public RolModuloPermisoController() {
-		
-		rolModuloPermisoValidator = new RolModuloPermisoValidator();		
+	public RolModuloPermisoController() {	
 	}
 	
 	public Usuario getUsuario() {
@@ -78,10 +70,10 @@ public class RolModuloPermisoController {
 		
 		int idRol = Integer.parseInt(request.getParameter("id"));
 		
-		int page = 1;
+		int page = 0;
 		
 		if ( request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));;
+			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
 		List<RolModuloPermiso> listRolModuloPermiso = rolModuloPermisoService
@@ -99,6 +91,7 @@ public class RolModuloPermisoController {
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
 		mav.addObject("totalCount", rolModuloPermisoService.getCountRolModuloPermisoByRol(idRol));
+		mav.addObject("perPage", LIMITITEMSPERPAGE);
 		
 		return mav;
 		
@@ -106,61 +99,67 @@ public class RolModuloPermisoController {
 	
 	@RequestMapping(value = "/rol-modulo-permiso/index", method = RequestMethod.POST)
 	public ModelAndView addRolModuloPermiso(
-			@ModelAttribute("RolModuloPermiso") RolModuloPermiso u,
-			BindingResult result,
 			SessionStatus status,
 			HttpServletRequest request,
 			final RedirectAttributes redirectAttributes
  			) {
 		
-		this.rolModuloPermisoValidator.validate(u, result);
+		int idRol = Integer.parseInt(request.getParameter("id"));
 		
-		if (result.hasErrors()) {
-			ModelAndView mav = new ModelAndView();
-			
-			Rol rol = rolService.getRol(u.getRol().getId());
-			
-			List<RolModuloPermiso> listRolModuloPermiso = rolModuloPermisoService.
-					getAllRolModuloPermisoByRol(rol.getId(), 1, LIMITITEMSPERPAGE);
-			
-			List<Modulo> listModulo = moduloService.getAllModulo();
-			
-			
-			mav.setViewName("rol_modulo_permiso/index");
-			mav.addObject("RolModuloPermiso", u);
-			mav.addObject("rol", rol);
-			mav.addObject("rolModuloPermisoList", listRolModuloPermiso);
-			mav.addObject("moduloList", listModulo);
-			mav.addObject("Usuario", getUsuario());
-			mav.addObject("modulos", getModulos());
-			
-			return mav;
-		}
+		Rol u = rolService.getRol(idRol);
 		
-		String[] permisos = request.getParameterValues("permisos");
-		
-		RolModuloPermiso rolModuloPermiso;
+		Modulo modulo;
 		Permiso permiso;
+		RolModuloPermiso rolModuloPermiso;
 		
-		Modulo modulo = moduloService.getModulo( u.getModulo().getId() );
-		Rol rol = rolService.getRol(u.getRol().getId());
-		
-		for (String id : permisos) {
+		String[] modulos = request.getParameterValues("modulos");
+		String[] permisos = request.getParameterValues("data-permisos");
+	
+		if (modulos != null && permisos != null) {
+
+			int j = 0;
 			
-			permiso = permisoService.getPermiso(Integer.parseInt(id));
+			for (String id : modulos) {
+				
+				modulo = moduloService.getModulo(Integer.parseInt(id));
+				
+				String[] aPermiso = permisos[j].split(",");
+				aPermiso[0] = "0";
+				
+				for (String i : aPermiso) {
+					
+					if (i != "0") {
+						
+						rolModuloPermiso = new RolModuloPermiso();
+						
+						permiso = permisoService.getPermiso( Integer.parseInt(i) );
+						
+						rolModuloPermiso.setModulo(modulo);
+						rolModuloPermiso.setPermiso(permiso);
+						rolModuloPermiso.setRol(u);
+						rolModuloPermiso.setEstado(true);
+						
+						rolModuloPermisoService.add(rolModuloPermiso);
+						
+					}
+					
+				}
 			
-			rolModuloPermiso = new RolModuloPermiso();
+				j++;
+				
+			}
 			
 			rolModuloPermiso.setModulo(modulo);
 			rolModuloPermiso.setPermiso(permiso);
 			rolModuloPermiso.setRol(rol);
 			rolModuloPermiso.setEstado(true);
+			
 			rolModuloPermisoService.add(rolModuloPermiso);		
 		}
 		
 		redirectAttributes.addFlashAttribute("messageSuccess", "El permiso ha sido agregado exitosamente.");
 		
-		return new ModelAndView("redirect:/rol-modulo-permiso/index.html").addObject("id", u.getRol().getId());
+		return new ModelAndView("redirect:/rol-modulo-permiso/index.html").addObject("id", idRol);
 	}
 	
 	@RequestMapping(value = "/rol-modulo-permiso/disable", method = RequestMethod.GET)
