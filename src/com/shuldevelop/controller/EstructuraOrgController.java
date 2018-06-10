@@ -79,7 +79,6 @@ public class EstructuraOrgController {
 
 		mav.setViewName("estructura_org/index");
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
-		mav.addObject("mensaje", null);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
 

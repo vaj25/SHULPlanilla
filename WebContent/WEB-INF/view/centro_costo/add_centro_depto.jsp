@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Centro de Costo</title>
+	<title>Centro Costo</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
@@ -17,22 +17,20 @@
 	<div class="container">
 		<div class="ui raised very padded text container segment">
 			<div class="ui large breadcrumb">
-				<a class="section" href="<c:url value="/centro-depto/index.html" />">Atras</a>
+				<a class="section" href="<c:url value="/centro-costo/index.html" />">Atras</a>
 			</div>
 			<br><br>
 			<div>
-				<c:url var="post_url" value="/centro-depto/edit.html" />
-				<form:form method="post" modelAttribute="CentroDepto" cssClass="ui form"
-					action="${post_url}">
+				<form:form method="post" modelAttribute="CentroDepto" cssClass="ui form">
 					
-					<h4 class="ui dividing header">Editar Centro de Costo</h4>
+					<h4 class="ui dividing header">Nuevo Centro de Costo</h4>
 					
 					<form:errors path="*" element="div" cssClass="alert" />
 
 					<div class="field">
 						<form:label path="id.estructuraOrg.id">Estructura Organizativa: </form:label>
 						<form:select path="id.estructuraOrg.id">
-                			<form:option value="0" label="Seleccione la planilla empleado"/>
+                			<form:option value="0" label="Seleccione la Estructura Organizativa"/>
                 			<form:options items="${estructuraOrgList}" itemValue="id" />
             			</form:select>
 						<form:errors path="id.estructuraOrg.id" />

@@ -40,10 +40,7 @@ public class CentroDeptoValidator  implements Validator  {
 			arg1.rejectValue("id.centroCosto.periodicidad", "id.centroCosto.periodicidad.incorrect", 
 					"La periodicidad no puede sobrepasar los 4 carácteres.");
 		}
-		if ( centroDepto.getCentroCosto().getPeriodicidad().length() > 4  ) {
-			arg1.rejectValue("id.centroCosto.periodicidad", "id.centroCosto.periodicidad.incorrect", 
-					"La periodicidad no puede sobrepasar los 4 carácteres.");
-		}		
+	
 	}
 	
 }

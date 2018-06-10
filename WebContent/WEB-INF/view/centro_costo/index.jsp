@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Genero</title>
+	<title>Centro de Costo</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="ui container">
 			<div>
-				<a class="ui positive button" href="<c:url value="/genero/add.html" />">Agregar</a>
+				<a class="ui positive button" href="<c:url value="/centro-costo/add.html" />">Agregar</a>
 			</div>
 			
 			<br>
@@ -32,34 +32,44 @@
 						<p>${messageError}</p>
 					</div>
 				</c:when>
-			</c:choose>			
+			</c:choose>		
 			<div>
 				<table class="ui single line table">
 					<thead>
 						<tr>
-							<th>Número</th>
-							<th>Genero</th>
-							<th>Acciones</th>
+							<th>Id Centro de Costo</th>
+							<th>Estructura Organizativa</th>
+							<th>Monto</th>
+							<th>Periodicidad</th>
+							<th>año</th>
 						</tr>				
 					</thead>
 					<tbody>
-					
-						<c:forEach items="${generoList}" var="genero">
+						<c:forEach items="${centroDeptoList}" var="centroDepto">
 							<tr>
 								<td>
-									<c:out value="${genero.getId()}"></c:out>
+									<c:out value="${centroDepto.centroCosto.getId()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${genero.getGenero()}"></c:out>
+									<c:out value="${centroDepto.estructuraOrg.getNombre()}"></c:out>
 								</td>
-								<td>									
+								<td>
+									<c:out value="${centroDepto.centroCosto.getMonto()}"></c:out>
+								</td>
+								<td>
+									<c:out value="${centroDepto.centroCosto.getPeriodicidad()}"></c:out>
+								</td>
+								<td>
+									<c:out value="${centroDepto.getAnio()}"></c:out>
+								</td>
+							    <td>									
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
-										<a href="<c:url value="/genero/edit.html?id=${genero.getId()}" />">
+										<a href="<c:url value="/centro-costo/edit.html?id=${centroDepto.estructuraOrg.getId()}&id2=${centroDepto.centroCosto.getId()}"/>">
 											<i class="large edit icon"></i>
 										</a>
 									</div>
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
-										<a href="<c:url value="/genero/delete.html?id=${genero.getId()}" />">
+										<a href="<c:url value="/centro-costo/delete.html?id=${centroDepto.estructuraOrg.getId()}&id2=${centroDepto.centroCosto.getId()}"/>">
 											<i class="large erase icon"></i>
 										</a>
 									</div>

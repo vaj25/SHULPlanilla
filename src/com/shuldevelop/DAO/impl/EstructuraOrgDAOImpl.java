@@ -69,7 +69,6 @@ public class EstructuraOrgDAOImpl implements EstructuraOrgDAO{
 				createQuery("from ESTRUCTURA_ORG where ID_NIVEL_ESTRUCTURA = 1", EstructuraOrg.class);
 		
 		List<EstructuraOrg> getAllEstructuraOrg = query.getResultList();
-		System.out.println(query.getResultList());
 		
 		return getAllEstructuraOrg;
 	}

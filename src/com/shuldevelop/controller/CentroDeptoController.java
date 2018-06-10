@@ -68,7 +68,7 @@ public class CentroDeptoController {
 		
 	}
 	
-	@RequestMapping(value = "/centro-depto/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/centro-costo/index", method = RequestMethod.GET)
 	public ModelAndView centroDepto() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -78,7 +78,7 @@ public class CentroDeptoController {
 		List<CentroCosto> listCentroCosto = centroCostoService.getAllCentroCosto();
 
 		
-		mav.setViewName("centro_depto/index");
+		mav.setViewName("centro_costo/index");
 		mav.addObject("centroDeptoList", listCentroDepto);
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
 		mav.addObject("centroCostoList", listCentroCosto);
@@ -89,7 +89,7 @@ public class CentroDeptoController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/centro-depto/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/centro-costo/add", method = RequestMethod.GET)
 	public ModelAndView addCentroDepto() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -97,7 +97,7 @@ public class CentroDeptoController {
 		List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getDeptoEstructuraOrg();
 		List<CentroCosto> listCentroCosto = centroCostoService.getAllCentroCosto();
 		
-		mav.setViewName("centro_depto/add_centro_depto");
+		mav.setViewName("centro_costo/add_centro_depto");
 		mav.addObject("CentroDepto", new CentroDepto());
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
 		mav.addObject("centroCostoList", listCentroCosto);
@@ -108,7 +108,7 @@ public class CentroDeptoController {
 			
 	}
 	
-	@RequestMapping(value = "/centro-depto/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/centro-costo/add", method = RequestMethod.POST)
 	public ModelAndView addCentroDepto(
 			@ModelAttribute("CentroDepto") CentroDepto u,
 			BindingResult result,
@@ -123,7 +123,7 @@ public class CentroDeptoController {
 			
 			List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getDeptoEstructuraOrg();
 			
-			mav.setViewName("centro_depto/add_centro_depto");
+			mav.setViewName("centro_costo/add_centro_depto");
 			mav.addObject("CentroDepto", u);
 			mav.addObject("estructuraOrgList", listEstructuraOrg);
 			mav.addObject("Usuario", getUsuario());
@@ -140,11 +140,11 @@ public class CentroDeptoController {
 		centroDeptoService.add(u);
 				
 		redirectAttributes.addFlashAttribute("messageSuccess", "El centro de costo se agregó exitosamente.");
-		return new ModelAndView("redirect:/welcome.html");
+		return new ModelAndView("redirect:/centro-costo/index.html");
 		
 	}
 	
-	@RequestMapping(value = "/centro-depto/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/centro-costo/edit", method = RequestMethod.GET)
 	public ModelAndView editCentroDept(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -165,7 +165,7 @@ public class CentroDeptoController {
 		
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
 	
-		mav.setViewName("centro_depto/edit_centro_depto");
+		mav.setViewName("centro_costo/edit_centro_depto");
 		mav.addObject("CentroDepto", centroDepto);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
@@ -174,7 +174,7 @@ public class CentroDeptoController {
 			
 	}
 	
-	@RequestMapping(value = "/centro-depto/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/centro-costo/edit", method = RequestMethod.POST)
 	public ModelAndView editCentroDepto(
 			@ModelAttribute("CentroDepto") CentroDepto u,
 			BindingResult result,
@@ -189,7 +189,7 @@ public class CentroDeptoController {
 				List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getDeptoEstructuraOrg();
 				List<CentroCosto> listCentroCosto = centroCostoService.getAllCentroCosto();
 				
-				mav.setViewName("centro_depto/add_centro_depto");
+				mav.setViewName("centro_costo/add_centro_depto");
 				mav.addObject("CentroDepto", u);
 				mav.addObject("estructuraOrgList", listEstructuraOrg);
 				mav.addObject("centroCostoList", listCentroCosto);
@@ -208,11 +208,11 @@ public class CentroDeptoController {
 			redirectAttributes.addFlashAttribute("messageSuccess", "El centro de costo se editó exitosamente.");
 			
 			
-			return new ModelAndView("redirect:/centro-depto/index.html");
+			return new ModelAndView("redirect:/centro-costo/index.html");
 		
 	}
 	
-	@RequestMapping(value = "/centro-depto/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/centro-costo/delete", method = RequestMethod.GET)
 	public ModelAndView deleteCentroDepto(HttpServletRequest request,
 			final RedirectAttributes redirectAttributes) {
 		
@@ -231,7 +231,7 @@ public class CentroDeptoController {
 
 		redirectAttributes.addFlashAttribute("messageSuccess", "El centro de costo se eliminó exitosamente.");
 		
-		return new ModelAndView("redirect:/centro-depto/index.html");	
+		return new ModelAndView("redirect:/centro-costo/index.html");	
 	}
 	
 	

@@ -59,5 +59,12 @@ public class Puesto {
 	public void setNivelPuesto(NivelPuesto nivelPuesto) {
 		this.nivelPuesto = nivelPuesto;
 	}
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
+	
 	
 }
