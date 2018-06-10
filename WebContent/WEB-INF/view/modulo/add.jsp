@@ -11,6 +11,11 @@
 	<title>Modulo</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
+	<style>
+		.actions .approve {
+			margin: 0.5em;
+		}
+	</style>
 </head>
 <body>
 	<c:import url="../layouts/menu.jsp"></c:import>
@@ -84,6 +89,22 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="modal.jsp"></c:import>
+	
 	<c:import url="../layouts/footer.jsp"></c:import>
+	
+	<script type="text/javascript">
+		$('#icono').click(function() {
+			$('.loger.modal')
+				.modal('show');			
+		});
+		
+		$('.approve').click(function () {
+			
+			$('#icono').val(($(this).children('i').attr('class')));
+			
+		});
+	</script>
+	
 </body>
 </html>

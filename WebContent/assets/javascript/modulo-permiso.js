@@ -13,7 +13,7 @@ $('#modulos')
 					var searchIDs = $("input[name='permisos']:checkbox:checked").map(function(){
 					      return $(this).val();
 					}).get();
-													
+					
 					$("#data-permisos").append($("<option></option>")
 							.attr('id', addedValue)
 							.attr('value', addedValue + "," + searchIDs)
