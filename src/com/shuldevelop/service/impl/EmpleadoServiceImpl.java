@@ -75,4 +75,9 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		return empleadoDAO.getInsEmail(emailInst);
 	}
 
+	@Transactional
+	public List<Empleado> getOneEmpleado(int idEmpleado) {
+		return empleadoDAO.getOneEmpleado(idEmpleado);
+	}
+	
 }

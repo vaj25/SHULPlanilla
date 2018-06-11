@@ -51,7 +51,7 @@ public class InfoLaboralEmpleadoDAOImpl implements InfoLaboralEmpleadoDAO {
 		return (InfoLaboralEmpleado) session.getCurrentSession().get(InfoLaboralEmpleado.class, id_info_laboral_empleado);
 
 	}
-
+	
 	@Override
 	public List<InfoLaboralEmpleado> getAllInfoLaboralEmpleado() {
 		// TODO Auto-generated method stub
@@ -63,5 +63,21 @@ public class InfoLaboralEmpleadoDAOImpl implements InfoLaboralEmpleadoDAO {
 		return getAllInfoLaboralEmpleado;
 	}
 	
-
+	@Override
+	public InfoLaboralEmpleado getInfobyIdEmpleado(int idEmpleado) {
+		// TODO Auto-generated method stub
+		try {
+			Query<InfoLaboralEmpleado> query = session.getCurrentSession().
+					createQuery("from INFO_LABORAL_EMPLEADO where  id_empleado = :idEmpleado", InfoLaboralEmpleado.class)
+					.setParameter("idEmpleado", idEmpleado);
+			
+			InfoLaboralEmpleado getInfoLaboralEmpleado = query.getSingleResult();
+			
+			return getInfoLaboralEmpleado;
+		}
+		catch(Exception e) {
+			InfoLaboralEmpleado getInfoLaboralEmpleado = null;
+			return getInfoLaboralEmpleado;
+		}
+	}
 }

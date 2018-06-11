@@ -107,4 +107,14 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		List<Empleado> allEmailIns = query.getResultList();
 		return allEmailIns;
 	}
+	
+	@Override
+	public List<Empleado> getOneEmpleado(int idEmpleado) {
+		Query<Empleado> query = session.getCurrentSession()
+				.createQuery("from Empleado where id_empleado= :idEmpleado",Empleado.class)
+				.setParameter("idEmpleado", idEmpleado);
+		
+		List<Empleado> OneEmpleado = query.getResultList();
+		return OneEmpleado;
+	}
 }

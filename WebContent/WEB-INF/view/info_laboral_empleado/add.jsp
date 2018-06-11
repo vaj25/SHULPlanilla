@@ -10,9 +10,7 @@
 	<title>Información Laboral</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
-	<script type="text/javascript">
-		$('#empleado.id').val(${empleado}).prop('selected', true);
-	</script>
+
 </head>
 <body>
 	<c:import url="../layouts/menu.jsp"></c:import>
@@ -46,8 +44,7 @@
 					<div class="field">
 						<form:label path="empleado.id">Empleado: </form:label>
 						<form:select path="empleado.id">
-                			<form:option value="0" label="Seleccione el Empleado:"/>
-                			<form:options items="${empleadoList}" itemValue="id" />
+                			<form:options items="${empleadoList}" itemValue="id" />	
             			</form:select>
 						<form:errors path="empleado.id"/>
 						

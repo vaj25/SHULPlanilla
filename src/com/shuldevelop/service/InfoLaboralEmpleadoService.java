@@ -15,4 +15,6 @@ public interface InfoLaboralEmpleadoService {
 	public InfoLaboralEmpleado getInfoLaboralEmpleado(int id_info_laboral_empleado);
 	
 	public List<InfoLaboralEmpleado> getAllInfoLaboralEmpleado();
+	
+	public InfoLaboralEmpleado getInfobyIdEmpleado(int idEmpleado);
 }

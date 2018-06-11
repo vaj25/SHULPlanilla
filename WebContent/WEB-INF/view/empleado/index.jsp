@@ -163,6 +163,11 @@
 											</div>
 										</c:when>
 									</c:choose>
+									<div class="ui mini circular icon button" data-tooltip="Información Laboral" data-inverted="">
+										<a href="<c:url value="/info-laboral/add.html?id=${empleado.getId()}" />">
+											<i class="large id card outline icon"></i>
+										</a>
+									</div>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
 										<a href="<c:url value="/empleado/edit.html?id=${empleado.getId()}" />">
 											<i class="large edit icon"></i>

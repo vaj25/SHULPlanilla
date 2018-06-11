@@ -50,5 +50,10 @@ public class InfoLaboralEmpleadoServiceImpl implements InfoLaboralEmpleadoServic
 		return InfoLaboralEmpleadoDAO.getAllInfoLaboralEmpleado();
 
 	}
-	
+		
+	@Transactional
+	public InfoLaboralEmpleado getInfobyIdEmpleado(int idEmpleado) {
+		return InfoLaboralEmpleadoDAO.getInfobyIdEmpleado(idEmpleado);
+
+	}
 }

@@ -17,4 +17,6 @@ public interface EmpleadoService {
 	public List<Empleado> getNup(long Nnup);
 	public List<Empleado> getEmpEmail(String emailEmp);
 	public List<Empleado> getInsEmail(String emailInst);
+	public List<Empleado> getOneEmpleado(int idEmpleado);
+
 }

@@ -12,10 +12,7 @@
 <body>
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
-		<div class="ui container">
-			<div>
-				<a class="ui positive button" href="<c:url value="/info-laboral/add.html" />">Agregar</a>
-			</div>		
+		<div class="ui container">	
 			<br>
 			<c:choose>
 				<c:when test="${messageSuccess != null}" >

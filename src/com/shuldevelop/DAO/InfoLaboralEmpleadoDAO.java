@@ -14,4 +14,6 @@ public interface InfoLaboralEmpleadoDAO {
 	public InfoLaboralEmpleado getInfoLaboralEmpleado(int idInfoLaboralEmpleado);
 	
 	public List<InfoLaboralEmpleado> getAllInfoLaboralEmpleado();
+	
+	public InfoLaboralEmpleado getInfobyIdEmpleado(int idEmpleado);
 }
