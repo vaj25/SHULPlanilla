@@ -117,23 +117,8 @@ public class InfoLaboralEmpleadoController {
 		infoLaboralEmpleado = infoLaboralEmpleadoService.getInfobyIdEmpleado(idEmpleado);
 		
 		if(infoLaboralEmpleado != null) {
-			List<TipoEmpleado> listTipoEmpleado= tipoEmpleadoService.getAllTipoEmpleado();
-			List<EstructuraOrg> listEstructuraOrg= estructuraOrgService.getAllEstructuraOrg();
-			List<Puesto> listPuesto= puestoService.getAllPuesto();
-			List<Empleado> listEmpleado= empleadoService.getOneEmpleado(idEmpleado);
-
-
-			mav.setViewName("info_laboral_empleado/add");
-			mav.addObject("InfoLaboralEmpleado", infoLaboralEmpleado);
-			mav.addObject("tipoEmpleadoList", listTipoEmpleado);
-			mav.addObject("estructuraOrgList", listEstructuraOrg);
-			mav.addObject("puestoList", listPuesto);		
-			mav.addObject("empleadoList", listEmpleado);
-			mav.addObject("Usuario", getUsuario());
-			mav.addObject("modulos", getModulos());
+			return new ModelAndView("redirect:/info-laboral/edit.html?id="+infoLaboralEmpleado.getId());
 			
-			
-			return mav;
 		}else {
 		
 		List<TipoEmpleado> listTipoEmpleado= tipoEmpleadoService.getAllTipoEmpleado();
@@ -312,7 +297,7 @@ public class InfoLaboralEmpleadoController {
 	
 		infoLaboralEmpleadoService.edit(u);
 		redirectAttributes.addFlashAttribute("messageSuccess", "La información del Empleado se editó exitosamente.");
-		return new ModelAndView("redirect:/info-laboral/index.html");
+		return new ModelAndView("redirect:/empleado/index.html");
 	}
 	
 	@RequestMapping(value = "/info-laboral/delete", method = RequestMethod.GET)

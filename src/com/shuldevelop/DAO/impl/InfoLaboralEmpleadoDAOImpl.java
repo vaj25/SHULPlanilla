@@ -22,7 +22,7 @@ public class InfoLaboralEmpleadoDAOImpl implements InfoLaboralEmpleadoDAO {
 	public void add(InfoLaboralEmpleado infoLaboralEmpleado) {
 		// TODO Auto-generated method stub
 		
-		session.getCurrentSession().saveOrUpdate(infoLaboralEmpleado);
+		session.getCurrentSession().save(infoLaboralEmpleado);
 
 	}
 
