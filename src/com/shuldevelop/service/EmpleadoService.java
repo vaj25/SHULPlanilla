@@ -1,8 +1,10 @@
 package com.shuldevelop.service;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import com.shuldevelop.model.Empleado;
+import com.shuldevelop.model.EmpleadoView;
 
 public interface EmpleadoService {
 	public void add(Empleado empleado);
@@ -18,5 +20,6 @@ public interface EmpleadoService {
 	public List<Empleado> getEmpEmail(String emailEmp);
 	public List<Empleado> getInsEmail(String emailInst);
 	public List<Empleado> getOneEmpleado(int idEmpleado);
-
+	public List<EmpleadoView> getViewEmpleado(Hashtable<String, String> listParameter);
+	
 }

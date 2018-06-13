@@ -1,13 +1,16 @@
 package com.shuldevelop.service.impl;
 
+import java.util.Hashtable;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.shuldevelop.DAO.EmpleadoDAO;
 import com.shuldevelop.model.Empleado;
+import com.shuldevelop.model.EmpleadoView;
 import com.shuldevelop.service.EmpleadoService;
 @Service
 public class EmpleadoServiceImpl implements EmpleadoService {
@@ -78,6 +81,13 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	@Transactional
 	public List<Empleado> getOneEmpleado(int idEmpleado) {
 		return empleadoDAO.getOneEmpleado(idEmpleado);
+	}
+	
+	@Transactional
+	public List<EmpleadoView> getViewEmpleado(Hashtable<String, String> listParameter) {
+		
+		return empleadoDAO.getViewEmpleado(listParameter);
+		
 	}
 	
 }

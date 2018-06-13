@@ -1,6 +1,8 @@
 package com.shuldevelop.DAO.impl;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.shuldevelop.DAO.EmpleadoDAO;
 import com.shuldevelop.model.Empleado;
+import com.shuldevelop.model.EmpleadoView;
+
 @Service
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 	@Autowired
@@ -104,15 +108,78 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		Query<Empleado> query = session.getCurrentSession()
 				.createQuery("from Empleado where email_inst = :emailInst",Empleado.class)
 				.setParameter("emailInst", emailInst);
+		
 		List<Empleado> allEmailIns = query.getResultList();
 		return allEmailIns;
 	}
+
+	@Override
+	public List<EmpleadoView> getViewEmpleado(Hashtable<String, String> listParameter) {
+		
+		int i = 0;
+		
+		String consulta = "from EmpleadoView ";
+		
+		for (Entry<String, String> entry : listParameter.entrySet() ) {
+			
+			if ( entry.getValue() != "" ) {
+				if (i > 0) {
+					consulta += " OR ";
+				} else {
+					consulta += " WHERE ";
+				}
+				
+				if ( entry.getKey() == "idEmpleado" ) {
+					
+					consulta += entry.getKey() + " = :" + entry.getKey() + i;
+					
+				} else {
+					
+					consulta += entry.getKey() + " LIKE :" + entry.getKey() + i;
+					
+				}
+			}
+			
+			
+			i++;
+			
+		}
+		
+		Query<EmpleadoView> query = session.getCurrentSession()
+				.createQuery(consulta, EmpleadoView.class);
+		
+		int j = 0;
+		
+		for (Entry<String, String> entry : listParameter.entrySet() ) {
+				
+			if ( entry.getValue() != "" ) {
+			
+				if ( entry.getKey() == "idEmpleado" ) {
+					
+					query.setParameter( entry.getKey() + j , entry.getValue());
+					
+				} else {
 	
+					query.setParameter( entry.getKey() + j , "%" + entry.getValue() + "%");
+					
+				}
+			
+			}
+			
+			j++;
+				
+		}
+		
+		List<EmpleadoView> allEmpleado = query.getResultList();
+		return allEmpleado;
+		
+	}
+
 	@Override
 	public List<Empleado> getOneEmpleado(int idEmpleado) {
 		Query<Empleado> query = session.getCurrentSession()
-				.createQuery("from Empleado where id_empleado= :idEmpleado",Empleado.class)
-				.setParameter("idEmpleado", idEmpleado);
+			.createQuery("from Empleado where id_empleado= :idEmpleado",Empleado.class)
+			.setParameter("idEmpleado", idEmpleado);
 		
 		List<Empleado> OneEmpleado = query.getResultList();
 		return OneEmpleado;
