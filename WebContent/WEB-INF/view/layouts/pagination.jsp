@@ -13,7 +13,7 @@
 <fmt:formatNumber var="factorPage"  value="${( totalPage - currentPage - (PAGEBLOCK / 2) )}" maxFractionDigits="0" pattern="######"/>
 <c:set var="factorPage" value="${factorPage}" />
 
-<c:if test="${totalPage > PAGEBLOCK}">
+<c:if test="${ PAGEBLOCK lt {totalPage} }">
 	<c:choose>
 	    <c:when test="${factorPage le 0}">
 	       	<c:set var="firstPage" value="${( totalPage - PAGEBLOCK )}" />
