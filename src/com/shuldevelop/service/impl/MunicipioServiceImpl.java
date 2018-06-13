@@ -34,5 +34,20 @@ public class MunicipioServiceImpl implements MunicipioService {
 		
 		return municipioDAO.findMunicipioByDepartamento(idDepartamento);
 	}
+	
+	@Transactional
+	public void add(Municipio municipio) {
+		municipioDAO.add(municipio);
+	}
+	
+	@Transactional
+	public void edit(Municipio municipio) {
+		municipioDAO.edit(municipio);
+	}
+	
+	@Transactional
+	public void delete(int idMunicipio) {
+		municipioDAO.delete(idMunicipio);
+	}
 
 }

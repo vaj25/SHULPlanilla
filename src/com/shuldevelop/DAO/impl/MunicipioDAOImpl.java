@@ -44,5 +44,20 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 		
 		return allMunicipio;
 	}
+	
+	@Override
+	public void add(Municipio municipio) {
+		session.getCurrentSession().save(municipio);
+	}
+	
+	@Override
+	public void edit(Municipio municipio) {
+		session.getCurrentSession().update(municipio);
+	}
+	
+	@Override
+	public void delete(int idMunicipio) {
+		session.getCurrentSession().delete(getMunicipio(idMunicipio));
+	}
 
 }

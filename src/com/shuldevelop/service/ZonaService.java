@@ -9,5 +9,8 @@ public interface ZonaService {
 	public Zona getZona(int idZona);
 	
 	public List<Zona> getAllZona();
+	public void add(Zona zona);
+	public void edit(Zona idZona);
+	public void delete(int idZona);
 	
 }

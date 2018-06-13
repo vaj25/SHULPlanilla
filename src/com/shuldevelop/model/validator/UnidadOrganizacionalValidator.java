@@ -32,8 +32,13 @@ public class UnidadOrganizacionalValidator implements Validator {
 			arg1.rejectValue("nit", "unidad.nit.invalid", "El nit posee un formato no valido");
 		}
 		
-		if(unidadOrganizacional.getNit().toString().length() > 8) {
-			arg1.rejectValue("telefono", "telefono.invalid", "El telefono solo puede tener 8 numero");
+		Pattern pattern2 = Pattern.compile("^[a-zA-zñ ]+$");
+		if(!(pattern2.matcher(unidadOrganizacional.getRepresentante()).matches())) {
+			arg1.rejectValue("representante", "representante.invalid", "Debe contener un nombre");
+		}
+		
+		if(Integer.toString(unidadOrganizacional.getTelefono()).length() != 8) {
+			arg1.rejectValue("telefono", "telefono.invalid", "El telefono solo puede tener 8 digitos");
 		}
 		
 		 Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",

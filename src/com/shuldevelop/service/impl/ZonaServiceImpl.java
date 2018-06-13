@@ -28,5 +28,20 @@ public class ZonaServiceImpl implements ZonaService {
 
 		return zonaDOA.getAllZona();
 	}
+	
+	@Transactional
+	public void add(Zona zona) {
+		zonaDOA.add(zona);
+	}
+	
+	@Transactional
+	public void edit(Zona zona) {
+		zonaDOA.edit(zona);
+	}
+	
+	@Transactional
+	public void delete(int idZona) {
+		zonaDOA.delete(idZona);
+	}
 
 }

@@ -48,7 +48,7 @@
 					</div>
 					<div class="field">
 						<form:label path="nic">NIC: </form:label>
-						<form:input path="nic" />
+						<form:input path="nic" tyep="number" />
 						<form:errors path="nic" />
 					</div>
 					<div class="field">

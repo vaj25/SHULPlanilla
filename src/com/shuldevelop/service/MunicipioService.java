@@ -11,5 +11,8 @@ public interface MunicipioService {
 	public List<Municipio> getAllMunicipio();
 	
 	public List<Municipio> findMunicipioByDepartamento(int idDepartamento);
+	public void add(Municipio municipio);
+	public void edit(Municipio municipio);
+	public void delete(int idMunicipio);
 
 }

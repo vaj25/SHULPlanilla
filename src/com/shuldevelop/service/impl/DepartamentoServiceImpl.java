@@ -34,5 +34,20 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 		
 		return departamentoDAO.findDepartamentoByZona(idZona);
 	}
+	
+	@Transactional
+	public void add(Departamento departamento) {
+		departamentoDAO.add(departamento);
+	}
+	
+	@Transactional
+	public void edit(Departamento departamento) {
+		departamentoDAO.edit(departamento);
+	}
+	
+	@Transactional
+	public void delete(int idDepartamento) {
+		departamentoDAO.delete(idDepartamento);
+	}
 
 }

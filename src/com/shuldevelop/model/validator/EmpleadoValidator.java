@@ -48,16 +48,12 @@ public class EmpleadoValidator implements Validator {
 				"required.email_inst","El email inst es obligatorio");
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "direccion.numCasa",
 				"required.direccion.numCasa","El numero de casa es obligatorio");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "direccion.numCalle",
-				"required.direccion.numCalle","El numero de Calle es obligatorio");
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "direccion.colonia",
 				"required.direccion.colonia","El numero de Calle es obligatorio");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "direccion.avenida",
-				"required.direccion.avenida","La avenida es obligatorio");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "direccion.poligono",
-				"required.direccion.poligono","El poligono es obligatorio");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "direccion.pasaje",
-				"required.direccion.pasaje","El pasaje es obligatorio");
+		
+		
+		
 		
 		Empleado empleado = (Empleado) arg0;
 		
@@ -121,6 +117,27 @@ public class EmpleadoValidator implements Validator {
 		Pattern pattern1=Pattern.compile("^[0-9]{4}-{1}[0-9]{6}-{1}[0-9]{3}-{1}[0-9]{1}$");
 		if(!(pattern1.matcher(empleado.getNit()).matches())) {
 			arg1.rejectValue("nit", "nit.incorrect", "Formato incorrecto para NIT");
+		}
+		
+		Pattern pattern2 = Pattern.compile("^[a-zA-zñ ]+$");
+		if(!(pattern2.matcher(empleado.getPrimer_nombre()).matches())) {
+			arg1.rejectValue("primer_nombre", "primer_nombre.invalid", "Debe introducir un nombre");
+		}
+		
+		if(!(pattern2.matcher(empleado.getSegundo_nombre()).matches())) {
+			arg1.rejectValue("segundo_nombre", "segundo_nombre.invalid", "Debe introducir un nombre");
+		}
+		
+		if(!(pattern2.matcher(empleado.getPrimer_apellido()).matches())) {
+			arg1.rejectValue("primer_apellido", "primer_apellido.invalid", "Debe introducir un nombre");
+		}
+		
+		if(!(pattern2.matcher(empleado.getSegundo_apellido()).matches())) {
+			arg1.rejectValue("segundo_appellido", "segundo_apellido.invalid", "Debe introducir un nombre");
+		}
+		
+		if(!(pattern2.matcher(empleado.getApellido_casada()).matches())) {
+			arg1.rejectValue("apellido_casada", "apellido_casada.invalid", "Debe introducir un nombre");
 		}
 		
 		

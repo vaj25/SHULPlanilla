@@ -32,5 +32,20 @@ public class ZonaDAOImpl implements ZonaDAO {
 		
 		return allZona;
 	}
+	
+	@Override
+	public void add(Zona zona) {
+		session.getCurrentSession().save(zona);
+	}
+	
+	@Override
+	public void edit(Zona zona) {
+		session.getCurrentSession().update(zona);
+	}
+	
+	@Override
+	public void delete(int idZona) {
+		session.getCurrentSession().delete(getZona(idZona));
+	}
 
 }

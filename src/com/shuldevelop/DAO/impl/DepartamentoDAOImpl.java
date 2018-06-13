@@ -44,5 +44,20 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 		
 		return allDepartamento;
 	}
+	
+	@Override
+	public void add(Departamento departamento) {
+		session.getCurrentSession().save(departamento);
+	}
+	
+	@Override
+	public void edit(Departamento departamento) {
+		session.getCurrentSession().update(departamento);
+	}
+	
+	@Override
+	public void delete(int idDepartamento) {
+		session.getCurrentSession().delete(getDepartamento(idDepartamento));
+	}
 
 }

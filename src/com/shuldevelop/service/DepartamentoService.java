@@ -11,5 +11,8 @@ public interface DepartamentoService {
 	public List<Departamento> getAllDepartamento();
 	
 	public List<Departamento> findDepartamentoByZona(int idZona);
+	public void add(Departamento departamento);
+	public void edit(Departamento departamento);
+	public void delete(int idDepartamento);
 	
 }
