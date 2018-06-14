@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Permisos</title>
+	<title>Buscar Empleados</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
@@ -51,7 +51,7 @@
 								<i class="icon search"></i>
 		  						<input type="text" name="search0" placeholder="Search">
 								<select name="select0" class="ui dropdown">
-									  <option value="">Buscar por</option>
+									  <option value="0">Buscar por</option>
 									  <option value="idEmpleado">Código de empleado</option>
 									  <option value="nit">NIT</option>
 									  <option value="doc_identidad">DUI</option>
@@ -91,8 +91,12 @@
 						
 			var div = $('#cont-search').clone()
 			div.attr('id', 'cont-search'+i );
-			div.children().children().children('select').attr('name', 'select'+i);
-			div.children().children('input').attr('name', 'search'+i);
+			div.children().children().children('select')
+				.attr('name', 'select'+i)
+				.val('0');
+			div.children().children('input')
+				.attr('name', 'search'+i)
+				.val('');
 			div.children().children().children('.minus')
 				.attr('data-container', 'cont-search'+i)
 				.attr('data-value', 'select'+i+',search'+1);

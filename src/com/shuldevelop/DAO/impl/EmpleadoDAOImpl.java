@@ -118,7 +118,7 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		
 		int i = 0;
 		
-		String consulta = "from EmpleadoView ";
+		String consulta = "from EmpleadoView";
 		
 		for (Entry<String, String> entry : listParameter.entrySet() ) {
 			
@@ -138,11 +138,8 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 					consulta += entry.getKey() + " LIKE :" + entry.getKey() + i;
 					
 				}
-			}
-			
-			
-			i++;
-			
+				i++;
+			}		
 		}
 		
 		Query<EmpleadoView> query = session.getCurrentSession()
@@ -163,13 +160,10 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 					query.setParameter( entry.getKey() + j , "%" + entry.getValue() + "%");
 					
 				}
-			
-			}
-			
-			j++;
-				
+				j++;			
+			}			
 		}
-		
+				
 		List<EmpleadoView> allEmpleado = query.getResultList();
 		return allEmpleado;
 		

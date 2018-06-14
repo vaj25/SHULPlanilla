@@ -1,5 +1,7 @@
 package com.shuldevelop.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,9 +9,16 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
 
-@Entity(name = "EmpleadoView")
-@Table(name = "EMPLEADOS")
-public class EmpleadoView {
+
+@Entity
+@Immutable
+@Table(name = "empleados")
+public class EmpleadoView implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id_empleado")

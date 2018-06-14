@@ -6,13 +6,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Gestionar Usuarios</title>
+	<title>Buscar Empleados</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/semantic.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/application.css" />
 </head>
 <body>
-	
-	<c:set value="${user}" var="Usuario" scope="request" ></c:set>
 	
 	<c:import url="../layouts/menu.jsp"></c:import>
 	<div class="container">
@@ -63,7 +61,7 @@
 					</thead>
 					<tbody>
 					
-						<c:forEach items="${listEmpleado}" var="usuario">
+						<c:forEach items="${listEmpleado}" var="empleado">
 							<tr>
 								<td>
 									<c:out value="${empleado.getIdEmpleado()}"></c:out>
@@ -108,7 +106,7 @@
 									<c:out value="${empleado.getNombreEstOrg()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${empleado.getSalario()}"></c:out>
+									$<c:out value="${empleado.getSalario()}"></c:out>
 								</td>
 								<td>
 									<c:out value="${empleado.getNombreJefe()}"></c:out>
