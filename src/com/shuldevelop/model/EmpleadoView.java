@@ -9,7 +9,6 @@ import org.hibernate.annotations.Immutable;
 
 @Entity(name = "EmpleadoView")
 @Table(name = "EMPLEADOS")
-@Immutable
 public class EmpleadoView {
 
 	@Id
