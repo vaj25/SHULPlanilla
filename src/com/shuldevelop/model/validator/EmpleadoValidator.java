@@ -4,7 +4,6 @@ package com.shuldevelop.model.validator;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
@@ -80,7 +79,6 @@ public class EmpleadoValidator implements Validator {
 		}
 		
 		if(empleado.getFecha_ingreso()!=null && empleado.getFecha_ingreso()!=null) {
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate fechaNac=empleado.getFecha_nacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		LocalDate fechaIng=empleado.getFecha_ingreso().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Period periodo = Period.between(fechaNac, fechaIng);

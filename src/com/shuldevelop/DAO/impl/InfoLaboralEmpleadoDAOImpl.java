@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.shuldevelop.DAO.InfoLaboralEmpleadoDAO;
 import com.shuldevelop.model.InfoLaboralEmpleado;
 
-
-
 @Service
 public class InfoLaboralEmpleadoDAOImpl implements InfoLaboralEmpleadoDAO {
 
@@ -68,7 +66,9 @@ public class InfoLaboralEmpleadoDAOImpl implements InfoLaboralEmpleadoDAO {
 		// TODO Auto-generated method stub
 		try {
 			Query<InfoLaboralEmpleado> query = session.getCurrentSession().
-					createQuery("from INFO_LABORAL_EMPLEADO where  id_empleado = :idEmpleado", InfoLaboralEmpleado.class)
+					createQuery("from INFO_LABORAL_EMPLEADO where id = "
+							+ "(select max(id) from  INFO_LABORAL_EMPLEADO "
+							+ "where id_empleado = :idEmpleado)", InfoLaboralEmpleado.class)
 					.setParameter("idEmpleado", idEmpleado);
 			
 			InfoLaboralEmpleado getInfoLaboralEmpleado = query.getSingleResult();

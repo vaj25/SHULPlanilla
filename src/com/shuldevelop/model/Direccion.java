@@ -120,5 +120,38 @@ public class Direccion {
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
+
+	@Override
+	public String toString() {
+		
+		String direccion = "";
+		
+		
+		if (this.pasaje != "") {
+			direccion += "Pasaje " + this.pasaje;
+		}
+		
+		if (this.colonia != "") {
+			direccion += ", Colonia " + this.colonia;
+		}
+		
+		if (this.numCalle != "") {
+			direccion += ", " + this.numCalle;
+		}
+		
+		if (this.avenida != "") {
+			direccion += ", Avenida " + this.avenida;
+		}
+		
+		if (this.poligono != "") {
+			direccion += ", Poligono " + this.poligono;
+		}
+		
+		if (this.poligono != "") {
+			direccion += ", Casa " + this.numCasa;
+		}
+		
+		return direccion;
+	}
 		
 }

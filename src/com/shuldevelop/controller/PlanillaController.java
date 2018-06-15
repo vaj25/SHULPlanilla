@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Planilla;
+import com.shuldevelop.model.Usuario;
+import com.shuldevelop.service.ModuloService;
 //import com.shuldevelop.model.validator.PlanillaValidator;
 import com.shuldevelop.service.PlanillaService;
+import com.shuldevelop.service.UsuarioService;
 
 @Controller
 public class PlanillaController {
@@ -28,7 +35,27 @@ public class PlanillaController {
 	public PlanillaController() {
 		this.planillaValidator = new PlanillaValidator();
 	}*/
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ModuloService moduloService;
 
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
+	}
+	
 	@RequestMapping(value = "/planilla-planilla/index", method = RequestMethod.GET)
 	public ModelAndView planilla() {
 
@@ -38,6 +65,8 @@ public class PlanillaController {
 
 		mav.setViewName("planilla_planilla/index");
 		mav.addObject("planillaList", listPlanilla);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 
 		return mav;
 	}
@@ -49,6 +78,8 @@ public class PlanillaController {
 
 		mav.setViewName("planilla_planilla/add");
 		mav.addObject("Planilla", new Planilla());
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 
 		return mav;
 	}
@@ -87,6 +118,8 @@ public class PlanillaController {
 
 		mav.setViewName("planilla_planilla/edit");
 		mav.addObject("Planilla", planilla);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
 
 		return mav;
 	}

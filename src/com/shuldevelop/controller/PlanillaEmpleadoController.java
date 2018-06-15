@@ -18,20 +18,21 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.shuldevelop.model.Departamento;
+import com.shuldevelop.model.DescuentoPlanilla;
 import com.shuldevelop.model.Empleado;
-import com.shuldevelop.model.EstadoCivil;
-import com.shuldevelop.model.Genero;
-import com.shuldevelop.model.Municipio;
+import com.shuldevelop.model.InfoLaboralEmpleado;
+import com.shuldevelop.model.IngresoPlanilla;
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.PlanillaEmpleado;
-import com.shuldevelop.model.ProfesionOficio;
-import com.shuldevelop.model.TipoDocIdentidad;
-import com.shuldevelop.model.Zona;
+import com.shuldevelop.model.UnidadOrganizacional;
+import com.shuldevelop.service.DescuentoPlanillaService;
 import com.shuldevelop.service.EmpleadoService;
+import com.shuldevelop.service.InfoLaboralEmpleadoService;
+import com.shuldevelop.service.IngresoPlanillaService;
 import com.shuldevelop.model.Usuario;
 import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.PlanillaEmpleadoService;
+import com.shuldevelop.service.UnidadOrganizacionalService;
 import com.shuldevelop.service.UsuarioService;
 
 @Controller
@@ -39,9 +40,21 @@ public class PlanillaEmpleadoController {
 
 	@Autowired
 	private PlanillaEmpleadoService planillaEmpleadoService;
-	@Autowired
 	
+	@Autowired
 	private EmpleadoService empleadoService;
+	
+	@Autowired
+	private UnidadOrganizacionalService unidadOrganizacionalService;
+	
+	@Autowired
+	private InfoLaboralEmpleadoService infoLaboralEmpleadoService;
+	
+	@Autowired
+	private IngresoPlanillaService ingresoPlanillaService;
+	
+	@Autowired
+	private DescuentoPlanillaService descuentoPlanillaService;
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -173,6 +186,36 @@ public class PlanillaEmpleadoController {
 		planillaEmpleadoService.delete(id);
 		redirectAttributes.addFlashAttribute("messageSuccess", "Planilla Empleado se eliminó exitosamente.");
 		return new ModelAndView("redirect:/planilla-empleado/index.html");
+	}
+	
+	@RequestMapping(value = "/planilla-empleado/boleta", method = RequestMethod.GET)
+	public ModelAndView boletaPlanillaEmpleado(HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		PlanillaEmpleado planillaEmpleado = planillaEmpleadoService.getPlanillaEmpleado(id);
+		
+		UnidadOrganizacional org = unidadOrganizacionalService.getUnidadOrganizacional(1);
+		
+		InfoLaboralEmpleado info = infoLaboralEmpleadoService.getInfobyIdEmpleado( planillaEmpleado.getEmpleado().getId() );
+		
+		List<IngresoPlanilla> ingresos = ingresoPlanillaService.getAllIngresoPlanillaByPlanilla( planillaEmpleado.getId() );
+		
+		List<DescuentoPlanilla> descuentos = descuentoPlanillaService.getAllDescuentoPlanillaByPlanilla( planillaEmpleado.getId() );
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("planilla_empleado/boleta");
+		mav.addObject("empleado", planillaEmpleado);
+		mav.addObject("org", org);
+		mav.addObject("info", info);
+		mav.addObject("ingresos", ingresos);
+		mav.addObject("descuentos", descuentos);
+		mav.addObject("Usuario", getUsuario());
+		mav.addObject("modulos", getModulos());
+		
+		return mav;
 	}
 	
 }

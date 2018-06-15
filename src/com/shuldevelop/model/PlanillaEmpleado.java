@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
-
 @Entity(name = "PLANILLA_EMPLEADO")
 @Table(name = "PLANILLA_EMPLEADO")
 public class PlanillaEmpleado {

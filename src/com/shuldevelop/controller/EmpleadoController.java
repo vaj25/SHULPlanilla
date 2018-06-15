@@ -29,7 +29,6 @@ import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.Zona;
 import com.shuldevelop.model.validator.EmpleadoValidator;
 import com.shuldevelop.service.DepartamentoService;
-import com.shuldevelop.service.DireccionService;
 import com.shuldevelop.service.EmpleadoService;
 import com.shuldevelop.service.EstadoCivilService;
 import com.shuldevelop.service.GeneroService;
@@ -44,8 +43,6 @@ import com.shuldevelop.service.ZonaService;
 public class EmpleadoController {
 	@Autowired
 	private EmpleadoService empleadoService;
-	@Autowired
-	private DireccionService direccionService;
 	@Autowired
 	private ZonaService zonaService;
 	@Autowired

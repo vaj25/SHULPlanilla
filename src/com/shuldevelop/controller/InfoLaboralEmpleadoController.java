@@ -18,13 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.InfoLaboralEmpleado;
 import com.shuldevelop.model.TipoEmpleado;
-import com.shuldevelop.model.UnidadOrganizacional;
 import com.shuldevelop.model.EstructuraOrg;
 import com.shuldevelop.model.Puesto;
 import com.shuldevelop.model.Empleado;
 import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.Modulo;
-import com.shuldevelop.model.NivelEstructura;
 import com.shuldevelop.service.InfoLaboralEmpleadoService;
 import com.shuldevelop.service.TipoEmpleadoService;
 import com.shuldevelop.service.EstructuraOrgService;

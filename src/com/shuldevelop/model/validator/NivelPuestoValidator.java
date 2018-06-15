@@ -8,6 +8,8 @@ import com.shuldevelop.model.NivelPuesto;
 
 public class NivelPuestoValidator implements Validator {
 
+	private static final int SALARIOMINIMO = 300;
+	
 	@Override
 	public boolean supports(Class<?> arg0) {
 		
@@ -40,6 +42,21 @@ public class NivelPuestoValidator implements Validator {
 		if ( tipoPuesto.getSalarioMaximo() < 0 ) {
 			arg1.rejectValue("salarioMaximo", "salarioMaximo.incorrect", 
 					"El salario máximo tiene que ser positivo.");
+		}
+		
+		if ( tipoPuesto.getSalarioMinimo() > tipoPuesto.getSalarioMaximo() ) {
+			arg1.rejectValue("salarioMinimo", "salarioMinimo.incorrect", 
+					"El salario mínimo tiene que ser menor al salario maximo.");
+		}
+		
+		if ( tipoPuesto.getSalarioMaximo() <  SALARIOMINIMO) {
+			arg1.rejectValue("salarioMaximo", "salarioMaximo.incorrect", 
+					"El salario máximo tiene que ser menor al salario minimo.");
+		}
+		
+		if ( tipoPuesto.getSalarioMinimo() < SALARIOMINIMO ) {
+			arg1.rejectValue("salarioMinimo", "salarioMinimo.incorrect", 
+					"El salario mínimo tiene que ser mayor al salario minimo.");
 		}
 		
 	}

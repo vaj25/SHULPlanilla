@@ -58,6 +58,11 @@
 											<i class="large percent icon"></i>
 										</a>
 									</div>
+									<div class="ui mini circular icon button" data-tooltip="Imprimir Boleta" data-inverted="">
+										<a target="_blank" href="<c:url value="/planilla-empleado/boleta.html?id=${planilla.getId()}" />">
+											<i class="large address card outline icon"></i>
+										</a>
+									</div>
 									<div class="ui mini circular icon button" data-tooltip="Editar" data-inverted="">
 										<a href="<c:url value="/planilla-empleado/edit.html?id=${planilla.getId()}&id_pl=${idPl}" />">
 											<i class="large edit icon"></i>

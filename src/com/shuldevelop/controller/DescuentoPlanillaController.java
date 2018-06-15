@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,12 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shuldevelop.model.DescuentoPlanilla;
 import com.shuldevelop.model.DescuentoPlanillaId;
+import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.PlanillaEmpleado;
 import com.shuldevelop.model.TipoDescuento;
+import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.validator.DescuentoPlanillaValidator;
 import com.shuldevelop.service.DescuentoPlanillaService;
+import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.PlanillaEmpleadoService;
 import com.shuldevelop.service.TipoDescuentoService;
+import com.shuldevelop.service.UsuarioService;
 
 @Controller
 public class DescuentoPlanillaController {
@@ -33,11 +40,31 @@ public class DescuentoPlanillaController {
 
 	@Autowired
 	private TipoDescuentoService tipoDescuentoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ModuloService moduloService;
 
 	private DescuentoPlanillaValidator descuentoPlanillaValidator;
 
 	public DescuentoPlanillaController() {
 		this.descuentoPlanillaValidator = new DescuentoPlanillaValidator();
+	}
+	
+	public Usuario getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		
+		return usuarioService.findUserByUsername(userDetails.getUsername());
+	}
+	
+	public List<Modulo> getModulos() {
+		
+		return moduloService.getAllModuloByRol(getUsuario().getRol().getId());
+		
 	}
 
 	@RequestMapping(value = "/descuento-planilla/index", method = RequestMethod.GET)
@@ -76,6 +103,8 @@ public class DescuentoPlanillaController {
 			mav.addObject("planillaEmpleado", planillaEmpleado);
 			mav.addObject("descuentoPlanillaList", listDescuentoPlanilla);
 			mav.addObject("idPl", idPl);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 
 			return mav;
 
@@ -106,6 +135,8 @@ public class DescuentoPlanillaController {
 			mav.addObject("tipoDescuentoList", listTipoDescuento);
 			mav.addObject("planillaEmpleado", planillaEmpleado);
 			mav.addObject("descuentoPlanillaList", listDescuentoPlanilla);
+			mav.addObject("Usuario", getUsuario());
+			mav.addObject("modulos", getModulos());
 
 			return mav;
 		}
