@@ -25,7 +25,6 @@
 					
 					<h4 class="ui dividing header">Nuevo Nivel Estructura</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="nombre_nivel">Nombre nivel: </form:label>
 						<form:input path="nombre_nivel" />

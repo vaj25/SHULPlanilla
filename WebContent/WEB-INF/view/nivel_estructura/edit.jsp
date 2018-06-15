@@ -23,9 +23,7 @@
 				<form:form method="post" modelAttribute="NivelEstructura" cssClass="ui form">
 					
 					<h4 class="ui dividing header">Editar Nivel de Estructura</h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					<div class="field">
+										<div class="field">
 						<form:label path="nombre_nivel">Nombre Nivel: </form:label>
 						<form:input path="nombre_nivel" />
 						<form:errors path="nombre_nivel" />

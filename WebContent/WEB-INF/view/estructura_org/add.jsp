@@ -23,9 +23,7 @@
 				<form:form method="post" modelAttribute="EstructuraOrg" cssClass="ui form">
 					
 					<h4 class="ui dividing header">Nueva Estructura Organizativa</h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					
+									
 					<div class="field">
 						<form:label path="unidadOrganizacional.id">Unidad Organizacional: </form:label>
 						<form:select path="unidadOrganizacional.id">

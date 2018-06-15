@@ -25,7 +25,6 @@
 
 					<h4 class="ui dividing header">Editar rango de renta</h4>
 
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="desde">Monto minimo: </form:label>
 						<form:input path="desde" type="number" />

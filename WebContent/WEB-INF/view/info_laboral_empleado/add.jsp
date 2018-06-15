@@ -37,9 +37,7 @@
 			<div>
 				<form:form method="post" modelAttribute="InfoLaboralEmpleado" cssClass="ui form">
 					
-					<h4 class="ui dividing header">Nueva Información Laboral</h4>
-					<form:errors path="*" element="div" cssClass="alert" />
-				
+					<h4 class="ui dividing header">Nueva Información Laboral</h4>			
 					
 					<div class="field">
 						<form:label path="empleado.id">Empleado: </form:label>

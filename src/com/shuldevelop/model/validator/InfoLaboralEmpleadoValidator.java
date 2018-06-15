@@ -25,6 +25,11 @@ public class InfoLaboralEmpleadoValidator  implements Validator{
 			arg1.rejectValue("salario", "salario.incorrect", 
 					"El Salario tiene que ser positivo.");
 		}		
+
+		if ( infoLaboralEmpleado.getSalario() < 310 ) {
+			arg1.rejectValue("salario", "salario.incorrect", 
+					"El Salario tiene que ser mayor al Salario Minimo.");
+		}	
 		
 		if ( infoLaboralEmpleado.getEmpleado().getId() == 0 ) {
 			arg1.rejectValue("empleado.id", "empleado.incorrect", 

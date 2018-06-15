@@ -25,7 +25,6 @@
 
 					<h4 class="ui dividing header">Editar Tipo de Descuento</h4>
 
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="tipo">Tipo de Descuento: </form:label>
 						<form:input path="tipo" />

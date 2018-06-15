@@ -29,9 +29,7 @@
 				<form:form method="post" modelAttribute="Modulo" cssClass="ui form">
 				
 					<h4 class="ui dividing header">Nuevo Modulo</h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					
+										
 					<div class="field">
 						<form:label path="nombre">Nombre: </form:label>
 						<form:input path="nombre" />

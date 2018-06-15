@@ -1,5 +1,6 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,7 +42,8 @@
 							<th>Estructura Organizativa</th>
 							<th>Monto</th>
 							<th>Periodicidad</th>
-							<th>año</th>
+							<th>Año</th>
+							<th>Acciones</th>
 						</tr>				
 					</thead>
 					<tbody>
@@ -54,7 +56,8 @@
 									<c:out value="${centroDepto.estructuraOrg.getNombre()}"></c:out>
 								</td>
 								<td>
-									<c:out value="${centroDepto.centroCosto.getMonto()}"></c:out>
+									<fmt:formatNumber minFractionDigits="2" type="currency" currencySymbol="$"	value="${centroDepto.centroCosto.getMonto()}" />
+									
 								</td>
 								<td>
 									<c:out value="${centroDepto.centroCosto.getPeriodicidad()}"></c:out>

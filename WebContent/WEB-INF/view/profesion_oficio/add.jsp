@@ -26,7 +26,6 @@
 					
 					<h4 class="ui dividing header">Nueva Profesion u Oficio</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="profesion_oficio">Profesion u Oficio: </form:label>
 						<form:input path="profesion_oficio" />

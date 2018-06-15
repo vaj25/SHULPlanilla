@@ -25,9 +25,7 @@
 				<form:form method="post" modelAttribute="Genero" cssClass="ui form">
 				
 					<h4 class="ui dividing header">Editar Genero</h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					
+										
 					<div class="field">
 						<form:label path="genero">Genero: </form:label>
 						<form:input path="genero" />

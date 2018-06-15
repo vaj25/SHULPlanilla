@@ -28,7 +28,6 @@
 					
 					<h4 class="ui dividing header">Nuevo Nivel de Puesto</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="numeroNivel">Número Nivel: </form:label>
 						<form:input type="number" path="numeroNivel" />

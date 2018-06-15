@@ -25,7 +25,6 @@
 					
 					<h4 class="ui dividing header">Nuevo Tipo Ingreso</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="tipoIngreso">Nombre de tipo de ingreso: </form:label>
 						<form:input path="tipoIngreso" />

@@ -24,7 +24,6 @@
 					
 					<h4 class="ui dividing header">Editar Profesion u oficio</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="profesion_oficio">Profesion u oficio: </form:label>
 						<form:input path="profesion_oficio" />

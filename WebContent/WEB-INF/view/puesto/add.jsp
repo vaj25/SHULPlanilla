@@ -25,7 +25,6 @@
 					
 					<h4 class="ui dividing header">Nuevo Puesto</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="nombre">Nombre del puesto: </form:label>
 						<form:input path="nombre" />

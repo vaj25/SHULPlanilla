@@ -25,7 +25,6 @@
 					
 					<h4 class="ui dividing header">Nueva Unidad Organizacional</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="unidad_org">Nombre Unidad Organizacional: </form:label>
 						<form:input path="unidad_org" />

@@ -25,7 +25,6 @@
 					
 					<h4 class="ui dividing header">Nuevo Tipo de Empleado</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
 					<div class="field">
 						<form:label path="tipo_empleado">Tipo de Empleado: </form:label>
 						<form:input path="tipo_empleado" />

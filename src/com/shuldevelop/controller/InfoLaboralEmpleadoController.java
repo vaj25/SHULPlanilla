@@ -182,7 +182,7 @@ public class InfoLaboralEmpleadoController {
 
 
 			mav.setViewName("info_laboral_empleado/add");
-			mav.addObject("infoLaboralEmpleado", u);
+			mav.addObject("InfoLaboralEmpleado", u);
 			mav.addObject("tipoEmpleadoList", listTipoEmpleado);
 			mav.addObject("estructuraOrgList", listEstructuraOrg);
 			mav.addObject("puestoList", listPuesto);		
@@ -217,7 +217,7 @@ public class InfoLaboralEmpleadoController {
 
 
 		mav.setViewName("info_laboral_empleado/edit");
-		mav.addObject("infoLaboralEmpleado", infoLaboralEmpleado);
+		mav.addObject("InfoLaboralEmpleado", infoLaboralEmpleado);
 		mav.addObject("infoLaboralEmpleadoList", listInfoLaboralEmpleado);
 		mav.addObject("tipoEmpleadoList", listTipoEmpleado);
 		mav.addObject("estructuraOrgList", listEstructuraOrg);
@@ -254,7 +254,7 @@ public class InfoLaboralEmpleadoController {
 
 
 			mav.setViewName("info_laboral_empleado/edit");
-			mav.addObject("infoLaboralEmpleado", u);
+			mav.addObject("InfoLaboralEmpleado", u);
 			mav.addObject("infoLaboralEmpleadoList", listInfoLaboralEmpleado);
 			mav.addObject("tipoEmpleadoList", listTipoEmpleado);
 			mav.addObject("estructuraOrgList", listEstructuraOrg);
@@ -280,7 +280,7 @@ public class InfoLaboralEmpleadoController {
 
 
 			mav.setViewName("info_laboral_empleado/add");
-			mav.addObject("infoLaboralEmpleado", u);
+			mav.addObject("InfoLaboralEmpleado", u);
 			mav.addObject("infoLaboralEmpleadoList", listInfoLaboralEmpleado);
 			mav.addObject("tipoEmpleadoList", listTipoEmpleado);
 			mav.addObject("estructuraOrgList", listEstructuraOrg);

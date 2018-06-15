@@ -20,12 +20,10 @@
 			</div>
 			<br><br>
 			<div>
-				<form:form method="post" modelAttribute="infoLaboralEmpleado" cssClass="ui form">
+				<form:form method="post" modelAttribute="InfoLaboralEmpleado" cssClass="ui form">
 					
 					<h4 class="ui dividing header">Editar Información Laboral</h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					
+										
 					<div class="field">
 						<form:label path="empleado.id">Empleado: </form:label>
 						<form:select path="empleado.id">

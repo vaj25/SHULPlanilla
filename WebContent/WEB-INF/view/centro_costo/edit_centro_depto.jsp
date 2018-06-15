@@ -27,8 +27,6 @@
 					
 					<h4 class="ui dividing header">Editar Centro de Costo</h4>
 					
-					<form:errors path="*" element="div" cssClass="alert" />
-
 					<div class="field">
 						<form:label path="id.estructuraOrg.id">Estructura Organizativa: </form:label>
 						<form:select path="id.estructuraOrg.id">
@@ -43,10 +41,13 @@
 						<form:input path="id.centroCosto.monto" type="number" min="0" step=".01" />
 						<form:errors path="id.centroCosto.monto" />
 					</div>
-
+					
 					<div class="field">
 						<form:label path="id.centroCosto.periodicidad">Periodicidad: </form:label>
-						<form:input path="id.centroCosto.periodicidad" type="text"/>
+						<form:select path="id.centroCosto.periodicidad">
+                			<form:option value="15" label="Quincenal (15 días))"/>
+                			<form:option value="30" label="Mensual (30 días)"/>
+            			</form:select>
 						<form:errors path="id.centroCosto.periodicidad" />
 					</div>
 

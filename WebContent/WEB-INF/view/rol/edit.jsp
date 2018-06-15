@@ -24,9 +24,7 @@
 				<form:form method="post" modelAttribute="Rol" cssClass="ui form">
 				
 					<h4 class="ui dividing header">Editar Rol</h4>
-					
-					<form:errors path="*" element="div" cssClass="alert" />
-					
+										
 					<div class="field">
 						<form:label path="nombre">Nombre: </form:label>
 						<form:input path="nombre" />

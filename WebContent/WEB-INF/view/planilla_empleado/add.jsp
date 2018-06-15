@@ -25,7 +25,6 @@
 
 					<h4 class="ui dividing header">Nuevo planilla para empleado</h4>
 
-					<form:errors path="*" element="div" cssClass="alert" />								
 					<div class="field">
 						<form:label path="Empleado.id">Empleado: </form:label>
 						<form:select path="Empleado.id">
