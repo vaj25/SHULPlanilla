@@ -1,5 +1,7 @@
 package com.shuldevelop.model.validator;
 
+import java.util.Calendar;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -22,15 +24,16 @@ public class CentroDeptoValidator  implements Validator  {
 				"required.id.centroCosto.periodicidad", "El periodo es obligatorio.");
 		
 		CentroDepto centroDepto	 = (CentroDepto) arg0;
-
+		Calendar cal= Calendar.getInstance();
+		int year= cal.get(Calendar.YEAR);
 		
 		if ( centroDepto.getEstructuraOrg().getId()== 0 ) {
 			arg1.rejectValue("id.estructuraOrg.id", "id.estructuraOrg.id.incorrect", 
 					"Seleccione una Estructura Organizativa.");
 		}
-		if ( centroDepto.getAnio() <= 0 ) {
+		if ( centroDepto.getAnio() < year ) {
 			arg1.rejectValue("anio", "anio.incorrect", 
-					"El año tiene que ser positivo.");
+					"El año tiene que ser mayor al año actual ("+year+").");
 		}		
 		if ( centroDepto.getCentroCosto().getMonto() <= 0 ) {
 			arg1.rejectValue("id.centroCosto.monto", "id.centroCosto.monto.incorrect", 

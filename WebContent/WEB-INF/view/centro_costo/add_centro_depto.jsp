@@ -43,8 +43,8 @@
 					<div class="field">
 						<form:label path="id.centroCosto.periodicidad">Periodicidad: </form:label>
 						<form:select path="id.centroCosto.periodicidad">
-                			<form:option value="15" label="Quincenal (15 días))"/>
-                			<form:option value="30" label="Mensual (30 días)"/>
+                			<form:option value="15" label="Quincenal"/>
+                			<form:option value="30" label="Mensual"/>
             			</form:select>
 						<form:errors path="id.centroCosto.periodicidad" />
 					</div>
@@ -54,6 +54,7 @@
 						<form:input path="anio" type="number"/>
 						<form:errors path="anio" />
 					</div>
+
 									
 					<button class="ui primary button" type="submit">Guardar</button>
 					<button class="ui button" type="reset" >Limpiar</button>

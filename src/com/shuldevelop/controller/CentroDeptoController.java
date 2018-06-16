@@ -104,6 +104,7 @@ public class CentroDeptoController {
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
 		
+		
 		return mav;
 			
 	}
@@ -169,6 +170,8 @@ public class CentroDeptoController {
 		mav.addObject("CentroDepto", centroDepto);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
+		mav.addObject("id1", idEstructura);
+		mav.addObject("id2", idCentroCosto);
 
 		return mav;
 			
@@ -179,8 +182,12 @@ public class CentroDeptoController {
 			@ModelAttribute("CentroDepto") CentroDepto u,
 			BindingResult result,
 			SessionStatus status,
-			final RedirectAttributes redirectAttributes
+			final RedirectAttributes redirectAttributes,
+			HttpServletRequest request
 			) {
+
+			int idEstructura = Integer.parseInt(request.getParameter("id1"));
+			int idCentroCosto = Integer.parseInt(request.getParameter("id2"));
 		
 			this.centroDeptoValidator.validate(u, result);		
 			if (result.hasErrors()) {
@@ -189,12 +196,14 @@ public class CentroDeptoController {
 				List<EstructuraOrg> listEstructuraOrg = estructuraOrgService.getDeptoEstructuraOrg();
 				List<CentroCosto> listCentroCosto = centroCostoService.getAllCentroCosto();
 				
-				mav.setViewName("centro_costo/add_centro_depto");
+				mav.setViewName("centro_costo/edit_centro_depto");
 				mav.addObject("CentroDepto", u);
 				mav.addObject("estructuraOrgList", listEstructuraOrg);
 				mav.addObject("centroCostoList", listCentroCosto);
 				mav.addObject("Usuario", getUsuario());
 				mav.addObject("modulos", getModulos());
+				mav.addObject("id1", idEstructura);
+				mav.addObject("id2", idCentroCosto);
 					
 				return mav;
 			}
@@ -202,7 +211,17 @@ public class CentroDeptoController {
 			u.setEstructuraOrg(
 				estructuraOrgService.getEstructuraOrg(u.getEstructuraOrg().getId())
 			);
-
+			
+			try{
+				EstructuraOrg estructuraOrg = estructuraOrgService.getEstructuraOrg(idEstructura);
+				CentroCosto centroCosto = centroCostoService.getCentroCosto(idCentroCosto);
+				CentroDeptoPK centroDeptoPK = new CentroDeptoPK();
+				centroDeptoPK.setCentroCosto(centroCosto);	
+				centroDeptoPK.setEstructuraOrg(estructuraOrg);
+				centroDeptoService.delete(centroDeptoPK);
+			}	finally {
+				
+			}
 			centroCostoService.edit(u.getCentroCosto());
 			centroDeptoService.edit(u);
 			redirectAttributes.addFlashAttribute("messageSuccess", "El centro de costo se editó exitosamente.");
