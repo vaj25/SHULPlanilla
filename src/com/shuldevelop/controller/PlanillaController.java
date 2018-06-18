@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.Planilla;
@@ -101,7 +102,7 @@ public class PlanillaController {
 
 			return mav;
 		}*/
-
+		u.setEstado(false);
 		planillaService.add(u);
 		planillaService.updateDates(u);
 
@@ -154,6 +155,23 @@ public class PlanillaController {
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		planillaService.delete(id);
+
+		return new ModelAndView("redirect:/planilla-planilla/index.html");
+	}
+	
+	@RequestMapping(value = "/planilla-planilla/enable", method = RequestMethod.GET)
+	public ModelAndView estadoPlanilla(HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		Planilla planilla = planillaService.getPlanilla(id);
+
+		planilla.setEstado(true);
+		
+		planillaService.edit(planilla);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "La planilla ha sido descontada exitosamente.");
 
 		return new ModelAndView("redirect:/planilla-planilla/index.html");
 	}

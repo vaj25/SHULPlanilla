@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "PLANILLA_EMPLEADO")
 @Table(name = "PLANILLA_EMPLEADO")
 public class PlanillaEmpleado {
@@ -30,6 +32,10 @@ public class PlanillaEmpleado {
 	@JoinColumn(name="id_planilla")
 	private Planilla planilla;
 
+	@Column(name = "estado")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean estado;
+	
 	public PlanillaEmpleado() {
 	}
 
@@ -56,6 +62,13 @@ public class PlanillaEmpleado {
 	public void setPlanilla(Planilla planilla) {
 		this.planilla = planilla;
 	}
-	
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 	
 }

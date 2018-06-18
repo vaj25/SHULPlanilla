@@ -58,6 +58,16 @@
 											<i class="large percent icon"></i>
 										</a>
 									</div>
+									<c:choose>
+										<c:when test = "${!planilla.getEstado() }" >
+											<div class="ui mini circular icon button" data-tooltip="Aplicar Descuentos" data-inverted="">
+												<a href="<c:url value="/planilla-empleado/enable.html?
+													id=${planilla.getId()}" />">
+													<i class="large arrow down icon"></i>
+												</a>
+											</div>
+										</c:when>
+									</c:choose>
 									<div class="ui mini circular icon button" data-tooltip="Imprimir Boleta" data-inverted="">
 										<a target="_blank" href="<c:url value="/planilla-empleado/boleta.html?id=${planilla.getId()}" />">
 											<i class="large address card outline icon"></i>

@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "PLANILLA")
 @Table(name = "PLANILLA")
 public class Planilla {
@@ -29,6 +31,10 @@ public class Planilla {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_fin")
 	private Date fechaFin;
+	
+	@Column(name = "estado_planilla")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean estado;
 
 	public Planilla() {
 	}
@@ -60,6 +66,14 @@ public class Planilla {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 
 	public String formatearFecha(Date fecha){

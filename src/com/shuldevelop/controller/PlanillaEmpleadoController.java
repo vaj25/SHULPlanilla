@@ -218,4 +218,21 @@ public class PlanillaEmpleadoController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/planilla-empleado/enable", method = RequestMethod.GET)
+	public ModelAndView estadoPlanilla(HttpServletRequest request,
+			final RedirectAttributes redirectAttributes) {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		PlanillaEmpleado planilla = planillaEmpleadoService.getPlanillaEmpleado(id);
+
+		planilla.setEstado(true);
+		
+		planillaEmpleadoService.edit(planilla);
+		
+		redirectAttributes.addFlashAttribute("messageSuccess", "Se han aplicado los descuentos exitosamente.");
+
+		return new ModelAndView("redirect:/planilla-empleado/index.html").addObject("id", planilla.getPlanilla().getId());
+	}
+	
 }

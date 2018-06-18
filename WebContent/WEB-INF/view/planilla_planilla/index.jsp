@@ -45,6 +45,16 @@
 				                  	
 				                </td>
 								<td>
+									<c:choose>
+										<c:when test = "${!planilla.getEstado() }" >
+											<div class="ui mini circular icon button" data-tooltip="Descontar en Centro de Costo" data-inverted="">
+												<a href="<c:url value="/planilla-planilla/enable.html?
+													id=${planilla.getId()}" />">
+													<i class="large arrow down icon"></i>
+												</a>
+											</div>
+										</c:when>
+									</c:choose>
 									<div class="ui mini circular icon button" data-tooltip="Eliminar" data-inverted="">
 										<a href="<c:url value="/planilla-planilla/delete.html?id=${planilla.getId()}" />">
 											<i class="large erase icon"></i>
