@@ -229,6 +229,7 @@
 				
    			</div>   
    			</div>
+   			<form:hidden path="estado" value="${empleado.estado}"/>
       <button class="ui primary button" type="submit">Guardar</button>
 					<button class="ui button" type="reset" >Limpiar</button>
     

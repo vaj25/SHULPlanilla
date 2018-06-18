@@ -1,9 +1,13 @@
 package com.shuldevelop.model.validator;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
@@ -112,6 +116,7 @@ public class EmpleadoValidator implements Validator {
 			arg1.rejectValue("nit", "nit.incorrect", "Formato no valido para NIT");
 		}
 		
+		
 		Pattern pattern1=Pattern.compile("^[0-9]{4}-{1}[0-9]{6}-{1}[0-9]{3}-{1}[0-9]{1}$");
 		if(!(pattern1.matcher(empleado.getNit()).matches())) {
 			arg1.rejectValue("nit", "nit.incorrect", "Formato incorrecto para NIT");
@@ -134,12 +139,18 @@ public class EmpleadoValidator implements Validator {
 			arg1.rejectValue("segundo_appellido", "segundo_apellido.invalid", "Debe introducir un nombre");
 		}
 		
-		if(!(pattern2.matcher(empleado.getApellido_casada()).matches())) {
-			arg1.rejectValue("apellido_casada", "apellido_casada.invalid", "Debe introducir un nombre");
-		}
 		
 		
-
+		String fechaNit = empleado.getNit().substring(5, 11);
+		DateFormat df = new SimpleDateFormat("ddMMyy");
+		String FechaNac = df.format(empleado.getFecha_nacimiento());
+		
+		
+		
+			if(!FechaNac.equals(fechaNit)) {
+				arg1.rejectValue("nit", "nit.invalid", "Fecha Invalida nit");
+			}
+		
 	}
 
 }
