@@ -39,7 +39,7 @@
 					
 					<div class="field">
 						<form:label path="tasa">Tasa: </form:label>
-						<form:input path="tasa" type="number" min="0.1" step="0.1" value="0" max="1" />
+						<form:input path="tasa" type="number" min="0.01" step="0.01" value="0" max="1" />
 						<form:errors path="tasa" />
 					</div>
 					

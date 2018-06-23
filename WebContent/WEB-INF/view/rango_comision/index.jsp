@@ -41,6 +41,7 @@
 							<th>Número</th>
 							<th>Desde</th>
 							<th>Hasta</th>
+							<th>Tipo Ingreso</th>
 							<th>Tasa</th>
 							<th>Acciones</th>
 						</tr>				
@@ -61,6 +62,9 @@
 									<fmt:formatNumber minFractionDigits="2" type="currency" 
 										currencySymbol="$"
 										value="${rangoComision.getHasta()}" />
+								</td>
+								<td>
+									<c:out value="${rangoComision.getTipoIngreso()}"></c:out>
 								</td>
 								<td>
 									<fmt:formatNumber minFractionDigits="2" type="percent"

@@ -76,7 +76,7 @@ public class TipoIngreso {
 
 	@Override
 	public String toString() {
-		return "Tipo de Ingreso: " + tipoIngreso;
+		return tipoIngreso;
 	}
 	
 }

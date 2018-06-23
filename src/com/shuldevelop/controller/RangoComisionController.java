@@ -19,10 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shuldevelop.model.Modulo;
 import com.shuldevelop.model.RangoComision;
+import com.shuldevelop.model.TipoIngreso;
 import com.shuldevelop.model.Usuario;
 import com.shuldevelop.model.validator.RangoComisionValidator;
 import com.shuldevelop.service.ModuloService;
 import com.shuldevelop.service.RangoComisionService;
+import com.shuldevelop.service.TipoIngresoService;
 import com.shuldevelop.service.UsuarioService;
 
 @Controller
@@ -36,6 +38,10 @@ public class RangoComisionController {
 	
 	@Autowired
 	private ModuloService moduloService;
+
+	@Autowired
+	private TipoIngresoService tipoIngresoService;
+	
 	
 	private RangoComisionValidator rangoComisionValidator;
 	
@@ -63,9 +69,11 @@ public class RangoComisionController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<RangoComision> listRangoComision = rangoComisionService.getAllRangoComision();
+		List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
 		
 		mav.setViewName("rango_comision/index");
 		mav.addObject("rangoComisionList", listRangoComision);
+		mav.addObject("tipoIngresoList", listTipoIngreso);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
 		
@@ -76,9 +84,12 @@ public class RangoComisionController {
 	public ModelAndView addRangoComision() {
 		
 		ModelAndView mav = new ModelAndView();
+		List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
+
 		
 		mav.setViewName("rango_comision/add");
 		mav.addObject("RangoComision", new RangoComision());
+		mav.addObject("tipoIngresoList", listTipoIngreso);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
 			
@@ -118,9 +129,12 @@ public class RangoComisionController {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		RangoComision rangoComision = rangoComisionService.getRangoComision(id);
+		List<TipoIngreso> listTipoIngreso = tipoIngresoService.getAllTipoIngreso();
+
 		
 		mav.setViewName("rango_comision/edit");
 		mav.addObject("RangoComision", rangoComision);
+		mav.addObject("tipoIngresoList", listTipoIngreso);
 		mav.addObject("Usuario", getUsuario());
 		mav.addObject("modulos", getModulos());
 		
