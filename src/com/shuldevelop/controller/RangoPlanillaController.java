@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -153,7 +152,8 @@ public class RangoPlanillaController {
 		
 		rangoPlanillaService.add(u);
 		redirectAttributes.addFlashAttribute("messageSuccess", "El Rango de la Planilla se agregó exitosamente.");
-		return new ModelAndView("redirect:/planilla-empleado/index.html");
+		return new ModelAndView("redirect:/planilla-empleado/index.html")
+				.addObject("id", u.getPlanillaEmpleado().getPlanilla().getId());
 		
 	}
 	
@@ -173,7 +173,8 @@ public class RangoPlanillaController {
 		rangoPlanillaService.delete(rangoPlanillaId);
 		redirectAttributes.addFlashAttribute("messageSuccess", "El Rango de la Planilla se eliminó exitosamente.");
 
-		return new ModelAndView("redirect:/planilla-empleado/index.html");
+		return new ModelAndView("redirect:/planilla-empleado/index.html")
+				.addObject("id", planillaEmpleado.getPlanilla().getId());
 	}
 		
 }
