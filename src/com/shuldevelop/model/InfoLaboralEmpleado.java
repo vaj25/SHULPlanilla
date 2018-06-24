@@ -17,9 +17,9 @@ public class InfoLaboralEmpleado {
 
 	@Id
 	@Column(name = "id_info_laboral_empleado")
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "SEQ_INFO_LABORAL_EMPLEADO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
-	private int id;	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INFO_LABORAL_EMPLEADO")
+	@SequenceGenerator(name = "SEQ_INFO_LABORAL_EMPLEADO", sequenceName = "SEQ_INFO_LABORAL_EMPLEADO", allocationSize = 1, initialValue = 1)
+	private int id;
 	
 	@Column(name="salario")
 	private double salario;
