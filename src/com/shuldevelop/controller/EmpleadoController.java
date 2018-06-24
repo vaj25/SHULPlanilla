@@ -168,6 +168,9 @@ public class EmpleadoController {
 		if(empDui.size()==0 && Empemail.size()==0 && empNit.size()==0 && empIsss.size()==0 
 				&& empNup.size()==0 && insEmail.size()==0 ) {
 			u.setEstado(1);
+			if(u.getJefe().getId()==0) {
+				u.setJefe(null);
+			}
 			empleadoService.add(u);
 			return new ModelAndView("redirect:/empleado/index.html");
 			
@@ -285,6 +288,9 @@ public class EmpleadoController {
 			mav.addObject("Usuario", getUsuario());
 			mav.addObject("modulos", getModulos());
 			return mav;
+		}
+		if(u.getJefe().getId()==0) {
+			u.setJefe(null);
 		}
 		empleadoService.edit(u);
 		return new ModelAndView("redirect:/empleado/index.html");
