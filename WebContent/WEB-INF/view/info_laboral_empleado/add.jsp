@@ -77,7 +77,7 @@
 					
 					<div class="field">
 						<form:label path="salario">Salario: </form:label>
-						<form:input path="salario" type="number"/>
+						<form:input path="salario"  type="number" min="0" step=".01"/>
 						<form:errors path="salario" />
 					</div>
 									

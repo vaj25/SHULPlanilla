@@ -62,7 +62,7 @@ public class Puesto {
 
 	@Override
 	public String toString() {
-		return nombre;
+		return nivelPuesto +" - "+ nombre;
 	}
 
 	
