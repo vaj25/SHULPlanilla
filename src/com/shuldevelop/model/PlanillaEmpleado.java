@@ -28,7 +28,7 @@ public class PlanillaEmpleado {
 	@JoinColumn(name="id_empleado")
 	private Empleado empleado;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="id_planilla")
 	private Planilla planilla;
 
